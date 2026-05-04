@@ -387,118 +387,153 @@
   }
   .model-row.active .tag { color: var(--sapphire); }
 
-  /* —— Card 3: Adaptive tasks —— */
+  /* —— Card 2: Apple apps integration —— */
+  .art-glow-multicolor {
+    position: absolute;
+    bottom: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 80%;
+    background:
+      radial-gradient(ellipse 30% 60% at 25% 70%, rgba(127, 146, 255, 0.4) 0%, transparent 60%),
+      radial-gradient(ellipse 30% 60% at 75% 70%, rgba(212, 149, 99, 0.35) 0%, transparent 60%),
+      radial-gradient(ellipse 25% 60% at 50% 80%, rgba(108, 179, 154, 0.3) 0%, transparent 60%);
+    filter: blur(30px);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .apps-grid {
+    position: absolute;
+    inset: 16% 16% 12% 16%;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .app-tile {
+    aspect-ratio: 1;
+    border-radius: 11px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.12) inset, 0 6px 14px -6px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 12px;
+    font-family: 'Manrope', sans-serif;
+  }
+  .app-tile.mail { background: linear-gradient(180deg, #4FA1FF, #1862C9); }
+  .app-tile.mail span { color: white; font-size: 14px; }
+  .app-tile.calendar { background: linear-gradient(180deg, #FFFFFF, #F1F1F1); color: #E2362F; font-size: 11px; font-weight: 700; }
+  .app-tile.notes { background: linear-gradient(180deg, #FFE57F, #F8C74D); position: relative; }
+  .app-tile.notes::after {
+    content: "";
+    position: absolute;
+    inset: 25% 22% 22% 22%;
+    background:
+      linear-gradient(rgba(0,0,0,0.18) 0 0) 0 0/100% 1.5px no-repeat,
+      linear-gradient(rgba(0,0,0,0.18) 0 0) 0 35%/80% 1.5px no-repeat,
+      linear-gradient(rgba(0,0,0,0.18) 0 0) 0 70%/90% 1.5px no-repeat;
+  }
+  .app-tile.safari {
+    background: radial-gradient(circle at 50% 50%, #4DC3FF 0%, #2073D9 70%);
+    position: relative;
+  }
+  .app-tile.safari::before {
+    content: "";
+    position: absolute;
+    inset: 28%;
+    border-radius: 50%;
+    background: white;
+  }
+  .app-tile.safari::after {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 40%;
+    height: 2px;
+    background: #E2362F;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    border-radius: 2px;
+  }
+  .app-tile.messages { background: linear-gradient(180deg, #6BE072, #1EAA38); }
+  .app-tile.messages span { color: white; font-size: 16px; line-height: 1; }
+  .app-tile.reminders { background: linear-gradient(180deg, #FFFFFF, #F1F1F1); color: #FF3B30; font-size: 12px; font-weight: 700; }
+  .app-tile.music { background: linear-gradient(180deg, #FF7B8A, #E63E5C); color: white; font-size: 14px; }
+  .app-tile.finder {
+    background: linear-gradient(180deg, #67B5FF, #2A7CD9);
+    position: relative;
+  }
+  .app-tile.finder::before {
+    content: "";
+    position: absolute;
+    inset: 22% 18%;
+    background: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 50%, #1862C9 50%, #0E4FAA 100%);
+    border-radius: 2px;
+  }
+
+  /* —— Card 4: Delegate to many agents —— */
   .art-glow-violet {
     position: absolute;
     bottom: -20%;
     left: 50%;
     transform: translateX(-50%);
-    width: 70%;
+    width: 75%;
     height: 80%;
-    background: radial-gradient(ellipse at center, rgba(127, 90, 200, 0.55) 0%, rgba(127, 146, 255, 0.2) 35%, transparent 60%);
+    background: radial-gradient(ellipse at center, rgba(127, 90, 200, 0.55) 0%, rgba(127, 146, 255, 0.22) 35%, transparent 60%);
     filter: blur(30px);
     pointer-events: none;
     z-index: 1;
   }
-  .task-stack {
+  .lanes {
     position: absolute;
-    inset: 16% 22% 12% 22%;
+    inset: 18% 16% 16% 16%;
     z-index: 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 7px;
-  }
-  .task-tile {
-    background: rgba(20, 17, 13, 0.92);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 6px;
-    padding: 8px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    box-shadow: 0 1px 0 rgba(255,255,255,0.05) inset;
-  }
-  .task-tile .bar {
-    height: 3px;
-    background: rgba(236, 231, 221, 0.2);
-    border-radius: 2px;
-  }
-  .task-tile .bar.short { width: 60%; }
-  .task-tile .bar.mid { width: 80%; }
-  .task-tile .bar.full { width: 100%; }
-  .task-tile .bar.accent { background: var(--sapphire); width: 40%; }
-  .task-tile.medium { transform: translateY(-4px); border-color: rgba(127, 146, 255, 0.18); }
-  .task-tile.large {
-    transform: translateY(-10px);
-    border-color: rgba(127, 146, 255, 0.3);
-    background: rgba(28, 24, 18, 0.95);
-  }
-
-  /* —— Card 4: Sandboxed agent runs —— */
-  .art-glow-jade {
-    position: absolute;
-    bottom: -20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70%;
-    height: 80%;
-    background: radial-gradient(ellipse at center, rgba(108, 179, 154, 0.5) 0%, rgba(127, 146, 255, 0.15) 35%, transparent 60%);
-    filter: blur(28px);
-    pointer-events: none;
-    z-index: 1;
-  }
-  .diff-panel {
-    position: absolute;
-    inset: 18% 18% 12% 18%;
-    z-index: 2;
-    background: rgba(15, 13, 10, 0.95);
+    gap: 12px;
+    background: rgba(20, 17, 13, 0.85);
     border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 8px;
-    padding: 9px 10px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    line-height: 1.7;
-    color: var(--bone-dim);
-    box-shadow: 0 1px 0 rgba(255,255,255,0.05) inset, 0 24px 60px -20px rgba(0,0,0,0.55);
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
+    border-radius: 9px;
+    padding: 14px 14px 12px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.06) inset, 0 24px 60px -20px rgba(0,0,0,0.55);
   }
-  .diff-line { padding: 1px 6px; border-radius: 3px; }
-  .diff-line.add {
-    background: rgba(108, 179, 154, 0.12);
-    color: #A4D6C2;
-    border-left: 2px solid var(--jade);
-    padding-left: 8px;
-  }
-  .diff-line.rem {
-    background: rgba(196, 90, 74, 0.12);
-    color: #E0A199;
-    border-left: 2px solid #C45A4A;
-    padding-left: 8px;
-    text-decoration: line-through;
-    text-decoration-color: rgba(224, 161, 153, 0.4);
-  }
-  .diff-line.context { color: var(--ash); padding-left: 8px; }
-  .diff-badge {
-    position: absolute;
-    top: 9px;
-    right: 10px;
-    font-size: 8.5px;
-    color: var(--jade);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+  .lane { display: flex; flex-direction: column; gap: 5px; }
+  .lane-label {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 7px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--bone-dim);
+    letter-spacing: 0.02em;
   }
-  .diff-badge::before {
-    content: "";
-    width: 5px;
-    height: 5px;
-    background: var(--jade);
+  .lane-label .dot {
+    width: 6px; height: 6px;
     border-radius: 50%;
-    box-shadow: 0 0 6px var(--jade);
+    background: var(--ash);
+  }
+  .lane-label .dot.pulse {
+    background: var(--sapphire);
+    box-shadow: 0 0 8px rgba(127, 146, 255, 0.7);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 8px rgba(127, 146, 255, 0.7); }
+    50% { box-shadow: 0 0 14px rgba(127, 146, 255, 1); }
+  }
+  .lane-track {
+    height: 4px;
+    background: rgba(236, 231, 221, 0.07);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .lane-fill {
+    height: 100%;
+    background: linear-gradient(90deg, rgba(127, 146, 255, 0.6), var(--sapphire));
+    border-radius: 3px;
   }
 
   /* how it works */
@@ -676,7 +711,28 @@
       </div>
     </div>
 
-    <!-- Card 2: Any model, local or cloud -->
+    <!-- Card 2: Apple apps integration -->
+    <div class="feature-card">
+      <div class="feature-art">
+        <div class="art-glow-multicolor"></div>
+        <div class="apps-grid">
+          <div class="app-tile mail"><span>✉</span></div>
+          <div class="app-tile calendar"><span>17</span></div>
+          <div class="app-tile notes"></div>
+          <div class="app-tile safari"></div>
+          <div class="app-tile messages"><span>●</span></div>
+          <div class="app-tile reminders"><span>✓</span></div>
+          <div class="app-tile music"><span>♪</span></div>
+          <div class="app-tile finder"></div>
+        </div>
+      </div>
+      <div class="feature-text">
+        <h3>Plays well with the apps you already use.</h3>
+        <p>Read Mail and Calendar. Draft replies. Search Notes. Pull from Reminders, Messages, Safari. Darius lives inside your Mac, not next to it.</p>
+      </div>
+    </div>
+
+    <!-- Card 3: Any model, local or cloud -->
     <div class="feature-card">
       <div class="feature-art">
         <div class="art-glow-amber"></div>
@@ -705,53 +761,37 @@
       </div>
     </div>
 
-    <!-- Card 3: Adaptive tasks -->
+    <!-- Card 4: Delegate to many agents -->
     <div class="feature-card">
       <div class="feature-art">
         <div class="art-glow-violet"></div>
-        <div class="task-stack">
-          <div class="task-tile">
-            <div class="bar short"></div>
-            <div class="bar mid"></div>
-            <div class="bar accent"></div>
+        <div class="lanes">
+          <div class="lane">
+            <div class="lane-label">
+              <span class="dot pulse"></span>
+              <span>Research · brief</span>
+            </div>
+            <div class="lane-track"><div class="lane-fill" style="width: 64%"></div></div>
           </div>
-          <div class="task-tile medium">
-            <div class="bar mid"></div>
-            <div class="bar full"></div>
-            <div class="bar short"></div>
-            <div class="bar accent"></div>
+          <div class="lane">
+            <div class="lane-label">
+              <span class="dot pulse"></span>
+              <span>Draft · memo</span>
+            </div>
+            <div class="lane-track"><div class="lane-fill" style="width: 38%"></div></div>
           </div>
-          <div class="task-tile large">
-            <div class="bar full"></div>
-            <div class="bar mid"></div>
-            <div class="bar full"></div>
-            <div class="bar short"></div>
-            <div class="bar accent"></div>
+          <div class="lane">
+            <div class="lane-label">
+              <span class="dot"></span>
+              <span>Review · sources</span>
+            </div>
+            <div class="lane-track"><div class="lane-fill" style="width: 12%"></div></div>
           </div>
         </div>
       </div>
       <div class="feature-text">
-        <h3>One unit of work that scales with you.</h3>
-        <p>Start with a question. Or a research brief. Tasks grow files, progress, and context only when there's something to show.</p>
-      </div>
-    </div>
-
-    <!-- Card 4: Sandboxed agent runs -->
-    <div class="feature-card">
-      <div class="feature-art">
-        <div class="art-glow-jade"></div>
-        <div class="diff-panel">
-          <div class="diff-badge">Sandbox</div>
-          <div class="diff-line context">@@ proposal.md @@</div>
-          <div class="diff-line rem">- preliminary findings</div>
-          <div class="diff-line add">+ initial findings, summarized</div>
-          <div class="diff-line context">  citations preserved</div>
-          <div class="diff-line add">+ added: cross-reference table</div>
-        </div>
-      </div>
-      <div class="feature-text">
-        <h3>Agent runs you can actually trust.</h3>
-        <p>Sandboxed in an Apple Containerization VM. Side-by-side diffs before any file changes. Every step traceable, every action reversible.</p>
+        <h3>Delegate to many agents at once.</h3>
+        <p>Run research, drafts, and reviews in parallel — each in its own task, each with its own context. Come back when there's something to read.</p>
       </div>
     </div>
 
