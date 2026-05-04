@@ -532,12 +532,12 @@
     filter: blur(14px);
     opacity: 0.65;
   }
-  .provider-mark.openai::before { background: rgba(180, 220, 200, 0.5); }
-  .provider-mark.anthropic::before { background: rgba(217, 119, 75, 0.55); }
+  .provider-mark.openai::before { background: rgba(220, 220, 220, 0.45); }
+  .provider-mark.anthropic::before { background: rgba(204, 120, 92, 0.6); }
   .provider-mark.gemini::before { background: rgba(120, 140, 220, 0.55); }
-  .provider-mark.meta::before { background: rgba(70, 130, 240, 0.55); }
   .provider-mark.mistral::before { background: rgba(240, 100, 30, 0.55); }
-  .provider-mark.xai::before { background: rgba(160, 160, 160, 0.45); }
+  .provider-mark.groq::before { background: rgba(245, 80, 54, 0.6); }
+  .provider-mark.xai::before { background: rgba(180, 180, 180, 0.4); }
   .provider-mark svg { width: 22px; height: 22px; display: block; }
   .provider-mark.tl { top: 14%; left: 8%; }
   .provider-mark.tr { top: 14%; right: 8%; }
@@ -575,9 +575,9 @@
   }
   .dock {
     position: absolute;
-    bottom: 14%;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     z-index: 2;
     display: flex;
     gap: 4px;
@@ -1092,44 +1092,38 @@
       <div class="feature-art">
         <div class="art-glow-amber"></div>
 
-        <!-- OpenAI -->
+        <!-- OpenAI: 6-petal blossom -->
         <div class="provider-mark openai tl">
           <svg viewBox="0 0 100 100">
-            <g stroke="#ECE7DD" stroke-width="5" fill="none">
-              <ellipse cx="50" cy="50" rx="32" ry="11"/>
-              <ellipse cx="50" cy="50" rx="32" ry="11" transform="rotate(60 50 50)"/>
-              <ellipse cx="50" cy="50" rx="32" ry="11" transform="rotate(120 50 50)"/>
+            <g fill="#ECE7DD">
+              <path d="M 50 8 C 41 8 33 22 50 50 C 67 22 59 8 50 8 Z"/>
+              <path d="M 50 8 C 41 8 33 22 50 50 C 67 22 59 8 50 8 Z" transform="rotate(60 50 50)"/>
+              <path d="M 50 8 C 41 8 33 22 50 50 C 67 22 59 8 50 8 Z" transform="rotate(120 50 50)"/>
+              <path d="M 50 8 C 41 8 33 22 50 50 C 67 22 59 8 50 8 Z" transform="rotate(180 50 50)"/>
+              <path d="M 50 8 C 41 8 33 22 50 50 C 67 22 59 8 50 8 Z" transform="rotate(240 50 50)"/>
+              <path d="M 50 8 C 41 8 33 22 50 50 C 67 22 59 8 50 8 Z" transform="rotate(300 50 50)"/>
             </g>
           </svg>
         </div>
-        <!-- Anthropic -->
+        <!-- Claude (Anthropic) -->
         <div class="provider-mark anthropic tr">
           <svg viewBox="0 0 100 100">
-            <g fill="#D9774B">
-              <ellipse cx="50" cy="20" rx="5" ry="20"/>
-              <ellipse cx="50" cy="80" rx="5" ry="20"/>
-              <ellipse cx="20" cy="50" rx="20" ry="5"/>
-              <ellipse cx="80" cy="50" rx="20" ry="5"/>
-              <ellipse cx="29" cy="29" rx="20" ry="5" transform="rotate(45 29 29)"/>
-              <ellipse cx="71" cy="71" rx="20" ry="5" transform="rotate(45 71 71)"/>
+            <g fill="#CC785C">
+              <ellipse cx="50" cy="50" rx="4.5" ry="40"/>
+              <ellipse cx="50" cy="50" rx="4.5" ry="40" transform="rotate(60 50 50)"/>
+              <ellipse cx="50" cy="50" rx="4.5" ry="40" transform="rotate(120 50 50)"/>
             </g>
           </svg>
         </div>
-        <!-- Gemini -->
+        <!-- Gemini: 4-pointed sparkle -->
         <div class="provider-mark gemini ml">
           <svg viewBox="0 0 100 100">
-            <defs><linearGradient id="prov-gemini" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5783FB"/><stop offset="1" stop-color="#9D5FE5"/></linearGradient></defs>
-            <path d="M 50 6 C 50 32 68 50 94 50 C 68 50 50 68 50 94 C 50 68 32 50 6 50 C 32 50 50 32 50 6 Z" fill="url(#prov-gemini)"/>
+            <defs><linearGradient id="prov-gemini" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#3186FF"/><stop offset="0.55" stop-color="#9168C0"/><stop offset="1" stop-color="#23CCC9"/></linearGradient></defs>
+            <path d="M 50 5 L 56 44 L 95 50 L 56 56 L 50 95 L 44 56 L 5 50 L 44 44 Z" fill="url(#prov-gemini)"/>
           </svg>
         </div>
-        <!-- Meta -->
-        <div class="provider-mark meta mr">
-          <svg viewBox="0 0 100 100">
-            <path d="M 8 60 C 8 38 22 26 38 38 C 46 44 50 56 50 56 C 50 56 54 44 62 38 C 78 26 92 38 92 60 C 92 78 78 82 70 76 C 60 68 50 56 50 56 C 50 56 40 68 30 76 C 22 82 8 78 8 60 Z" fill="#0866FF"/>
-          </svg>
-        </div>
-        <!-- Mistral -->
-        <div class="provider-mark mistral bl">
+        <!-- Mistral: flame stair-step -->
+        <div class="provider-mark mistral mr">
           <svg viewBox="0 0 100 100">
             <rect x="20" y="76" width="60" height="12" fill="#FFD13F"/>
             <rect x="28" y="62" width="44" height="12" fill="#F09A1B"/>
@@ -1138,10 +1132,24 @@
             <rect x="46" y="20" width="8" height="12" fill="#DD1A09"/>
           </svg>
         </div>
-        <!-- xAI -->
+        <!-- Groq: angular dart cross -->
+        <div class="provider-mark groq bl">
+          <svg viewBox="0 0 100 100">
+            <g fill="#F55036">
+              <path d="M 50 8 L 60 42 L 50 50 L 40 42 Z"/>
+              <path d="M 92 50 L 58 60 L 50 50 L 58 40 Z"/>
+              <path d="M 50 92 L 40 58 L 50 50 L 60 58 Z"/>
+              <path d="M 8 50 L 42 40 L 50 50 L 42 60 Z"/>
+            </g>
+          </svg>
+        </div>
+        <!-- xAI / Grok: bold X -->
         <div class="provider-mark xai br">
           <svg viewBox="0 0 100 100">
-            <path d="M 22 22 L 50 50 L 22 78 M 78 22 L 50 50 L 78 78" stroke="#ECE7DD" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <g fill="#ECE7DD">
+              <polygon points="18,18 36,18 82,82 64,82"/>
+              <polygon points="82,18 64,18 18,82 36,82"/>
+            </g>
           </svg>
         </div>
 
