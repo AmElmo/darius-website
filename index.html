@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Darius — A native Mac workspace for thinking with AI</title>
 <meta name="description" content="The calmest place to think with AI on Apple Silicon. Native macOS. Any model — local or cloud." />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="alternate icon" href="assets/favicon-32.png" type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+<script defer src="https://cloud.umami.is/script.js" data-website-id="c4ca1e12-6665-4b73-a849-aa3917d0f575"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -68,16 +72,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 28px;
+    padding: 16px 28px;
     max-width: 1100px;
     margin: 0 auto;
   }
-  .brand { display: flex; align-items: center; gap: 9px; text-decoration: none; color: var(--bone); }
-  .brand svg { width: 18px; height: 18px; }
+  .brand { display: flex; align-items: center; gap: 6px; text-decoration: none; color: #FFFFFF; }
+  .brand svg { width: 38px; height: 38px; }
   .brand-name {
     font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.18em;
+    font-size: 22px;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
   }
   .nav-cta {
@@ -373,13 +377,9 @@
     z-index: 2;
   }
   .mb-prism {
-    width: 28%;
-    filter: drop-shadow(0 0 20px rgba(127, 146, 255, 0.95));
-    animation: mb-pulse 5s ease-in-out infinite;
-  }
-  @keyframes mb-pulse {
-    0%, 100% { filter: drop-shadow(0 0 20px rgba(127, 146, 255, 0.9)); }
-    50% { filter: drop-shadow(0 0 32px rgba(127, 146, 255, 1)); }
+    width: 30%;
+    display: block;
+    transform: translateX(3%);
   }
   .mb-hinge {
     width: 100%;
@@ -614,22 +614,34 @@
       0 6px 12px -4px rgba(0,0,0,0.4);
     overflow: hidden;
   }
+  .dock-icon.app {
+    background: transparent;
+    box-shadow: 0 6px 12px -4px rgba(0,0,0,0.42);
+    overflow: visible;
+  }
+  .dock-icon.app img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+  }
   .dock-icon svg { width: 100%; height: 100%; display: block; }
   .dock-icon.darius {
-    background: radial-gradient(120% 120% at 30% 20%, #5C8AFF 0%, #1E3D7A 78%);
-    transform: translateY(-3px);
+    border-radius: 12px;
+    background:
+      radial-gradient(100% 100% at 28% 18%, rgba(160, 180, 255, 0.42) 0%, transparent 34%),
+      linear-gradient(145deg, #5873FF 0%, #334ED0 46%, #162554 100%);
+    transform: translateY(-4px) scale(1.08);
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.28),
-      0 0 20px rgba(127, 146, 255, 0.7),
-      0 0 0 1px rgba(127, 146, 255, 0.35),
-      0 8px 16px -4px rgba(0,0,0,0.5);
+      inset 0 1px 0 rgba(255,255,255,0.36),
+      inset 0 -12px 22px rgba(7, 12, 36, 0.38),
+      0 0 0 1px rgba(179, 193, 255, 0.26),
+      0 0 22px rgba(92, 138, 255, 0.66),
+      0 9px 18px -5px rgba(0,0,0,0.58);
   }
   .dock-icon.darius svg {
-    padding: 16%;
-  }
-  .dock-icon.darius svg use {
-    /* white-tinted prism via filter */
-    filter: brightness(0) invert(1);
+    padding: 13%;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.24));
   }
   .dock-running-dot {
     position: absolute;
@@ -742,7 +754,6 @@
     opacity: 0.85;
   }
   .agent-row.active .row-mark {
-    filter: drop-shadow(0 0 4px rgba(127, 146, 255, 0.7));
     opacity: 1;
   }
   .agent-row .check {
@@ -806,36 +817,123 @@
 
   /* CTA */
   .cta {
-    padding: 60px 28px 96px;
-    max-width: 720px;
+    padding: 102px 28px 124px;
+    min-height: 608px;
+    max-width: 1100px;
     margin: 0 auto;
-    text-align: left;
+    text-align: center;
   }
   .cta h2 {
-    font-weight: 600;
-    font-size: 18px;
-    margin-bottom: 4px;
-    letter-spacing: -0.01em;
+    font-weight: 400;
+    font-size: clamp(52px, 7.2vw, 104px);
+    line-height: 1;
+    margin-bottom: 48px;
+    letter-spacing: 0;
   }
-  .cta p {
-    font-size: 15px;
-    color: var(--bone-dim);
-    margin-bottom: 24px;
+  .cta h2 .cta-brand {
+    background: linear-gradient(135deg, #9FB1FF 0%, #5C8AFF 62%, #3D7FE0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   .cta-btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    gap: 10px;
     background: var(--bone);
     color: var(--bg);
-    padding: 9px 16px;
-    border-radius: 7px;
+    min-width: 374px;
+    min-height: 74px;
+    padding: 19px 36px;
+    border-radius: 999px;
     text-decoration: none;
-    font-size: 13.5px;
-    font-weight: 600;
-    transition: opacity 200ms;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.1;
+    transition: opacity 200ms, transform 200ms;
   }
-  .cta-btn:hover { opacity: 0.9; }
+  .cta-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+  .cta-btn svg { width: 21px; height: 21px; flex: 0 0 auto; }
+  .cta-variant {
+    position: relative;
+    min-height: 760px;
+    overflow: hidden;
+    isolation: isolate;
+    display: grid;
+    place-items: center;
+    padding: 104px 28px;
+    text-align: center;
+  }
+  .cta-variant::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.035), transparent 24%, transparent 74%, rgba(0,0,0,0.24)),
+      radial-gradient(ellipse 86% 32% at 50% 105%, rgba(236, 231, 221, 0.055), transparent 68%);
+  }
+  .cta-stage {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    justify-items: center;
+    width: min(100%, 1100px);
+  }
+  .cta-variant h2 {
+    font-weight: 300;
+    font-size: clamp(58px, 9.2vw, 132px);
+    line-height: 0.96;
+    letter-spacing: 0;
+  }
+  .cta-variant .cta-brand {
+    color: var(--sapphire);
+  }
+  .cta-variant .cta-btn {
+    margin-top: 52px;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.74),
+      0 20px 60px -28px rgba(236,231,221,0.55);
+  }
+  .cta-field {
+    background:
+      linear-gradient(180deg, #100E0B 0%, #0C0A08 100%);
+  }
+  .cta-field::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background:
+      linear-gradient(rgba(236,231,221,0.042) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(236,231,221,0.035) 1px, transparent 1px),
+      linear-gradient(135deg, rgba(92,138,255,0.1), transparent 36%, rgba(212,149,99,0.08) 62%, transparent);
+    background-size: 72px 72px, 72px 72px, 160% 160%;
+    transform-origin: 50% 58%;
+    transform: perspective(900px) rotateX(58deg) scale(1.25);
+    animation: ctaFieldSlide 18s linear infinite;
+  }
+  .cta-field .cta-rail {
+    position: absolute;
+    inset: auto -10% 18%;
+    z-index: -1;
+    height: 26%;
+    background:
+      linear-gradient(90deg, transparent, rgba(92,138,255,0.13), rgba(236,231,221,0.08), rgba(113,183,161,0.1), transparent);
+    filter: blur(28px);
+    transform: skewY(-4deg);
+    animation: ctaRailBreathe 8s ease-in-out infinite alternate;
+  }
+  @keyframes ctaFieldSlide {
+    from { background-position: 0 0, 0 0, 0% 50%; }
+    to { background-position: 0 144px, 144px 0, 100% 50%; }
+  }
+  @keyframes ctaRailBreathe {
+    from { opacity: 0.48; transform: skewY(-4deg) translateY(8px); }
+    to { opacity: 0.82; transform: skewY(-4deg) translateY(-6px); }
+  }
 
   /* footer */
   footer {
@@ -860,6 +958,35 @@
     .feature-grid { grid-template-columns: 1fr; }
     .footer-meta { flex-direction: column; gap: 14px; align-items: flex-start; }
     .hero-canvas { padding-bottom: 56px; }
+    .cta {
+      padding: 76px 24px 92px;
+      min-height: 0;
+    }
+    .cta h2 {
+      font-size: clamp(42px, 13vw, 68px);
+      margin-bottom: 32px;
+    }
+    .cta-btn {
+      min-width: 0;
+      width: min(100%, 330px);
+      min-height: 60px;
+      padding: 16px 22px;
+      font-size: 21px;
+    }
+    .cta-btn svg { width: 18px; height: 18px; }
+    .cta-variant {
+      min-height: 620px;
+      padding: 72px 24px;
+    }
+    .cta-variant h2 {
+      font-size: clamp(48px, 15vw, 72px);
+    }
+    .cta-variant .cta-btn {
+      min-height: 62px;
+      margin-top: 34px;
+      padding: 16px 24px;
+      font-size: 22px;
+    }
   }
 </style>
 </head>
@@ -867,21 +994,18 @@
 
 <svg width="0" height="0" style="position: absolute;">
   <defs>
-    <clipPath id="rounded-mark-v4">
-      <path d="M 96.35 39.31 Q 100 30 103.65 39.31 L 150.35 158.69 Q 154 168 144 168 L 56 168 Q 46 168 49.65 158.69 Z"/>
-    </clipPath>
     <symbol id="darius-mark" viewBox="0 0 200 200">
-      <g clip-path="url(#rounded-mark-v4)">
-        <polygon points="100,30 154,168 100,148" fill="#7F92FF"/>
-        <polygon points="100,30 46,168 100,148" fill="#3D7FE0" opacity="0.42"/>
-        <polygon points="46,168 154,168 100,148" fill="#5C8AFF" opacity="0.92"/>
+      <g fill="none" stroke="#5C8AFF" stroke-linejoin="round" stroke-linecap="round">
+        <path stroke-width="5.27" d="M 46.49 29.06 L 153.51 90.85 C 160.56 94.91 160.56 105.09 153.51 109.15 L 46.49 170.94 C 39.45 175.01 30.64 169.92 30.64 161.78 L 30.64 38.22 C 30.64 30.08 39.45 25.00 46.49 29.06 Z"/>
+        <path stroke-width="4.30" d="M 100 140 L 30.64 100 L 100 60 Z"/>
+        <path stroke-width="3.13" d="M 65.31 120 L 65.31 80 L 100 100 Z"/>
       </g>
     </symbol>
     <symbol id="darius-mark-white" viewBox="0 0 200 200">
-      <g clip-path="url(#rounded-mark-v4)">
-        <polygon points="100,30 154,168 100,148" fill="#FFFFFF"/>
-        <polygon points="100,30 46,168 100,148" fill="#FFFFFF" opacity="0.42"/>
-        <polygon points="46,168 154,168 100,148" fill="#FFFFFF" opacity="0.78"/>
+      <g fill="none" stroke="#FFFFFF" stroke-linejoin="round" stroke-linecap="round">
+        <path stroke-width="5.27" d="M 46.49 29.06 L 153.51 90.85 C 160.56 94.91 160.56 105.09 153.51 109.15 L 46.49 170.94 C 39.45 175.01 30.64 169.92 30.64 161.78 L 30.64 38.22 C 30.64 30.08 39.45 25.00 46.49 29.06 Z"/>
+        <path stroke-width="4.30" d="M 100 140 L 30.64 100 L 100 60 Z"/>
+        <path stroke-width="3.13" d="M 65.31 120 L 65.31 80 L 100 100 Z"/>
       </g>
     </symbol>
   </defs>
@@ -890,10 +1014,10 @@
 <nav>
   <div class="nav-inner">
     <a class="brand" href="#">
-      <svg><use href="#darius-mark"/></svg>
-      <span class="brand-name">Darius</span>
+      <svg><use href="#darius-mark-white"/></svg>
+      <span class="brand-name">DARIUS</span>
     </a>
-    <a href="#download" class="nav-cta">Download</a>
+    <a href="https://github.com/AmElmo/darius-updates/releases/latest/download/Darius.dmg" class="nav-cta">Download</a>
   </div>
 </nav>
 
@@ -901,7 +1025,7 @@
   <h1 class="hero-title">The best way to run<br><em>agents on your Mac.</em></h1>
   <p class="hero-sub">A native macOS workspace where AI agents work alongside you — many at once, local or cloud, with the apps you already use.</p>
   <div class="hero-actions">
-    <a href="#download" class="btn btn-primary">
+    <a href="https://github.com/AmElmo/darius-updates/releases/latest/download/Darius.dmg" class="btn btn-primary">
       Download for macOS
       <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 2v9m0 0l-3.5-3.5M8 11l3.5-3.5M3 14h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
@@ -950,75 +1074,18 @@
         <div class="dock-bg"></div>
         <div class="art-glow-multicolor"></div>
         <div class="dock">
-          <!-- Mail -->
-          <div class="dock-icon">
-            <svg viewBox="0 0 100 100">
-              <defs><linearGradient id="dki-mail" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5BB0FF"/><stop offset="1" stop-color="#1B6BCF"/></linearGradient></defs>
-              <rect width="100" height="100" rx="22" fill="url(#dki-mail)"/>
-              <rect x="18" y="32" width="64" height="38" rx="4" fill="none" stroke="#FFFFFF" stroke-width="4"/>
-              <path d="M 18 32 L 50 56 L 82 32" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <!-- Calendar -->
-          <div class="dock-icon">
-            <svg viewBox="0 0 100 100">
-              <rect width="100" height="100" rx="22" fill="#FFFFFF"/>
-              <text x="50" y="32" text-anchor="middle" fill="#888888" font-size="13" font-weight="700" font-family="Manrope, -apple-system, sans-serif">SUN</text>
-              <text x="50" y="82" text-anchor="middle" fill="#FF3B30" font-size="50" font-weight="700" font-family="Manrope, -apple-system, sans-serif">17</text>
-            </svg>
-          </div>
-          <!-- Notes -->
-          <div class="dock-icon">
-            <svg viewBox="0 0 100 100">
-              <defs><linearGradient id="dki-notes" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEFA8"/><stop offset="1" stop-color="#F4C548"/></linearGradient></defs>
-              <rect width="100" height="100" rx="22" fill="url(#dki-notes)"/>
-              <rect x="0" y="0" width="100" height="22" fill="#FFD93D"/>
-              <line x1="22" y1="46" x2="78" y2="46" stroke="rgba(0,0,0,0.18)" stroke-width="2.5" stroke-linecap="round"/>
-              <line x1="22" y1="60" x2="68" y2="60" stroke="rgba(0,0,0,0.18)" stroke-width="2.5" stroke-linecap="round"/>
-              <line x1="22" y1="74" x2="78" y2="74" stroke="rgba(0,0,0,0.18)" stroke-width="2.5" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <!-- Safari -->
-          <div class="dock-icon">
-            <svg viewBox="0 0 100 100">
-              <defs><radialGradient id="dki-safari" cx="0.5" cy="0.5" r="0.6"><stop offset="0" stop-color="#5BC8FF"/><stop offset="1" stop-color="#1A6FD0"/></radialGradient></defs>
-              <rect width="100" height="100" rx="22" fill="url(#dki-safari)"/>
-              <circle cx="50" cy="50" r="28" fill="#FFFFFF"/>
-              <circle cx="50" cy="50" r="28" fill="none" stroke="#888888" stroke-width="0.6"/>
-              <polygon points="50,28 56,50 50,72 44,50" fill="#FFFFFF" stroke="#888888" stroke-width="0.6" stroke-linejoin="round"/>
-              <polygon points="50,28 56,50 50,50" fill="#FF3B30"/>
-              <circle cx="50" cy="50" r="2.5" fill="#666666"/>
-            </svg>
-          </div>
-          <!-- Messages -->
-          <div class="dock-icon">
-            <svg viewBox="0 0 100 100">
-              <defs><linearGradient id="dki-msg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7EE972"/><stop offset="1" stop-color="#1FB13D"/></linearGradient></defs>
-              <rect width="100" height="100" rx="22" fill="url(#dki-msg)"/>
-              <path d="M 50 22 C 30 22 18 35 18 50 C 18 60 24 68 32 73 L 30 84 L 42 78 C 44.5 79 47 79 50 79 C 70 79 82 65 82 50 C 82 35 70 22 50 22 Z" fill="#FFFFFF"/>
-            </svg>
-          </div>
-          <!-- Reminders -->
-          <div class="dock-icon">
-            <svg viewBox="0 0 100 100">
-              <rect width="100" height="100" rx="22" fill="#FFFFFF"/>
-              <circle cx="50" cy="50" r="22" fill="#FF3B30"/>
-              <path d="M 38 50 L 47 58 L 62 42" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <!-- Music -->
-          <div class="dock-icon">
-            <svg viewBox="0 0 100 100">
-              <defs><linearGradient id="dki-music" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF7A8E"/><stop offset="1" stop-color="#E62F58"/></linearGradient></defs>
-              <rect width="100" height="100" rx="22" fill="url(#dki-music)"/>
-              <path d="M 38 32 L 38 65 C 38 70 33 73 28 71 C 23 69 23 64 28 62 C 32 60 36 60 38 62 L 38 38 L 65 30 L 65 60 C 65 65 60 68 55 66 C 50 64 50 59 55 57 C 59 55 63 55 65 57 Z" fill="#FFFFFF"/>
-            </svg>
-          </div>
+          <div class="dock-icon app"><img src="assets/app-icons/mail.png" alt="Mail"></div>
+          <div class="dock-icon app"><img src="assets/app-icons/calendar.png" alt="Calendar"></div>
+          <div class="dock-icon app"><img src="assets/app-icons/notes.png" alt="Notes"></div>
+          <div class="dock-icon app"><img src="assets/app-icons/safari.png" alt="Safari"></div>
           <!-- Darius (lifted, glowing) -->
           <div class="dock-icon darius">
             <svg viewBox="0 0 200 200"><use href="#darius-mark-white"/></svg>
             <span class="dock-running-dot"></span>
           </div>
+          <div class="dock-icon app"><img src="assets/app-icons/messages.png" alt="Messages"></div>
+          <div class="dock-icon app"><img src="assets/app-icons/reminders.png" alt="Reminders"></div>
+          <div class="dock-icon app"><img src="assets/app-icons/music.png" alt="Music"></div>
         </div>
       </div>
       <div class="feature-text">
@@ -1161,20 +1228,22 @@
   </ol>
 </section>
 
-<section class="cta" id="download">
-  <h2>We built Darius on Apple Silicon.</h2>
-  <p>We think you'll like it as much as we do.</p>
-  <a href="#" class="cta-btn">
-    Download Darius
-    <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 2v9m0 0l-3.5-3.5M8 11l3.5-3.5M3 14h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </a>
+<section class="cta-variant cta-field" id="download">
+  <div class="cta-rail"></div>
+  <div class="cta-stage">
+    <h2>Try <span class="cta-brand">Darius</span> now.</h2>
+    <a href="https://github.com/AmElmo/darius-updates/releases/latest/download/Darius.dmg" class="cta-btn">
+      Download for macOS
+      <svg viewBox="0 0 16 16" fill="none"><path d="M8 2v9m0 0l-3.5-3.5M8 11l3.5-3.5M3 14h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
 </section>
 
 <footer>
   <div class="footer-meta">
     <a class="brand" href="#">
-      <svg><use href="#darius-mark"/></svg>
-      <span class="brand-name">Darius</span>
+      <svg><use href="#darius-mark-white"/></svg>
+      <span class="brand-name">DARIUS</span>
     </a>
     <span>© 2026 Darius · v0.2.0 · macOS 15.5+ · Made on Apple Silicon</span>
   </div>
