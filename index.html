@@ -287,253 +287,479 @@
     line-height: 1.55;
   }
 
-  /* —— Card 1: Native to macOS —— */
+  /* —— Card 1: Apple Silicon chip die —— */
   .art-glow-blue {
-    position: absolute;
-    bottom: -20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70%;
-    height: 80%;
-    background: radial-gradient(ellipse at center, rgba(127, 146, 255, 0.6) 0%, rgba(127, 146, 255, 0.15) 30%, transparent 60%);
-    filter: blur(28px);
-    pointer-events: none;
-    z-index: 1;
-  }
-  .mac-window {
-    position: absolute;
-    inset: 18% 14% 0 14%;
-    background: linear-gradient(180deg, rgba(36, 32, 26, 0.95), rgba(20, 17, 13, 0.95));
-    border: 1px solid rgba(255,255,255,0.08);
-    border-bottom: none;
-    border-radius: 10px 10px 0 0;
-    box-shadow: 0 1px 0 rgba(255,255,255,0.08) inset, 0 30px 60px -20px rgba(0,0,0,0.5);
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-  }
-  .traffic-lights {
-    display: flex;
-    gap: 6px;
-    padding: 10px 12px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-  .light { width: 9px; height: 9px; border-radius: 50%; }
-  .light.red { background: #FF5F57; }
-  .light.yellow { background: #FEBC2E; }
-  .light.green { background: #28C840; }
-  .mac-window-body {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 14px;
-  }
-  .mac-window-body svg {
-    width: 38px;
-    height: 38px;
-    filter: drop-shadow(0 0 22px rgba(127, 146, 255, 0.65));
-  }
-
-  /* —— Card 2: Any model, local or cloud —— */
-  .art-glow-amber {
-    position: absolute;
-    bottom: -20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 75%;
-    height: 80%;
-    background:
-      radial-gradient(ellipse at 30% center, rgba(212, 149, 99, 0.5) 0%, transparent 55%),
-      radial-gradient(ellipse at 70% center, rgba(127, 146, 255, 0.45) 0%, transparent 55%);
-    filter: blur(30px);
-    pointer-events: none;
-    z-index: 1;
-  }
-  .model-stack {
-    position: absolute;
-    inset: 18% 18% 12% 18%;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    background: rgba(20, 17, 13, 0.9);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 9px;
-    padding: 8px;
-    box-shadow: 0 1px 0 rgba(255,255,255,0.06) inset, 0 24px 60px -20px rgba(0,0,0,0.55);
-  }
-  .model-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 6px 10px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px;
-    color: var(--bone-dim);
-    letter-spacing: 0.02em;
-  }
-  .model-row .tag {
-    font-size: 8.5px;
-    color: var(--ash);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-  .model-row.active {
-    background: rgba(127, 146, 255, 0.1);
-    border: 1px solid rgba(127, 146, 255, 0.2);
-    border-radius: 5px;
-    color: var(--bone);
-  }
-  .model-row.active .tag { color: var(--sapphire); }
-
-  /* —— Card 2: Apple apps integration —— */
-  .art-glow-multicolor {
     position: absolute;
     bottom: -20%;
     left: 50%;
     transform: translateX(-50%);
     width: 80%;
     height: 80%;
-    background:
-      radial-gradient(ellipse 30% 60% at 25% 70%, rgba(127, 146, 255, 0.4) 0%, transparent 60%),
-      radial-gradient(ellipse 30% 60% at 75% 70%, rgba(212, 149, 99, 0.35) 0%, transparent 60%),
-      radial-gradient(ellipse 25% 60% at 50% 80%, rgba(108, 179, 154, 0.3) 0%, transparent 60%);
+    background: radial-gradient(ellipse at center, rgba(127, 146, 255, 0.55) 0%, rgba(127, 146, 255, 0.15) 35%, transparent 60%);
     filter: blur(30px);
     pointer-events: none;
     z-index: 1;
   }
-  .apps-grid {
+  .chip-package {
     position: absolute;
-    inset: 16% 16% 12% 16%;
+    inset: 10% 16% 10% 16%;
+    background:
+      linear-gradient(135deg, #15120E 0%, #0B0907 100%);
+    border: 1px solid rgba(127, 146, 255, 0.22);
+    border-radius: 12px;
+    box-shadow:
+      inset 0 1px 0 rgba(127, 146, 255, 0.14),
+      0 24px 50px -20px rgba(0,0,0,0.6),
+      0 0 60px -10px rgba(127, 146, 255, 0.25);
     z-index: 2;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+    padding: 10px;
+    overflow: hidden;
   }
-  .app-tile {
-    aspect-ratio: 1;
-    border-radius: 11px;
-    border: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 1px 0 rgba(255,255,255,0.12) inset, 0 6px 14px -6px rgba(0,0,0,0.5);
+  .chip-package::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(127, 146, 255, 0.04) 0 1px, transparent 1px 8px),
+      repeating-linear-gradient(-45deg, rgba(127, 146, 255, 0.04) 0 1px, transparent 1px 8px);
+    pointer-events: none;
+  }
+  .chip-package::after {
+    /* corner registration brackets */
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px dashed rgba(127, 146, 255, 0.08);
+    border-radius: 8px;
+    pointer-events: none;
+  }
+  .chip-die {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.7fr 1fr;
+    grid-template-rows: 0.7fr 1.7fr 0.7fr;
+    gap: 3px;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 4px;
+    border-radius: 5px;
+    border: 1px solid rgba(127, 146, 255, 0.1);
+  }
+  .cd-block {
+    position: relative;
+    background: rgba(127, 146, 255, 0.05);
+    border: 1px solid rgba(127, 146, 255, 0.13);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .cd-block.center {
+    background:
+      radial-gradient(circle at 50% 50%, rgba(127, 146, 255, 0.18) 0%, rgba(30, 61, 122, 0.4) 70%);
+    border: 1px solid rgba(127, 146, 255, 0.4);
+    box-shadow: inset 0 0 24px rgba(127, 146, 255, 0.18);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-weight: 600;
-    font-size: 12px;
-    font-family: 'Manrope', sans-serif;
   }
-  .app-tile.mail { background: linear-gradient(180deg, #4FA1FF, #1862C9); }
-  .app-tile.mail span { color: white; font-size: 14px; }
-  .app-tile.calendar { background: linear-gradient(180deg, #FFFFFF, #F1F1F1); color: #E2362F; font-size: 11px; font-weight: 700; }
-  .app-tile.notes { background: linear-gradient(180deg, #FFE57F, #F8C74D); position: relative; }
-  .app-tile.notes::after {
+  .cd-block.center svg {
+    width: 30%;
+    max-width: 38px;
+    filter: drop-shadow(0 0 14px rgba(127, 146, 255, 1));
+    z-index: 2;
+  }
+  .cd-block.center::before {
+    /* concentric trace ring */
     content: "";
     position: absolute;
-    inset: 25% 22% 22% 22%;
-    background:
-      linear-gradient(rgba(0,0,0,0.18) 0 0) 0 0/100% 1.5px no-repeat,
-      linear-gradient(rgba(0,0,0,0.18) 0 0) 0 35%/80% 1.5px no-repeat,
-      linear-gradient(rgba(0,0,0,0.18) 0 0) 0 70%/90% 1.5px no-repeat;
+    inset: 14%;
+    border: 1px dashed rgba(127, 146, 255, 0.22);
+    border-radius: 4px;
   }
-  .app-tile.safari {
-    background: radial-gradient(circle at 50% 50%, #4DC3FF 0%, #2073D9 70%);
-    position: relative;
-  }
-  .app-tile.safari::before {
+  .cd-block.center::after {
     content: "";
     position: absolute;
     inset: 28%;
-    border-radius: 50%;
-    background: white;
+    border: 1px solid rgba(127, 146, 255, 0.3);
+    border-radius: 3px;
   }
-  .app-tile.safari::after {
-    content: "";
+  .cd-label {
     position: absolute;
-    top: 50%; left: 50%;
-    width: 40%;
-    height: 2px;
-    background: #E2362F;
-    transform: translate(-50%, -50%) rotate(-30deg);
-    border-radius: 2px;
+    top: 3px;
+    left: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 6.5px;
+    color: rgba(127, 146, 255, 0.6);
+    letter-spacing: 0.12em;
+    z-index: 3;
+    text-transform: uppercase;
   }
-  .app-tile.messages { background: linear-gradient(180deg, #6BE072, #1EAA38); }
-  .app-tile.messages span { color: white; font-size: 16px; line-height: 1; }
-  .app-tile.reminders { background: linear-gradient(180deg, #FFFFFF, #F1F1F1); color: #FF3B30; font-size: 12px; font-weight: 700; }
-  .app-tile.music { background: linear-gradient(180deg, #FF7B8A, #E63E5C); color: white; font-size: 14px; }
-  .app-tile.finder {
-    background: linear-gradient(180deg, #67B5FF, #2A7CD9);
-    position: relative;
-  }
-  .app-tile.finder::before {
-    content: "";
+  .cd-cells {
     position: absolute;
-    inset: 22% 18%;
-    background: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 50%, #1862C9 50%, #0E4FAA 100%);
-    border-radius: 2px;
+    inset: 11px 4px 4px 4px;
+    display: grid;
+    gap: 1px;
+  }
+  .cd-cells.cores4 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+  .cd-cells.gpu8 { grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr 1fr; }
+  .cd-cells.cache6 { grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr 1fr; }
+  .cd-cells.bars { grid-template-columns: 1fr; grid-template-rows: repeat(4, 1fr); }
+  .cd-cell {
+    background: rgba(127, 146, 255, 0.18);
+    border-radius: 1px;
+  }
+  .cd-cell.lit {
+    background: rgba(127, 146, 255, 0.55);
+    box-shadow: 0 0 4px rgba(127, 146, 255, 0.7);
+  }
+  .cd-cell.dim { background: rgba(127, 146, 255, 0.08); }
+  .cd-tag {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    background: rgba(15, 13, 10, 0.95);
+    border: 1px solid rgba(127, 146, 255, 0.3);
+    color: rgba(127, 146, 255, 0.9);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7px;
+    letter-spacing: 0.14em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    z-index: 4;
   }
 
-  /* —— Card 4: Delegate to many agents —— */
+  /* —— Card 3: Chat composer with provider logos floating —— */
+  .art-glow-amber {
+    position: absolute;
+    bottom: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 80%;
+    background:
+      radial-gradient(ellipse 40% 50% at 50% 50%, rgba(127, 146, 255, 0.35) 0%, transparent 60%),
+      radial-gradient(ellipse 30% 30% at 20% 30%, rgba(212, 149, 99, 0.3) 0%, transparent 65%),
+      radial-gradient(ellipse 30% 30% at 80% 30%, rgba(160, 119, 220, 0.32) 0%, transparent 65%),
+      radial-gradient(ellipse 30% 30% at 30% 80%, rgba(108, 179, 154, 0.25) 0%, transparent 65%),
+      radial-gradient(ellipse 30% 30% at 75% 75%, rgba(220, 90, 90, 0.25) 0%, transparent 65%);
+    filter: blur(30px);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .composer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 56%;
+    z-index: 3;
+    background: linear-gradient(180deg, rgba(40, 35, 28, 0.92), rgba(20, 17, 13, 0.95));
+    border: 1px solid rgba(255,255,255,0.13);
+    border-radius: 11px;
+    padding: 11px 12px;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      0 24px 60px -20px rgba(0,0,0,0.65),
+      0 0 30px rgba(127, 146, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .composer-input {
+    font-size: 11px;
+    color: var(--ash);
+    font-style: italic;
+  }
+  .composer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .composer-model {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 100px;
+    padding: 3px 8px 3px 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--bone-dim);
+  }
+  .composer-model .cm-icon {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sapphire), var(--sapphire-deep));
+    box-shadow: 0 0 5px rgba(127, 146, 255, 0.6);
+  }
+  .composer-send {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ECE7DD, #C7C0B3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 4px 10px -4px rgba(0,0,0,0.5);
+  }
+  .provider-mark {
+    position: absolute;
+    z-index: 2;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(20, 17, 13, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.1),
+      0 8px 16px -4px rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+  }
+  .provider-mark::before {
+    /* per-mark colored glow underneath */
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(14px);
+    opacity: 0.65;
+  }
+  .provider-mark.openai::before { background: rgba(180, 220, 200, 0.5); }
+  .provider-mark.anthropic::before { background: rgba(217, 119, 75, 0.55); }
+  .provider-mark.gemini::before { background: rgba(120, 140, 220, 0.55); }
+  .provider-mark.meta::before { background: rgba(70, 130, 240, 0.55); }
+  .provider-mark.mistral::before { background: rgba(240, 100, 30, 0.55); }
+  .provider-mark.xai::before { background: rgba(160, 160, 160, 0.45); }
+  .provider-mark svg { width: 22px; height: 22px; display: block; }
+  .provider-mark.tl { top: 14%; left: 8%; }
+  .provider-mark.tr { top: 14%; right: 8%; }
+  .provider-mark.ml { top: 50%; left: 4%; transform: translateY(-50%); }
+  .provider-mark.mr { top: 50%; right: 4%; transform: translateY(-50%); }
+  .provider-mark.bl { bottom: 14%; left: 8%; }
+  .provider-mark.br { bottom: 14%; right: 8%; }
+
+  /* —— Card 2: macOS dock with proper Apple icons —— */
+  .art-glow-multicolor {
+    position: absolute;
+    bottom: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 70%;
+    background:
+      radial-gradient(ellipse 25% 60% at 12% 70%, rgba(127, 146, 255, 0.4) 0%, transparent 60%),
+      radial-gradient(ellipse 25% 60% at 30% 75%, rgba(212, 149, 99, 0.32) 0%, transparent 60%),
+      radial-gradient(ellipse 25% 60% at 50% 80%, rgba(108, 179, 154, 0.32) 0%, transparent 60%),
+      radial-gradient(ellipse 25% 60% at 70% 75%, rgba(196, 90, 74, 0.28) 0%, transparent 60%),
+      radial-gradient(ellipse 25% 60% at 88% 70%, rgba(127, 146, 255, 0.4) 0%, transparent 60%);
+    filter: blur(28px);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .dock-bg {
+    /* faint desktop wallpaper hint */
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 30%, rgba(127, 146, 255, 0.06) 0%, transparent 70%),
+      linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.18) 100%);
+    z-index: 1;
+  }
+  .dock {
+    position: absolute;
+    bottom: 14%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    gap: 4px;
+    padding: 6px 7px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.13), rgba(255,255,255,0.04));
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 18px;
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.28),
+      inset 0 -1px 0 rgba(255,255,255,0.06),
+      0 14px 30px -10px rgba(0,0,0,0.65),
+      0 4px 12px -4px rgba(0,0,0,0.45);
+  }
+  .dock::after {
+    /* dock reflection on the surface below */
+    content: "";
+    position: absolute;
+    bottom: -22px;
+    left: 6%;
+    right: 6%;
+    height: 18px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
+    filter: blur(8px);
+    pointer-events: none;
+  }
+  .dock-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+    position: relative;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.22),
+      0 6px 12px -4px rgba(0,0,0,0.4);
+    overflow: hidden;
+  }
+  .dock-icon svg { width: 100%; height: 100%; display: block; }
+  .dock-icon.darius {
+    background: radial-gradient(120% 120% at 30% 20%, #5C8AFF 0%, #1E3D7A 78%);
+    transform: translateY(-3px);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.28),
+      0 0 20px rgba(127, 146, 255, 0.7),
+      0 0 0 1px rgba(127, 146, 255, 0.35),
+      0 8px 16px -4px rgba(0,0,0,0.5);
+  }
+  .dock-icon.darius svg {
+    padding: 16%;
+  }
+  .dock-icon.darius svg use {
+    /* white-tinted prism via filter */
+    filter: brightness(0) invert(1);
+  }
+  .dock-running-dot {
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+  }
+
+  /* —— Card 4: Mac window listing active agent tasks —— */
   .art-glow-violet {
     position: absolute;
     bottom: -20%;
     left: 50%;
     transform: translateX(-50%);
     width: 75%;
-    height: 80%;
+    height: 85%;
     background: radial-gradient(ellipse at center, rgba(127, 90, 200, 0.55) 0%, rgba(127, 146, 255, 0.22) 35%, transparent 60%);
     filter: blur(30px);
     pointer-events: none;
     z-index: 1;
   }
-  .lanes {
+  .agents-window {
     position: absolute;
-    inset: 18% 16% 16% 16%;
+    inset: 8% 8% 10% 8%;
+    background: linear-gradient(180deg, rgba(40, 35, 28, 0.85), rgba(20, 17, 13, 0.92));
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(12px);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      0 24px 60px -20px rgba(0,0,0,0.6);
+    overflow: hidden;
     z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    background: rgba(20, 17, 13, 0.85);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 9px;
-    padding: 14px 14px 12px;
-    box-shadow: 0 1px 0 rgba(255,255,255,0.06) inset, 0 24px 60px -20px rgba(0,0,0,0.55);
   }
-  .lane { display: flex; flex-direction: column; gap: 5px; }
-  .lane-label {
+  .agents-bar {
     display: flex;
     align-items: center;
-    gap: 7px;
-    font-family: 'JetBrains Mono', monospace;
+    gap: 8px;
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .agents-bar .light { width: 8px; height: 8px; border-radius: 50%; }
+  .agents-bar .light.red { background: #FF5F57; }
+  .agents-bar .light.yellow { background: #FEBC2E; }
+  .agents-bar .light.green { background: #28C840; }
+  .agents-title {
+    margin-left: 6px;
+    font-family: 'Manrope', sans-serif;
     font-size: 10px;
     color: var(--bone-dim);
-    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
-  .lane-label .dot {
-    width: 6px; height: 6px;
+  .agents-title svg { width: 11px; height: 11px; opacity: 0.8; }
+  .agents-rows {
+    flex: 1;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .agent-row {
+    display: grid;
+    grid-template-columns: 11px 13px 1fr auto;
+    gap: 8px;
+    align-items: center;
+    padding: 6px 9px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    font-family: 'Manrope', sans-serif;
+    font-size: 10.5px;
+    color: var(--bone-dim);
+  }
+  .agent-row.active {
+    background: rgba(127, 146, 255, 0.09);
+    border-color: rgba(127, 146, 255, 0.28);
+    color: var(--bone);
+    box-shadow: 0 0 14px rgba(127, 146, 255, 0.15);
+  }
+  .agent-row .radio {
+    width: 11px;
+    height: 11px;
     border-radius: 50%;
-    background: var(--ash);
+    border: 1.4px solid var(--ash);
+    position: relative;
+    box-sizing: border-box;
   }
-  .lane-label .dot.pulse {
+  .agent-row.active .radio {
+    border-color: var(--sapphire);
+  }
+  .agent-row.active .radio::after {
+    content: "";
+    position: absolute;
+    inset: 1.5px;
     background: var(--sapphire);
-    box-shadow: 0 0 8px rgba(127, 146, 255, 0.7);
-    animation: pulse 1.6s ease-in-out infinite;
+    border-radius: 50%;
+    box-shadow: 0 0 5px var(--sapphire);
   }
-  @keyframes pulse {
-    0%, 100% { box-shadow: 0 0 8px rgba(127, 146, 255, 0.7); }
-    50% { box-shadow: 0 0 14px rgba(127, 146, 255, 1); }
+  .agent-row .row-mark {
+    width: 12px;
+    height: 12px;
+    opacity: 0.85;
   }
-  .lane-track {
-    height: 4px;
-    background: rgba(236, 231, 221, 0.07);
-    border-radius: 3px;
-    overflow: hidden;
+  .agent-row.active .row-mark {
+    filter: drop-shadow(0 0 4px rgba(127, 146, 255, 0.7));
+    opacity: 1;
   }
-  .lane-fill {
-    height: 100%;
-    background: linear-gradient(90deg, rgba(127, 146, 255, 0.6), var(--sapphire));
-    border-radius: 3px;
+  .agent-row .check {
+    color: var(--ash);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    line-height: 1;
+  }
+  .agent-row.done .check { color: var(--jade); }
+  .agent-row.queued { opacity: 0.55; }
+  .agents-cursor {
+    position: absolute;
+    z-index: 4;
+    pointer-events: none;
+    color: var(--bone);
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
   }
 
   /* how it works */
@@ -652,6 +878,13 @@
         <polygon points="46,168 154,168 100,148" fill="#5C8AFF" opacity="0.92"/>
       </g>
     </symbol>
+    <symbol id="darius-mark-white" viewBox="0 0 200 200">
+      <g clip-path="url(#rounded-mark-v4)">
+        <polygon points="100,30 154,168 100,148" fill="#FFFFFF"/>
+        <polygon points="100,30 46,168 100,148" fill="#FFFFFF" opacity="0.42"/>
+        <polygon points="46,168 154,168 100,148" fill="#FFFFFF" opacity="0.78"/>
+      </g>
+    </symbol>
   </defs>
 </svg>
 
@@ -690,40 +923,162 @@
   <div class="features-eyebrow">— What makes Darius different</div>
   <div class="feature-grid">
 
-    <!-- Card 1: Native to macOS -->
+    <!-- Card 1: Apple Silicon chip die -->
     <div class="feature-card">
       <div class="feature-art">
         <div class="art-glow-blue"></div>
-        <div class="mac-window">
-          <div class="traffic-lights">
-            <span class="light red"></span>
-            <span class="light yellow"></span>
-            <span class="light green"></span>
-          </div>
-          <div class="mac-window-body">
-            <svg viewBox="0 0 200 200"><use href="#darius-mark"/></svg>
+        <div class="chip-package">
+          <span class="cd-tag">M-SERIES</span>
+          <div class="chip-die">
+            <div class="cd-block">
+              <span class="cd-label">Cache</span>
+              <div class="cd-cells cache6">
+                <span class="cd-cell"></span><span class="cd-cell lit"></span><span class="cd-cell"></span>
+                <span class="cd-cell lit"></span><span class="cd-cell"></span><span class="cd-cell"></span>
+              </div>
+            </div>
+            <div class="cd-block">
+              <span class="cd-label">Neural Engine</span>
+              <div class="cd-cells gpu8">
+                <span class="cd-cell lit"></span><span class="cd-cell"></span><span class="cd-cell lit"></span><span class="cd-cell"></span>
+                <span class="cd-cell"></span><span class="cd-cell lit"></span><span class="cd-cell"></span><span class="cd-cell lit"></span>
+              </div>
+            </div>
+            <div class="cd-block">
+              <span class="cd-label">Cache</span>
+              <div class="cd-cells cache6">
+                <span class="cd-cell"></span><span class="cd-cell lit"></span><span class="cd-cell"></span>
+                <span class="cd-cell"></span><span class="cd-cell"></span><span class="cd-cell lit"></span>
+              </div>
+            </div>
+
+            <div class="cd-block">
+              <span class="cd-label">E-Cores</span>
+              <div class="cd-cells cores4">
+                <span class="cd-cell lit"></span><span class="cd-cell"></span>
+                <span class="cd-cell"></span><span class="cd-cell lit"></span>
+              </div>
+            </div>
+            <div class="cd-block center">
+              <svg viewBox="0 0 200 200"><use href="#darius-mark"/></svg>
+            </div>
+            <div class="cd-block">
+              <span class="cd-label">GPU</span>
+              <div class="cd-cells gpu8">
+                <span class="cd-cell lit"></span><span class="cd-cell"></span><span class="cd-cell lit"></span><span class="cd-cell"></span>
+                <span class="cd-cell"></span><span class="cd-cell lit"></span><span class="cd-cell"></span><span class="cd-cell lit"></span>
+              </div>
+            </div>
+
+            <div class="cd-block">
+              <span class="cd-label">Mem</span>
+              <div class="cd-cells bars">
+                <span class="cd-cell lit"></span>
+                <span class="cd-cell"></span>
+                <span class="cd-cell lit"></span>
+                <span class="cd-cell dim"></span>
+              </div>
+            </div>
+            <div class="cd-block">
+              <span class="cd-label">System Cache</span>
+              <div class="cd-cells gpu8">
+                <span class="cd-cell"></span><span class="cd-cell"></span><span class="cd-cell lit"></span><span class="cd-cell"></span>
+                <span class="cd-cell lit"></span><span class="cd-cell"></span><span class="cd-cell"></span><span class="cd-cell lit"></span>
+              </div>
+            </div>
+            <div class="cd-block">
+              <span class="cd-label">Mem</span>
+              <div class="cd-cells bars">
+                <span class="cd-cell"></span>
+                <span class="cd-cell lit"></span>
+                <span class="cd-cell"></span>
+                <span class="cd-cell lit"></span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <div class="feature-text">
         <h3>Native to macOS, made for Apple Silicon.</h3>
-        <p>Built in Swift. No Electron, no Chromium. Opens instantly, runs cool, and lives in your dock the way real Mac apps do.</p>
+        <p>Built in Swift. No Electron, no Chromium. Opens instantly, runs cool, and lives on the chip — not in a browser tab.</p>
       </div>
     </div>
 
-    <!-- Card 2: Apple apps integration -->
+    <!-- Card 2: macOS dock -->
     <div class="feature-card">
       <div class="feature-art">
+        <div class="dock-bg"></div>
         <div class="art-glow-multicolor"></div>
-        <div class="apps-grid">
-          <div class="app-tile mail"><span>✉</span></div>
-          <div class="app-tile calendar"><span>17</span></div>
-          <div class="app-tile notes"></div>
-          <div class="app-tile safari"></div>
-          <div class="app-tile messages"><span>●</span></div>
-          <div class="app-tile reminders"><span>✓</span></div>
-          <div class="app-tile music"><span>♪</span></div>
-          <div class="app-tile finder"></div>
+        <div class="dock">
+          <!-- Mail -->
+          <div class="dock-icon">
+            <svg viewBox="0 0 100 100">
+              <defs><linearGradient id="dki-mail" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5BB0FF"/><stop offset="1" stop-color="#1B6BCF"/></linearGradient></defs>
+              <rect width="100" height="100" rx="22" fill="url(#dki-mail)"/>
+              <rect x="18" y="32" width="64" height="38" rx="4" fill="none" stroke="#FFFFFF" stroke-width="4"/>
+              <path d="M 18 32 L 50 56 L 82 32" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <!-- Calendar -->
+          <div class="dock-icon">
+            <svg viewBox="0 0 100 100">
+              <rect width="100" height="100" rx="22" fill="#FFFFFF"/>
+              <text x="50" y="32" text-anchor="middle" fill="#888888" font-size="13" font-weight="700" font-family="Manrope, -apple-system, sans-serif">SUN</text>
+              <text x="50" y="82" text-anchor="middle" fill="#FF3B30" font-size="50" font-weight="700" font-family="Manrope, -apple-system, sans-serif">17</text>
+            </svg>
+          </div>
+          <!-- Notes -->
+          <div class="dock-icon">
+            <svg viewBox="0 0 100 100">
+              <defs><linearGradient id="dki-notes" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEFA8"/><stop offset="1" stop-color="#F4C548"/></linearGradient></defs>
+              <rect width="100" height="100" rx="22" fill="url(#dki-notes)"/>
+              <rect x="0" y="0" width="100" height="22" fill="#FFD93D"/>
+              <line x1="22" y1="46" x2="78" y2="46" stroke="rgba(0,0,0,0.18)" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="22" y1="60" x2="68" y2="60" stroke="rgba(0,0,0,0.18)" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="22" y1="74" x2="78" y2="74" stroke="rgba(0,0,0,0.18)" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <!-- Safari -->
+          <div class="dock-icon">
+            <svg viewBox="0 0 100 100">
+              <defs><radialGradient id="dki-safari" cx="0.5" cy="0.5" r="0.6"><stop offset="0" stop-color="#5BC8FF"/><stop offset="1" stop-color="#1A6FD0"/></radialGradient></defs>
+              <rect width="100" height="100" rx="22" fill="url(#dki-safari)"/>
+              <circle cx="50" cy="50" r="28" fill="#FFFFFF"/>
+              <circle cx="50" cy="50" r="28" fill="none" stroke="#888888" stroke-width="0.6"/>
+              <polygon points="50,28 56,50 50,72 44,50" fill="#FFFFFF" stroke="#888888" stroke-width="0.6" stroke-linejoin="round"/>
+              <polygon points="50,28 56,50 50,50" fill="#FF3B30"/>
+              <circle cx="50" cy="50" r="2.5" fill="#666666"/>
+            </svg>
+          </div>
+          <!-- Messages -->
+          <div class="dock-icon">
+            <svg viewBox="0 0 100 100">
+              <defs><linearGradient id="dki-msg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7EE972"/><stop offset="1" stop-color="#1FB13D"/></linearGradient></defs>
+              <rect width="100" height="100" rx="22" fill="url(#dki-msg)"/>
+              <path d="M 50 22 C 30 22 18 35 18 50 C 18 60 24 68 32 73 L 30 84 L 42 78 C 44.5 79 47 79 50 79 C 70 79 82 65 82 50 C 82 35 70 22 50 22 Z" fill="#FFFFFF"/>
+            </svg>
+          </div>
+          <!-- Reminders -->
+          <div class="dock-icon">
+            <svg viewBox="0 0 100 100">
+              <rect width="100" height="100" rx="22" fill="#FFFFFF"/>
+              <circle cx="50" cy="50" r="22" fill="#FF3B30"/>
+              <path d="M 38 50 L 47 58 L 62 42" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <!-- Music -->
+          <div class="dock-icon">
+            <svg viewBox="0 0 100 100">
+              <defs><linearGradient id="dki-music" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF7A8E"/><stop offset="1" stop-color="#E62F58"/></linearGradient></defs>
+              <rect width="100" height="100" rx="22" fill="url(#dki-music)"/>
+              <path d="M 38 32 L 38 65 C 38 70 33 73 28 71 C 23 69 23 64 28 62 C 32 60 36 60 38 62 L 38 38 L 65 30 L 65 60 C 65 65 60 68 55 66 C 50 64 50 59 55 57 C 59 55 63 55 65 57 Z" fill="#FFFFFF"/>
+            </svg>
+          </div>
+          <!-- Darius (lifted, glowing) -->
+          <div class="dock-icon darius">
+            <svg viewBox="0 0 200 200"><use href="#darius-mark-white"/></svg>
+            <span class="dock-running-dot"></span>
+          </div>
         </div>
       </div>
       <div class="feature-text">
@@ -732,61 +1087,130 @@
       </div>
     </div>
 
-    <!-- Card 3: Any model, local or cloud -->
+    <!-- Card 3: Chat composer with provider logos -->
     <div class="feature-card">
       <div class="feature-art">
         <div class="art-glow-amber"></div>
-        <div class="model-stack">
-          <div class="model-row">
-            <span>OpenAI · GPT-5</span>
-            <span class="tag">Cloud</span>
-          </div>
-          <div class="model-row active">
-            <span>Anthropic · Claude</span>
-            <span class="tag">Active</span>
-          </div>
-          <div class="model-row">
-            <span>Google · Gemini</span>
-            <span class="tag">Cloud</span>
-          </div>
-          <div class="model-row">
-            <span>MLX · On-device</span>
-            <span class="tag">Local</span>
+
+        <!-- OpenAI -->
+        <div class="provider-mark openai tl">
+          <svg viewBox="0 0 100 100">
+            <g stroke="#ECE7DD" stroke-width="5" fill="none">
+              <ellipse cx="50" cy="50" rx="32" ry="11"/>
+              <ellipse cx="50" cy="50" rx="32" ry="11" transform="rotate(60 50 50)"/>
+              <ellipse cx="50" cy="50" rx="32" ry="11" transform="rotate(120 50 50)"/>
+            </g>
+          </svg>
+        </div>
+        <!-- Anthropic -->
+        <div class="provider-mark anthropic tr">
+          <svg viewBox="0 0 100 100">
+            <g fill="#D9774B">
+              <ellipse cx="50" cy="20" rx="5" ry="20"/>
+              <ellipse cx="50" cy="80" rx="5" ry="20"/>
+              <ellipse cx="20" cy="50" rx="20" ry="5"/>
+              <ellipse cx="80" cy="50" rx="20" ry="5"/>
+              <ellipse cx="29" cy="29" rx="20" ry="5" transform="rotate(45 29 29)"/>
+              <ellipse cx="71" cy="71" rx="20" ry="5" transform="rotate(45 71 71)"/>
+            </g>
+          </svg>
+        </div>
+        <!-- Gemini -->
+        <div class="provider-mark gemini ml">
+          <svg viewBox="0 0 100 100">
+            <defs><linearGradient id="prov-gemini" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5783FB"/><stop offset="1" stop-color="#9D5FE5"/></linearGradient></defs>
+            <path d="M 50 6 C 50 32 68 50 94 50 C 68 50 50 68 50 94 C 50 68 32 50 6 50 C 32 50 50 32 50 6 Z" fill="url(#prov-gemini)"/>
+          </svg>
+        </div>
+        <!-- Meta -->
+        <div class="provider-mark meta mr">
+          <svg viewBox="0 0 100 100">
+            <path d="M 8 60 C 8 38 22 26 38 38 C 46 44 50 56 50 56 C 50 56 54 44 62 38 C 78 26 92 38 92 60 C 92 78 78 82 70 76 C 60 68 50 56 50 56 C 50 56 40 68 30 76 C 22 82 8 78 8 60 Z" fill="#0866FF"/>
+          </svg>
+        </div>
+        <!-- Mistral -->
+        <div class="provider-mark mistral bl">
+          <svg viewBox="0 0 100 100">
+            <rect x="20" y="76" width="60" height="12" fill="#FFD13F"/>
+            <rect x="28" y="62" width="44" height="12" fill="#F09A1B"/>
+            <rect x="36" y="48" width="28" height="12" fill="#EB6911"/>
+            <rect x="42" y="34" width="16" height="12" fill="#E33B0B"/>
+            <rect x="46" y="20" width="8" height="12" fill="#DD1A09"/>
+          </svg>
+        </div>
+        <!-- xAI -->
+        <div class="provider-mark xai br">
+          <svg viewBox="0 0 100 100">
+            <path d="M 22 22 L 50 50 L 22 78 M 78 22 L 50 50 L 78 78" stroke="#ECE7DD" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- Center chat composer -->
+        <div class="composer">
+          <div class="composer-input">Ask anything…</div>
+          <div class="composer-bottom">
+            <div class="composer-model">
+              <span class="cm-icon"></span>
+              <span>Claude Sonnet 4.6</span>
+              <svg width="8" height="8" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="composer-send">
+              <svg width="11" height="11" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
       <div class="feature-text">
         <h3>Any model — local or cloud, your choice.</h3>
-        <p>Bring keys for OpenAI, Anthropic, Gemini. Or run frontier models on-device with MLX. Switch per task without losing context.</p>
+        <p>Bring keys for OpenAI, Anthropic, Gemini, Mistral. Or run frontier models on-device with MLX. Switch per task without losing context.</p>
       </div>
     </div>
 
-    <!-- Card 4: Delegate to many agents -->
+    <!-- Card 4: Active tasks window -->
     <div class="feature-card">
       <div class="feature-art">
         <div class="art-glow-violet"></div>
-        <div class="lanes">
-          <div class="lane">
-            <div class="lane-label">
-              <span class="dot pulse"></span>
-              <span>Research · brief</span>
-            </div>
-            <div class="lane-track"><div class="lane-fill" style="width: 64%"></div></div>
+        <div class="agents-window">
+          <div class="agents-bar">
+            <span class="light red"></span>
+            <span class="light yellow"></span>
+            <span class="light green"></span>
+            <span class="agents-title">
+              <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+              Active tasks · 4 running
+            </span>
           </div>
-          <div class="lane">
-            <div class="lane-label">
-              <span class="dot pulse"></span>
-              <span>Draft · memo</span>
+          <div class="agents-rows">
+            <div class="agent-row done">
+              <span class="radio"></span>
+              <svg class="row-mark" viewBox="0 0 200 200"><use href="#darius-mark"/></svg>
+              <span>Investment thesis · brief</span>
+              <span class="check">✓</span>
             </div>
-            <div class="lane-track"><div class="lane-fill" style="width: 38%"></div></div>
-          </div>
-          <div class="lane">
-            <div class="lane-label">
-              <span class="dot"></span>
-              <span>Review · sources</span>
+            <div class="agent-row active">
+              <span class="radio"></span>
+              <svg class="row-mark" viewBox="0 0 200 200"><use href="#darius-mark"/></svg>
+              <span>Competitor scan · 64%</span>
+              <span class="check" style="color: var(--sapphire)">▶</span>
             </div>
-            <div class="lane-track"><div class="lane-fill" style="width: 12%"></div></div>
+            <div class="agent-row">
+              <span class="radio"></span>
+              <svg class="row-mark" viewBox="0 0 200 200"><use href="#darius-mark"/></svg>
+              <span>Memo draft · Q3 board</span>
+              <span class="check" style="color: var(--sapphire)">▶</span>
+            </div>
+            <div class="agent-row queued">
+              <span class="radio"></span>
+              <svg class="row-mark" viewBox="0 0 200 200"><use href="#darius-mark"/></svg>
+              <span>Source verification</span>
+              <span class="check">⋯</span>
+            </div>
           </div>
+          <svg class="agents-cursor" width="14" height="16" viewBox="0 0 14 16" fill="currentColor" style="top: 56%; left: 64%;">
+            <path d="M0 0 L0 12 L4 9 L7 15 L10 13 L7 7 L12 6 Z"/>
+          </svg>
         </div>
       </div>
       <div class="feature-text">
