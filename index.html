@@ -525,7 +525,19 @@
   .provider-mark.mistral::before { background: rgba(240, 100, 30, 0.55); }
   .provider-mark.groq::before { background: rgba(245, 80, 54, 0.6); }
   .provider-mark.xai::before { background: rgba(180, 180, 180, 0.4); }
-  .provider-mark svg { width: 22px; height: 22px; display: block; }
+  .provider-mark svg,
+  .provider-mark img {
+    width: 22px;
+    height: 22px;
+    display: block;
+    object-fit: contain;
+  }
+  /* Monochrome marks recolored to bone via filter */
+  .provider-mark.openai img,
+  .provider-mark.groq img,
+  .provider-mark.xai img {
+    filter: brightness(0) invert(1);
+  }
   .provider-mark.tl { top: 14%; left: 8%; }
   .provider-mark.tr { top: 14%; right: 8%; }
   .provider-mark.ml { top: 50%; left: 4%; transform: translateY(-50%); }
@@ -1020,65 +1032,29 @@
       <div class="feature-art">
         <div class="art-glow-amber"></div>
 
-        <!-- OpenAI: 6-petal blossom -->
+        <!-- OpenAI -->
         <div class="provider-mark openai tl">
-          <svg viewBox="0 0 100 100">
-            <g fill="#ECE7DD">
-              <path d="M 50 8 C 41 8 33 22 50 50 C 67 22 59 8 50 8 Z"/>
-              <path d="M 50 8 C 41 8 33 22 50 50 C 67 22 59 8 50 8 Z" transform="rotate(60 50 50)"/>
-              <path d="M 50 8 C 41 8 33 22 50 50 C 67 22 59 8 50 8 Z" transform="rotate(120 50 50)"/>
-              <path d="M 50 8 C 41 8 33 22 50 50 C 67 22 59 8 50 8 Z" transform="rotate(180 50 50)"/>
-              <path d="M 50 8 C 41 8 33 22 50 50 C 67 22 59 8 50 8 Z" transform="rotate(240 50 50)"/>
-              <path d="M 50 8 C 41 8 33 22 50 50 C 67 22 59 8 50 8 Z" transform="rotate(300 50 50)"/>
-            </g>
-          </svg>
+          <img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/openai.svg" alt="OpenAI"/>
         </div>
         <!-- Claude (Anthropic) -->
         <div class="provider-mark anthropic tr">
-          <svg viewBox="0 0 100 100">
-            <g fill="#CC785C">
-              <ellipse cx="50" cy="50" rx="4.5" ry="40"/>
-              <ellipse cx="50" cy="50" rx="4.5" ry="40" transform="rotate(60 50 50)"/>
-              <ellipse cx="50" cy="50" rx="4.5" ry="40" transform="rotate(120 50 50)"/>
-            </g>
-          </svg>
+          <img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/claude-color.svg" alt="Claude"/>
         </div>
-        <!-- Gemini: 4-pointed sparkle -->
+        <!-- Google Gemini -->
         <div class="provider-mark gemini ml">
-          <svg viewBox="0 0 100 100">
-            <defs><linearGradient id="prov-gemini" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#3186FF"/><stop offset="0.55" stop-color="#9168C0"/><stop offset="1" stop-color="#23CCC9"/></linearGradient></defs>
-            <path d="M 50 5 L 56 44 L 95 50 L 56 56 L 50 95 L 44 56 L 5 50 L 44 44 Z" fill="url(#prov-gemini)"/>
-          </svg>
+          <img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/gemini-color.svg" alt="Gemini"/>
         </div>
-        <!-- Mistral: flame stair-step -->
+        <!-- Mistral -->
         <div class="provider-mark mistral mr">
-          <svg viewBox="0 0 100 100">
-            <rect x="20" y="76" width="60" height="12" fill="#FFD13F"/>
-            <rect x="28" y="62" width="44" height="12" fill="#F09A1B"/>
-            <rect x="36" y="48" width="28" height="12" fill="#EB6911"/>
-            <rect x="42" y="34" width="16" height="12" fill="#E33B0B"/>
-            <rect x="46" y="20" width="8" height="12" fill="#DD1A09"/>
-          </svg>
+          <img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/mistral-color.svg" alt="Mistral"/>
         </div>
-        <!-- Groq: angular dart cross -->
+        <!-- Groq -->
         <div class="provider-mark groq bl">
-          <svg viewBox="0 0 100 100">
-            <g fill="#F55036">
-              <path d="M 50 8 L 60 42 L 50 50 L 40 42 Z"/>
-              <path d="M 92 50 L 58 60 L 50 50 L 58 40 Z"/>
-              <path d="M 50 92 L 40 58 L 50 50 L 60 58 Z"/>
-              <path d="M 8 50 L 42 40 L 50 50 L 42 60 Z"/>
-            </g>
-          </svg>
+          <img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/groq.svg" alt="Groq"/>
         </div>
-        <!-- xAI / Grok: bold X -->
+        <!-- xAI / Grok -->
         <div class="provider-mark xai br">
-          <svg viewBox="0 0 100 100">
-            <g fill="#ECE7DD">
-              <polygon points="18,18 36,18 82,82 64,82"/>
-              <polygon points="82,18 64,18 18,82 36,82"/>
-            </g>
-          </svg>
+          <img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/grok.svg" alt="Grok by xAI"/>
         </div>
 
         <!-- Center chat composer -->
