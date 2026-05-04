@@ -68,15 +68,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 28px;
+    padding: 16px 28px;
     max-width: 1100px;
     margin: 0 auto;
   }
-  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--bone); }
-  .brand svg { width: 20px; height: 20px; }
+  .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--bone); }
+  .brand svg { width: 30px; height: 30px; }
   .brand-name {
     font-weight: 600;
-    font-size: 11.5px;
+    font-size: 18px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
   }
@@ -373,7 +373,9 @@
     z-index: 2;
   }
   .mb-prism {
-    width: 28%;
+    width: 30%;
+    display: block;
+    transform: translateX(3%);
   }
   .mb-hinge {
     width: 100%;
@@ -621,16 +623,21 @@
   }
   .dock-icon svg { width: 100%; height: 100%; display: block; }
   .dock-icon.darius {
-    background: radial-gradient(120% 120% at 30% 20%, #5C8AFF 0%, #1E3D7A 78%);
-    transform: translateY(-3px);
+    border-radius: 12px;
+    background:
+      radial-gradient(100% 100% at 28% 18%, rgba(160, 180, 255, 0.42) 0%, transparent 34%),
+      linear-gradient(145deg, #5873FF 0%, #334ED0 46%, #162554 100%);
+    transform: translateY(-4px) scale(1.08);
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.28),
-      0 0 20px rgba(127, 146, 255, 0.7),
-      0 0 0 1px rgba(127, 146, 255, 0.35),
-      0 8px 16px -4px rgba(0,0,0,0.5);
+      inset 0 1px 0 rgba(255,255,255,0.36),
+      inset 0 -12px 22px rgba(7, 12, 36, 0.38),
+      0 0 0 1px rgba(179, 193, 255, 0.26),
+      0 0 22px rgba(92, 138, 255, 0.66),
+      0 9px 18px -5px rgba(0,0,0,0.58);
   }
   .dock-icon.darius svg {
-    padding: 16%;
+    padding: 13%;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.24));
   }
   .dock-running-dot {
     position: absolute;
