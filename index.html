@@ -817,36 +817,38 @@
 
   /* CTA */
   .cta {
-    padding: 60px 28px 96px;
-    max-width: 720px;
+    padding: 102px 28px 124px;
+    min-height: 608px;
+    max-width: 1100px;
     margin: 0 auto;
-    text-align: left;
+    text-align: center;
   }
   .cta h2 {
-    font-weight: 600;
-    font-size: 18px;
-    margin-bottom: 4px;
-    letter-spacing: -0.01em;
-  }
-  .cta p {
-    font-size: 15px;
-    color: var(--bone-dim);
-    margin-bottom: 24px;
+    font-weight: 400;
+    font-size: clamp(52px, 7.2vw, 104px);
+    line-height: 1;
+    margin-bottom: 48px;
+    letter-spacing: 0;
   }
   .cta-btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    gap: 10px;
     background: var(--bone);
     color: var(--bg);
-    padding: 9px 16px;
-    border-radius: 7px;
+    min-width: 432px;
+    min-height: 88px;
+    padding: 24px 44px;
+    border-radius: 999px;
     text-decoration: none;
-    font-size: 13.5px;
-    font-weight: 600;
-    transition: opacity 200ms;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.1;
+    transition: opacity 200ms, transform 200ms;
   }
-  .cta-btn:hover { opacity: 0.9; }
+  .cta-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+  .cta-btn svg { width: 24px; height: 24px; flex: 0 0 auto; }
 
   /* footer */
   footer {
@@ -871,6 +873,22 @@
     .feature-grid { grid-template-columns: 1fr; }
     .footer-meta { flex-direction: column; gap: 14px; align-items: flex-start; }
     .hero-canvas { padding-bottom: 56px; }
+    .cta {
+      padding: 76px 24px 92px;
+      min-height: 0;
+    }
+    .cta h2 {
+      font-size: clamp(42px, 13vw, 68px);
+      margin-bottom: 32px;
+    }
+    .cta-btn {
+      min-width: 0;
+      width: min(100%, 360px);
+      min-height: 66px;
+      padding: 18px 24px;
+      font-size: 23px;
+    }
+    .cta-btn svg { width: 19px; height: 19px; }
   }
 </style>
 </head>
@@ -1116,11 +1134,10 @@
 </section>
 
 <section class="cta" id="download">
-  <h2>We built Darius on Apple Silicon.</h2>
-  <p>We think you'll like it as much as we do.</p>
+  <h2>Try Darius now.</h2>
   <a href="https://github.com/AmElmo/darius-updates/releases/latest/download/Darius.dmg" class="cta-btn">
-    Download Darius
-    <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 2v9m0 0l-3.5-3.5M8 11l3.5-3.5M3 14h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Download for macOS
+    <svg viewBox="0 0 16 16" fill="none"><path d="M8 2v9m0 0l-3.5-3.5M8 11l3.5-3.5M3 14h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </a>
 </section>
 
