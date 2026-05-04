@@ -614,6 +614,17 @@
       0 6px 12px -4px rgba(0,0,0,0.4);
     overflow: hidden;
   }
+  .dock-icon.app {
+    background: transparent;
+    box-shadow: 0 6px 12px -4px rgba(0,0,0,0.42);
+    overflow: visible;
+  }
+  .dock-icon.app img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+  }
   .dock-icon svg { width: 100%; height: 100%; display: block; }
   .dock-icon.darius {
     background: radial-gradient(120% 120% at 30% 20%, #5C8AFF 0%, #1E3D7A 78%);
@@ -893,7 +904,7 @@
       <svg><use href="#darius-mark"/></svg>
       <span class="brand-name">Darius</span>
     </a>
-    <a href="#download" class="nav-cta">Download</a>
+    <a href="https://github.com/AmElmo/darius-updates/releases/latest/download/Darius.dmg" class="nav-cta">Download</a>
   </div>
 </nav>
 
@@ -901,7 +912,7 @@
   <h1 class="hero-title">The best way to run<br><em>agents on your Mac.</em></h1>
   <p class="hero-sub">A native macOS workspace where AI agents work alongside you — many at once, local or cloud, with the apps you already use.</p>
   <div class="hero-actions">
-    <a href="#download" class="btn btn-primary">
+    <a href="https://github.com/AmElmo/darius-updates/releases/latest/download/Darius.dmg" class="btn btn-primary">
       Download for macOS
       <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 2v9m0 0l-3.5-3.5M8 11l3.5-3.5M3 14h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
@@ -950,75 +961,18 @@
         <div class="dock-bg"></div>
         <div class="art-glow-multicolor"></div>
         <div class="dock">
-          <!-- Mail -->
-          <div class="dock-icon">
-            <svg viewBox="0 0 100 100">
-              <defs><linearGradient id="dki-mail" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5BB0FF"/><stop offset="1" stop-color="#1B6BCF"/></linearGradient></defs>
-              <rect width="100" height="100" rx="22" fill="url(#dki-mail)"/>
-              <rect x="18" y="32" width="64" height="38" rx="4" fill="none" stroke="#FFFFFF" stroke-width="4"/>
-              <path d="M 18 32 L 50 56 L 82 32" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <!-- Calendar -->
-          <div class="dock-icon">
-            <svg viewBox="0 0 100 100">
-              <rect width="100" height="100" rx="22" fill="#FFFFFF"/>
-              <text x="50" y="32" text-anchor="middle" fill="#888888" font-size="13" font-weight="700" font-family="Manrope, -apple-system, sans-serif">SUN</text>
-              <text x="50" y="82" text-anchor="middle" fill="#FF3B30" font-size="50" font-weight="700" font-family="Manrope, -apple-system, sans-serif">17</text>
-            </svg>
-          </div>
-          <!-- Notes -->
-          <div class="dock-icon">
-            <svg viewBox="0 0 100 100">
-              <defs><linearGradient id="dki-notes" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEFA8"/><stop offset="1" stop-color="#F4C548"/></linearGradient></defs>
-              <rect width="100" height="100" rx="22" fill="url(#dki-notes)"/>
-              <rect x="0" y="0" width="100" height="22" fill="#FFD93D"/>
-              <line x1="22" y1="46" x2="78" y2="46" stroke="rgba(0,0,0,0.18)" stroke-width="2.5" stroke-linecap="round"/>
-              <line x1="22" y1="60" x2="68" y2="60" stroke="rgba(0,0,0,0.18)" stroke-width="2.5" stroke-linecap="round"/>
-              <line x1="22" y1="74" x2="78" y2="74" stroke="rgba(0,0,0,0.18)" stroke-width="2.5" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <!-- Safari -->
-          <div class="dock-icon">
-            <svg viewBox="0 0 100 100">
-              <defs><radialGradient id="dki-safari" cx="0.5" cy="0.5" r="0.6"><stop offset="0" stop-color="#5BC8FF"/><stop offset="1" stop-color="#1A6FD0"/></radialGradient></defs>
-              <rect width="100" height="100" rx="22" fill="url(#dki-safari)"/>
-              <circle cx="50" cy="50" r="28" fill="#FFFFFF"/>
-              <circle cx="50" cy="50" r="28" fill="none" stroke="#888888" stroke-width="0.6"/>
-              <polygon points="50,28 56,50 50,72 44,50" fill="#FFFFFF" stroke="#888888" stroke-width="0.6" stroke-linejoin="round"/>
-              <polygon points="50,28 56,50 50,50" fill="#FF3B30"/>
-              <circle cx="50" cy="50" r="2.5" fill="#666666"/>
-            </svg>
-          </div>
-          <!-- Messages -->
-          <div class="dock-icon">
-            <svg viewBox="0 0 100 100">
-              <defs><linearGradient id="dki-msg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7EE972"/><stop offset="1" stop-color="#1FB13D"/></linearGradient></defs>
-              <rect width="100" height="100" rx="22" fill="url(#dki-msg)"/>
-              <path d="M 50 22 C 30 22 18 35 18 50 C 18 60 24 68 32 73 L 30 84 L 42 78 C 44.5 79 47 79 50 79 C 70 79 82 65 82 50 C 82 35 70 22 50 22 Z" fill="#FFFFFF"/>
-            </svg>
-          </div>
-          <!-- Reminders -->
-          <div class="dock-icon">
-            <svg viewBox="0 0 100 100">
-              <rect width="100" height="100" rx="22" fill="#FFFFFF"/>
-              <circle cx="50" cy="50" r="22" fill="#FF3B30"/>
-              <path d="M 38 50 L 47 58 L 62 42" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <!-- Music -->
-          <div class="dock-icon">
-            <svg viewBox="0 0 100 100">
-              <defs><linearGradient id="dki-music" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF7A8E"/><stop offset="1" stop-color="#E62F58"/></linearGradient></defs>
-              <rect width="100" height="100" rx="22" fill="url(#dki-music)"/>
-              <path d="M 38 32 L 38 65 C 38 70 33 73 28 71 C 23 69 23 64 28 62 C 32 60 36 60 38 62 L 38 38 L 65 30 L 65 60 C 65 65 60 68 55 66 C 50 64 50 59 55 57 C 59 55 63 55 65 57 Z" fill="#FFFFFF"/>
-            </svg>
-          </div>
+          <div class="dock-icon app"><img src="assets/app-icons/mail.png" alt="Mail"></div>
+          <div class="dock-icon app"><img src="assets/app-icons/calendar.png" alt="Calendar"></div>
+          <div class="dock-icon app"><img src="assets/app-icons/notes.png" alt="Notes"></div>
+          <div class="dock-icon app"><img src="assets/app-icons/safari.png" alt="Safari"></div>
           <!-- Darius (lifted, glowing) -->
           <div class="dock-icon darius">
             <svg viewBox="0 0 200 200"><use href="#darius-mark-white"/></svg>
             <span class="dock-running-dot"></span>
           </div>
+          <div class="dock-icon app"><img src="assets/app-icons/messages.png" alt="Messages"></div>
+          <div class="dock-icon app"><img src="assets/app-icons/reminders.png" alt="Reminders"></div>
+          <div class="dock-icon app"><img src="assets/app-icons/music.png" alt="Music"></div>
         </div>
       </div>
       <div class="feature-text">
@@ -1164,7 +1118,7 @@
 <section class="cta" id="download">
   <h2>We built Darius on Apple Silicon.</h2>
   <p>We think you'll like it as much as we do.</p>
-  <a href="#" class="cta-btn">
+  <a href="https://github.com/AmElmo/darius-updates/releases/latest/download/Darius.dmg" class="cta-btn">
     Download Darius
     <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 2v9m0 0l-3.5-3.5M8 11l3.5-3.5M3 14h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </a>
