@@ -188,19 +188,13 @@
     overflow: hidden;
     background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0)), var(--panel);
     border: 1px solid var(--line-2);
-    aspect-ratio: 16/10;
+    aspect-ratio: 1656/1080;
     box-shadow:
       0 1px 0 rgba(255,255,255,0.05) inset,
       0 0 0 1px rgba(255,255,255,0.02),
       0 40px 100px -20px rgba(0,0,0,0.6),
       0 80px 160px -40px rgba(212, 149, 99, 0.15),
       0 60px 140px -30px rgba(127, 146, 255, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--ash);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
   }
   .hero-screen::before {
     content: "";
@@ -211,14 +205,11 @@
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
   }
-  .ph-tag {
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    font-size: 10px;
-    color: var(--ash-2);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+  .hero-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   /* lede */
@@ -1036,8 +1027,9 @@
 
   <div class="hero-canvas">
     <div class="hero-screen">
-      <div class="ph-tag">SCREENSHOT · Darius app — full window</div>
-      [hero screenshot · 16:10]
+      <video class="hero-video" aria-label="Darius app workspace preview" width="1656" height="1080" autoplay muted loop playsinline>
+        <source src="assets/darius-hero-screen.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 </header>
