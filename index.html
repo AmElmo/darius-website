@@ -1010,7 +1010,7 @@
       <svg><use href="#darius-mark-white"/></svg>
       <span class="brand-name">DARIUS</span>
     </a>
-    <a href="https://github.com/AmElmo/darius-updates/releases/latest/download/Darius.dmg" class="nav-cta">Download</a>
+    <a href="https://github.com/AmElmo/darius-updates/releases/download/0.19.0-beta.5/Darius.dmg" class="nav-cta" data-darius-download>Download</a>
   </div>
 </nav>
 
@@ -1018,7 +1018,7 @@
   <h1 class="hero-title">The best way to run<br><em>agents on your Mac.</em></h1>
   <p class="hero-sub">A native macOS workspace where AI agents work alongside you — many at once, local or cloud, with the apps you already use.</p>
   <div class="hero-actions">
-    <a href="https://github.com/AmElmo/darius-updates/releases/latest/download/Darius.dmg" class="btn btn-primary">
+    <a href="https://github.com/AmElmo/darius-updates/releases/download/0.19.0-beta.5/Darius.dmg" class="btn btn-primary" data-darius-download>
       Download for macOS
       <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 2v9m0 0l-3.5-3.5M8 11l3.5-3.5M3 14h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
@@ -1226,7 +1226,7 @@
   <div class="cta-rail"></div>
   <div class="cta-stage">
     <h2>Try <span class="cta-brand">Darius</span> now.</h2>
-    <a href="https://github.com/AmElmo/darius-updates/releases/latest/download/Darius.dmg" class="cta-btn">
+    <a href="https://github.com/AmElmo/darius-updates/releases/download/0.19.0-beta.5/Darius.dmg" class="cta-btn" data-darius-download>
       Download for macOS
       <svg viewBox="0 0 16 16" fill="none"><path d="M8 2v9m0 0l-3.5-3.5M8 11l3.5-3.5M3 14h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
@@ -1242,6 +1242,35 @@
     <span>© 2026 Darius · v0.2.0 · macOS 15.5+ · Made on Apple Silicon</span>
   </div>
 </footer>
+
+<script>
+  // Upgrade [data-darius-download] hrefs to the newest release (including pre-releases).
+  // GitHub's /releases/latest/download/ excludes pre-releases, so the static href is pinned
+  // to a known-good tag as a reliable fallback. Cached for an hour to limit API calls.
+  (() => {
+    const buttons = document.querySelectorAll('a[data-darius-download]');
+    if (!buttons.length) return;
+    const apply = (url) => buttons.forEach(el => { el.href = url; });
+
+    try {
+      const cached = JSON.parse(localStorage.getItem('darius-dl') || 'null');
+      if (cached && Date.now() - cached.t < 3600_000) {
+        apply(cached.url);
+        return;
+      }
+    } catch {}
+
+    fetch('https://api.github.com/repos/AmElmo/darius-updates/releases?per_page=1')
+      .then(r => r.ok ? r.json() : Promise.reject(r.status))
+      .then(([release]) => {
+        const asset = release && release.assets.find(a => a.name === 'Darius.dmg');
+        if (!asset) return;
+        apply(asset.browser_download_url);
+        try { localStorage.setItem('darius-dl', JSON.stringify({ t: Date.now(), url: asset.browser_download_url })); } catch {}
+      })
+      .catch(() => { /* static href on the button is the fallback */ });
+  })();
+</script>
 
 </body>
 </html>
