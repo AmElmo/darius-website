@@ -516,8 +516,8 @@
     const list = document.getElementById('releaseList');
     if (!rail || !list || !releases.length) return;
 
-    rail.innerHTML = releases.map((release, index) => `
-      <a class="${index === 0 ? 'is-active' : ''}" href="#${slugForVersion(release.version)}">
+    rail.innerHTML = releases.map((release) => `
+      <a href="#${slugForVersion(release.version)}">
         <strong>${escapeHtml(release.version)}</strong>
         <span>${escapeHtml(formatDate(release.date))}</span>
       </a>
@@ -538,6 +538,49 @@
         </div>
       </article>
     `).join('');
+
+    bindReleaseScrollSpy();
+  };
+
+  let releaseSpyCleanup = null;
+  const bindReleaseScrollSpy = () => {
+    if (releaseSpyCleanup) releaseSpyCleanup();
+
+    const railLinks = Array.from(document.querySelectorAll('#releaseRail a[href^="#"]'));
+    const articles = railLinks
+      .map((link) => document.getElementById(decodeURIComponent(link.getAttribute('href').slice(1))))
+      .filter(Boolean);
+    if (!articles.length) return;
+
+    const setActive = (id) => {
+      railLinks.forEach((link) => {
+        link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`);
+      });
+    };
+
+    const update = () => {
+      const probe = window.innerHeight * 0.28;
+      let current = articles[0].id;
+      for (const article of articles) {
+        if (article.getBoundingClientRect().top - probe <= 0) {
+          current = article.id;
+        } else {
+          break;
+        }
+      }
+      const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+      if (nearBottom) current = articles[articles.length - 1].id;
+      setActive(current);
+    };
+
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+
+    releaseSpyCleanup = () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
   };
 
   renderChangelog(CHANGELOG_FALLBACK, '');
