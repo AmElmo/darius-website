@@ -1034,7 +1034,7 @@
     </a>
     <div class="nav-actions">
       <a href="changelog/" class="nav-link">Changelog</a>
-      <a href="https://github.com/AmElmo/darius-updates/releases/download/0.19.0-beta.5/Darius.dmg" class="nav-cta" data-darius-download>
+      <a href="https://github.com/AmElmo/darius-updates/releases/download/0.19.0-beta.6/Darius-0.19.0-beta.6.dmg" class="nav-cta" data-darius-download>
         <svg class="apple-logo" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true"><path d="M13.06 10.53c-.02-2.06 1.68-3.05 1.76-3.1-.96-1.4-2.45-1.59-2.98-1.62-1.27-.13-2.48.74-3.12.74-.65 0-1.65-.72-2.71-.7-1.39.02-2.68.81-3.39 2.06-1.45 2.51-.37 6.22 1.04 8.27.69 1 1.51 2.13 2.58 2.09 1.04-.04 1.43-.67 2.69-.67 1.25 0 1.61.67 2.71.65 1.12-.02 1.83-1.02 2.51-2.02.79-1.16 1.12-2.28 1.14-2.34-.03-.01-2.18-.84-2.2-3.32zM11.04 4.55c.58-.7.97-1.67.86-2.64-.83.03-1.84.55-2.43 1.25-.53.62-.99 1.6-.87 2.55.92.07 1.86-.47 2.44-1.16z"/></svg>
         Download
       </a>
@@ -1046,7 +1046,7 @@
   <h1 class="hero-title">The best way to run<br><em>agents on your Mac.</em></h1>
   <p class="hero-sub">A native macOS workspace where AI agents work alongside you — many at once, local or cloud, with the apps you already use.</p>
   <div class="hero-actions">
-    <a href="https://github.com/AmElmo/darius-updates/releases/download/0.19.0-beta.5/Darius.dmg" class="btn btn-primary" data-darius-download>
+    <a href="https://github.com/AmElmo/darius-updates/releases/download/0.19.0-beta.6/Darius-0.19.0-beta.6.dmg" class="btn btn-primary" data-darius-download>
       <svg class="apple-logo" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true"><path d="M13.06 10.53c-.02-2.06 1.68-3.05 1.76-3.1-.96-1.4-2.45-1.59-2.98-1.62-1.27-.13-2.48.74-3.12.74-.65 0-1.65-.72-2.71-.7-1.39.02-2.68.81-3.39 2.06-1.45 2.51-.37 6.22 1.04 8.27.69 1 1.51 2.13 2.58 2.09 1.04-.04 1.43-.67 2.69-.67 1.25 0 1.61.67 2.71.65 1.12-.02 1.83-1.02 2.51-2.02.79-1.16 1.12-2.28 1.14-2.34-.03-.01-2.18-.84-2.2-3.32zM11.04 4.55c.58-.7.97-1.67.86-2.64-.83.03-1.84.55-2.43 1.25-.53.62-.99 1.6-.87 2.55.92.07 1.86-.47 2.44-1.16z"/></svg>
       Download for Mac
     </a>
@@ -1254,7 +1254,7 @@
   <div class="cta-rail"></div>
   <div class="cta-stage">
     <h2>Try <span class="cta-brand">Darius</span> now.</h2>
-    <a href="https://github.com/AmElmo/darius-updates/releases/download/0.19.0-beta.5/Darius.dmg" class="cta-btn" data-darius-download>
+    <a href="https://github.com/AmElmo/darius-updates/releases/download/0.19.0-beta.6/Darius-0.19.0-beta.6.dmg" class="cta-btn" data-darius-download>
       <svg class="apple-logo" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true"><path d="M13.06 10.53c-.02-2.06 1.68-3.05 1.76-3.1-.96-1.4-2.45-1.59-2.98-1.62-1.27-.13-2.48.74-3.12.74-.65 0-1.65-.72-2.71-.7-1.39.02-2.68.81-3.39 2.06-1.45 2.51-.37 6.22 1.04 8.27.69 1 1.51 2.13 2.58 2.09 1.04-.04 1.43-.67 2.69-.67 1.25 0 1.61.67 2.71.65 1.12-.02 1.83-1.02 2.51-2.02.79-1.16 1.12-2.28 1.14-2.34-.03-.01-2.18-.84-2.2-3.32zM11.04 4.55c.58-.7.97-1.67.86-2.64-.83.03-1.84.55-2.43 1.25-.53.62-.99 1.6-.87 2.55.92.07 1.86-.47 2.44-1.16z"/></svg>
       Download for Mac
     </a>
@@ -1291,7 +1291,10 @@
     fetch('https://api.github.com/repos/AmElmo/darius-updates/releases?per_page=1')
       .then(r => r.ok ? r.json() : Promise.reject(r.status))
       .then(([release]) => {
-        const asset = release && release.assets.find(a => a.name === 'Darius.dmg');
+        const asset = release && (
+          release.assets.find(a => /^Darius-.+\.dmg$/.test(a.name)) ||
+          release.assets.find(a => a.name === 'Darius.dmg')
+        );
         if (!asset) return;
         apply(asset.browser_download_url);
         try { localStorage.setItem('darius-dl', JSON.stringify({ t: Date.now(), url: asset.browser_download_url })); } catch {}
