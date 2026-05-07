@@ -70,7 +70,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 28px;
+    padding: 22px 28px;
     max-width: 1100px;
     margin: 0 auto;
   }
@@ -88,7 +88,7 @@
     letter-spacing: 0.16em;
     text-transform: uppercase;
   }
-  .nav-actions { display: flex; align-items: center; gap: 16px; }
+  .nav-actions { display: flex; align-items: center; gap: 26px; }
   .nav-link {
     color: var(--bone-dim);
     font-size: 12.5px;
@@ -139,11 +139,11 @@
     box-shadow: 0 0 18px rgba(127, 146, 255, 0.9);
   }
   h1 {
-    max-width: 760px;
-    font-size: clamp(44px, 7vw, 82px);
+    font-size: clamp(40px, 6.2vw, 72px);
     font-weight: 400;
     letter-spacing: 0;
     line-height: 0.98;
+    white-space: nowrap;
   }
   .changelog-shell {
     display: grid;
@@ -318,9 +318,10 @@
   footer .brand-name { font-size: 11px; letter-spacing: 0.18em; }
 
   @media (max-width: 860px) {
-    .nav-actions { gap: 10px; }
+    .nav-actions { gap: 14px; }
     .nav-link:not([aria-current="page"]) { display: none; }
     .page-head { padding-top: 62px; }
+    h1 { white-space: normal; font-size: clamp(40px, 9vw, 60px); }
     .changelog-shell {
       display: block;
       padding-bottom: 84px;
