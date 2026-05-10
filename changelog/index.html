@@ -388,7 +388,7 @@
   <span class="eyebrow">Product changelog</span>
 </header>
 
-<main class="changelog-shell">
+<main class="changelog-shell" aria-busy="true">
   <aside class="release-rail" id="releaseRail" aria-label="Release navigation"></aside>
   <div class="release-list" id="releaseList"></div>
 </main>
@@ -512,9 +512,11 @@
 
   const renderChangelog = (feed, baseUrl = '') => {
     const releases = Array.isArray(feed.releases) ? feed.releases : [];
+    if (!releases.length) return false;
+
     const rail = document.getElementById('releaseRail');
     const list = document.getElementById('releaseList');
-    if (!rail || !list || !releases.length) return;
+    if (!rail || !list) return false;
 
     rail.innerHTML = releases.map((release) => `
       <a href="#${slugForVersion(release.version)}">
@@ -540,6 +542,8 @@
     `).join('');
 
     bindReleaseScrollSpy();
+    document.querySelector('.changelog-shell')?.setAttribute('aria-busy', 'false');
+    return true;
   };
 
   let releaseSpyCleanup = null;
@@ -583,12 +587,16 @@
     };
   };
 
-  renderChangelog(CHANGELOG_FALLBACK, '');
-
   fetch(CHANGELOG_FEED_URL, { cache: 'no-store' })
     .then((response) => response.ok ? response.json() : Promise.reject(response.status))
-    .then((feed) => renderChangelog(feed, CHANGELOG_FEED_BASE))
-    .catch(() => {});
+    .then((feed) => {
+      if (!renderChangelog(feed, CHANGELOG_FEED_BASE)) {
+        renderChangelog(CHANGELOG_FALLBACK, '');
+      }
+    })
+    .catch(() => {
+      renderChangelog(CHANGELOG_FALLBACK, '');
+    });
 
   (() => {
     const buttons = document.querySelectorAll('a[data-darius-download]');
