@@ -244,6 +244,1171 @@
     line-height: 1.6;
   }
 
+  /* scenarios — tabbed showcase */
+  .scenarios {
+    padding: 8px 28px 88px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .scenarios-head {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .scenarios-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ash);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 18px;
+  }
+  .scenarios-title {
+    font-weight: 600;
+    font-size: clamp(28px, 3.4vw, 40px);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+  .scenarios-tabbar {
+    display: flex;
+    justify-content: center;
+    margin: 26px 0 22px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .scenarios-tabbar::-webkit-scrollbar { display: none; }
+  .scenario-tabs {
+    display: inline-flex;
+    gap: 2px;
+    background: rgba(20, 17, 13, 0.7);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid var(--line-2);
+    border-radius: 12px;
+    padding: 4px;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.04),
+      0 12px 30px -16px rgba(0,0,0,0.5);
+  }
+  .scenario-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: var(--ash);
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 180ms ease-out, background 180ms ease-out;
+  }
+  .scenario-tab:hover {
+    color: var(--bone-dim);
+    background: rgba(236,231,221,0.03);
+  }
+  .scenario-tab.active {
+    background: rgba(236,231,221,0.07);
+    color: var(--bone);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+  .scenario-tab svg {
+    width: 13px;
+    height: 13px;
+    flex: 0 0 auto;
+    opacity: 0.75;
+  }
+  .scenario-tab.active svg { opacity: 1; }
+
+  .scenario-stage {
+    position: relative;
+    aspect-ratio: 16/10;
+    container-type: inline-size;
+    border-radius: 18px;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0)), var(--panel);
+    border: 1px solid var(--line-2);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.04),
+      0 1px 0 rgba(255,255,255,0.02),
+      0 30px 80px -20px rgba(0,0,0,0.6),
+      0 60px 140px -40px rgba(127, 146, 255, 0.08);
+  }
+  .scenario-stage::after {
+    /* faint dot matrix overlay, like feature-art */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(236, 231, 221, 0.035) 1px, transparent 1.4px);
+    background-size: 16px 16px;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .scenario-stage::before {
+    /* top highlight bar */
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 12%;
+    right: 12%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.16), transparent);
+    z-index: 2;
+  }
+  .scenario-panel {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 360ms ease-out;
+    z-index: 0;
+  }
+  .scenario-panel.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 3;
+  }
+  .scenario-wash {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: screen;
+  }
+  /* Each panel gets a layered, vibrant wash:
+     - a saturated primary blob in one quadrant
+     - a complementary secondary blob in the opposite quadrant
+     - a small accent in a third position
+     - a soft directional overlay for depth */
+  .panel-draft .scenario-wash {
+    background:
+      radial-gradient(ellipse 55% 65% at 12% 28%, rgba(127, 146, 255, 0.55) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 88% 75%, rgba(186, 156, 255, 0.42) 0%, transparent 58%),
+      radial-gradient(ellipse 65% 45% at 50% 108%, rgba(92, 138, 255, 0.40) 0%, transparent 65%),
+      radial-gradient(ellipse 35% 28% at 92% 8%, rgba(159, 177, 255, 0.28) 0%, transparent 60%),
+      linear-gradient(135deg, rgba(127, 146, 255, 0.08) 0%, transparent 40%, transparent 60%, rgba(186, 156, 255, 0.06) 100%);
+  }
+  .panel-files .scenario-wash {
+    background:
+      radial-gradient(ellipse 55% 65% at 86% 24%, rgba(108, 179, 154, 0.55) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 55% at 14% 80%, rgba(122, 207, 197, 0.42) 0%, transparent 58%),
+      radial-gradient(ellipse 65% 45% at 50% 108%, rgba(92, 168, 200, 0.36) 0%, transparent 65%),
+      radial-gradient(ellipse 32% 26% at 8% 8%, rgba(127, 146, 255, 0.28) 0%, transparent 60%),
+      linear-gradient(225deg, rgba(108, 179, 154, 0.08) 0%, transparent 40%, transparent 60%, rgba(92, 168, 200, 0.06) 100%);
+  }
+  .panel-tracker .scenario-wash {
+    background:
+      radial-gradient(ellipse 58% 65% at 14% 26%, rgba(212, 149, 99, 0.58) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 55% at 86% 78%, rgba(232, 124, 92, 0.42) 0%, transparent 58%),
+      radial-gradient(ellipse 65% 45% at 50% 108%, rgba(255, 168, 110, 0.36) 0%, transparent 65%),
+      radial-gradient(ellipse 30% 26% at 96% 8%, rgba(255, 196, 130, 0.30) 0%, transparent 60%),
+      linear-gradient(135deg, rgba(212, 149, 99, 0.10) 0%, transparent 40%, transparent 60%, rgba(232, 124, 92, 0.07) 100%);
+  }
+  .panel-apps .scenario-wash {
+    background:
+      radial-gradient(ellipse 55% 65% at 14% 28%, rgba(232, 120, 170, 0.50) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 55% at 86% 76%, rgba(127, 146, 255, 0.42) 0%, transparent 58%),
+      radial-gradient(ellipse 65% 45% at 50% 108%, rgba(186, 124, 220, 0.38) 0%, transparent 65%),
+      radial-gradient(ellipse 32% 26% at 94% 8%, rgba(255, 168, 130, 0.28) 0%, transparent 60%),
+      linear-gradient(135deg, rgba(232, 120, 170, 0.10) 0%, transparent 40%, transparent 60%, rgba(127, 146, 255, 0.07) 100%);
+  }
+  .panel-notes .scenario-wash {
+    background:
+      radial-gradient(ellipse 55% 65% at 86% 26%, rgba(160, 119, 220, 0.48) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 14% 80%, rgba(127, 146, 255, 0.40) 0%, transparent 58%),
+      radial-gradient(ellipse 65% 45% at 50% 108%, rgba(108, 179, 154, 0.32) 0%, transparent 65%),
+      radial-gradient(ellipse 30% 26% at 95% 92%, rgba(232, 124, 92, 0.24) 0%, transparent 60%),
+      linear-gradient(225deg, rgba(160, 119, 220, 0.09) 0%, transparent 40%, transparent 60%, rgba(127, 146, 255, 0.07) 100%);
+  }
+  /* shared soft grain over the wash for tactility */
+  .scenario-wash::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.32;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/></svg>");
+  }
+
+  /* the doc card — shared base */
+  .sc-doc {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 90%;
+    aspect-ratio: 8.5/11;
+    background: linear-gradient(180deg, #FAF7F0 0%, #F1ECE0 100%);
+    border-radius: 9px;
+    padding: 4.2% 5%;
+    font-family: 'Manrope', sans-serif;
+    color: #1B1813;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.7),
+      0 1px 0 rgba(0,0,0,0.04),
+      0 30px 60px -16px rgba(0,0,0,0.55),
+      0 60px 110px -30px rgba(127,146,255,0.18);
+    overflow: hidden;
+    z-index: 2;
+  }
+  .sc-doc-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9cqi;
+    color: #837C70;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1%;
+  }
+  .sc-doc h2 {
+    font-size: 2.4cqi;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+    margin-bottom: 0.6%;
+  }
+  .sc-doc-meta {
+    font-size: 1.0cqi;
+    color: #837C70;
+    margin-bottom: 4%;
+  }
+  .sc-doc h3 {
+    font-size: 1.4cqi;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 2.6% 0 1%;
+  }
+  .sc-doc p, .sc-doc li {
+    font-size: 1.05cqi;
+    line-height: 1.5;
+    color: #2A251D;
+  }
+  .sc-doc ul {
+    list-style: none;
+    padding: 0;
+  }
+  .sc-doc ul li {
+    position: relative;
+    padding-left: 1.8cqi;
+    margin-bottom: 0.6%;
+  }
+  .sc-doc ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.65cqi;
+    width: 0.55cqi;
+    height: 0.55cqi;
+    background: #5C8AFF;
+    border-radius: 50%;
+  }
+  .panel-tracker .sc-doc ul li::before { background: #D49563; }
+  .panel-files .sc-doc ul li::before { background: #6CB39A; }
+
+  /* floating dark cards on top of the canvas */
+  .sc-card {
+    position: absolute;
+    background: linear-gradient(180deg, rgba(40, 35, 28, 0.92), rgba(20, 17, 13, 0.94));
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 10px;
+    padding: 3.5% 4%;
+    font-family: 'Manrope', sans-serif;
+    color: var(--bone);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.07),
+      0 18px 36px -12px rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    z-index: 3;
+  }
+  .sc-card-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85cqi;
+    color: var(--ash);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.6%;
+  }
+  .sc-card-body {
+    font-size: 1.0cqi;
+    line-height: 1.5;
+    color: var(--bone-dim);
+  }
+  .sc-card-body em {
+    font-style: normal;
+    color: var(--bone);
+    font-weight: 500;
+  }
+  .sc-prompt {
+    left: 3.5%;
+    top: 14%;
+    width: 22%;
+  }
+  .sc-note {
+    left: 3.5%;
+    top: 62%;
+    width: 22%;
+  }
+  /* Files / Apps / Tracker / Notes have wide center content — flip cards to the right */
+  .panel-files .sc-prompt,
+  .panel-apps .sc-prompt,
+  .panel-tracker .sc-prompt,
+  .panel-notes .sc-prompt {
+    left: auto;
+    right: 3.5%;
+  }
+  .panel-files .sc-note,
+  .panel-apps .sc-note,
+  .panel-tracker .sc-note,
+  .panel-notes .sc-note {
+    left: auto;
+    right: 3.5%;
+  }
+  .panel-tracker .sc-sheet,
+  .panel-notes .sc-review {
+    left: 38%;
+  }
+  .panel-files .sc-finder,
+  .panel-apps .sc-calendar {
+    left: 36%;
+  }
+  .panel-files .sc-hint,
+  .panel-apps .sc-hint,
+  .panel-tracker .sc-hint,
+  .panel-notes .sc-hint {
+    display: none;
+  }
+  .sc-note-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.95cqi;
+    color: var(--bone-dim);
+    padding: 0.6cqi 0;
+  }
+  .sc-note-row + .sc-note-row { border-top: 1px solid rgba(255,255,255,0.05); }
+  .sc-note-row .mono {
+    color: var(--ash);
+    font-size: 0.85cqi;
+  }
+  .sc-hint {
+    position: absolute;
+    right: 3.5%;
+    top: 22%;
+    width: 16%;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.4%;
+    color: var(--bone-dim);
+    font-size: 0.95cqi;
+    line-height: 1.4;
+    z-index: 3;
+  }
+  .sc-hint::before {
+    content: "";
+    margin-top: 0.55cqi;
+    width: 0.55cqi;
+    height: 0.55cqi;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: var(--sapphire);
+    box-shadow: 0 0 8px rgba(127, 146, 255, 0.7);
+  }
+  .sc-hint-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8cqi;
+    color: var(--ash);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.4%;
+    display: block;
+  }
+
+  /* panel-specific document content tweaks */
+  /* draft brief — uses base sc-doc */
+
+  /* Finder window (panel-files) */
+  .sc-finder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 86%;
+    aspect-ratio: 12/9;
+    background: linear-gradient(180deg, #2A2724 0%, #1F1C18 100%);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 10px;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      0 30px 60px -16px rgba(0,0,0,0.55),
+      0 60px 100px -30px rgba(108, 179, 154, 0.18);
+    overflow: hidden;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    color: var(--bone);
+  }
+  .finder-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.7cqi;
+    padding: 0.95cqi 1.2cqi;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
+  }
+  .finder-bar .light { width: 0.9cqi; height: 0.9cqi; border-radius: 50%; }
+  .finder-bar .light.red { background: #FF5F57; }
+  .finder-bar .light.yellow { background: #FEBC2E; }
+  .finder-bar .light.green { background: #28C840; }
+  .finder-nav {
+    display: inline-flex;
+    gap: 0.3cqi;
+    margin-left: 0.8cqi;
+  }
+  .finder-nav .nav-btn {
+    width: 1.6cqi;
+    height: 1.6cqi;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.04);
+    border: none;
+    padding: 0;
+    color: var(--bone-dim);
+    display: grid;
+    place-items: center;
+    cursor: default;
+  }
+  .finder-nav .nav-btn svg { width: 1.1cqi; height: 1.1cqi; }
+  .finder-nav .nav-btn.dim { color: var(--ash-2); }
+  .finder-title {
+    margin: 0 auto 0 0.4cqi;
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.0cqi;
+    font-weight: 600;
+    color: var(--bone);
+    letter-spacing: -0.005em;
+  }
+  .finder-search {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4cqi;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 5px;
+    padding: 0.35cqi 0.7cqi;
+    color: var(--ash);
+    font-size: 0.85cqi;
+  }
+  .finder-search svg { width: 1.0cqi; height: 1.0cqi; }
+  .finder-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 0.65fr 1.35fr;
+    min-height: 0;
+  }
+  .finder-sidebar {
+    padding: 1.0cqi 0.7cqi;
+    background: rgba(255,255,255,0.025);
+    border-right: 1px solid rgba(255,255,255,0.05);
+    overflow: hidden;
+  }
+  .sidebar-section {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.78cqi;
+    font-weight: 600;
+    color: var(--ash);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3cqi 0.6cqi 0.4cqi;
+  }
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 0.55cqi;
+    padding: 0.45cqi 0.6cqi;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.95cqi;
+    color: var(--bone-dim);
+    border-radius: 5px;
+    line-height: 1;
+  }
+  .sidebar-item .sb-ico {
+    width: 1.2cqi;
+    height: 1.2cqi;
+    flex: 0 0 auto;
+    color: var(--ash);
+  }
+  .sidebar-item .sb-dot {
+    width: 0.7cqi;
+    height: 0.7cqi;
+    border-radius: 50%;
+    flex: 0 0 auto;
+    margin-left: 0.25cqi;
+  }
+  .sidebar-item.active {
+    background: rgba(127, 146, 255, 0.16);
+    color: var(--bone);
+  }
+  .sidebar-item.active .sb-ico { color: var(--bone); }
+  .finder-main {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .finder-cols-head {
+    display: grid;
+    grid-template-columns: 2.2fr 1fr 0.7fr;
+    gap: 1cqi;
+    padding: 0.55cqi 1.2cqi;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 0.78cqi;
+    color: var(--ash);
+    letter-spacing: 0.04em;
+  }
+  .finder-rows {
+    flex: 1;
+    overflow: hidden;
+    padding: 0.3cqi 0;
+  }
+  .finder-row {
+    display: grid;
+    grid-template-columns: 2.2fr 1fr 0.7fr;
+    gap: 1cqi;
+    padding: 0.5cqi 1.2cqi;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.92cqi;
+    color: var(--bone-dim);
+    align-items: center;
+    line-height: 1.2;
+  }
+  .finder-row .name-col {
+    display: flex;
+    align-items: center;
+    gap: 0.45cqi;
+    min-width: 0;
+  }
+  .finder-row .chev {
+    width: 0.85cqi;
+    height: 0.85cqi;
+    color: var(--ash);
+    flex: 0 0 auto;
+  }
+  .finder-row .chev.down { transform: rotate(0deg); }
+  .finder-row .folder-ico {
+    width: 1.5cqi;
+    height: 1.25cqi;
+    flex: 0 0 auto;
+  }
+  .finder-row .file-ico {
+    width: 1.3cqi;
+    height: 1.55cqi;
+    flex: 0 0 auto;
+    margin-left: 0.05cqi;
+  }
+  .finder-row.folder > .name-col > span:not(.badge-new) { color: var(--bone); }
+  .finder-row .badge-new {
+    background: rgba(108, 179, 154, 0.18);
+    color: var(--jade);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7cqi;
+    font-weight: 600;
+    padding: 0.2cqi 0.5cqi;
+    border-radius: 3px;
+    margin-left: 0.35cqi;
+    letter-spacing: 0.04em;
+  }
+  .finder-row .modified,
+  .finder-row .size {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78cqi;
+    color: var(--ash);
+    letter-spacing: 0.02em;
+  }
+  .finder-row.indent .name-col { padding-left: 2.1cqi; }
+  .finder-row.indent .file-ico { width: 1.1cqi; height: 1.35cqi; }
+  .finder-row.selected {
+    background: rgba(127, 146, 255, 0.18);
+    box-shadow: inset 0 0 0 1px rgba(127, 146, 255, 0.25);
+    color: var(--bone);
+  }
+  .finder-row.selected .modified,
+  .finder-row.selected .size { color: var(--bone-dim); }
+
+  /* Calendar (panel-apps) — macOS Calendar week view */
+  .sc-calendar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 86%;
+    aspect-ratio: 12/9;
+    background: linear-gradient(180deg, #2A2724 0%, #1F1C18 100%);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 10px;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      0 30px 60px -16px rgba(0,0,0,0.55),
+      0 60px 100px -30px rgba(232, 120, 170, 0.18);
+    overflow: hidden;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    color: var(--bone);
+  }
+  .cal-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.6cqi;
+    padding: 0.95cqi 1.4cqi;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
+  }
+  .cal-bar .light { width: 0.9cqi; height: 0.9cqi; border-radius: 50%; }
+  .cal-bar .light.red { background: #FF5F57; }
+  .cal-bar .light.yellow { background: #FEBC2E; }
+  .cal-bar .light.green { background: #28C840; }
+  .cal-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5cqi;
+    margin-left: 1.6cqi;
+  }
+  .cal-nav .cal-btn {
+    height: 1.9cqi;
+    padding: 0 0.9cqi;
+    border-radius: 5px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.07);
+    color: var(--bone-dim);
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.85cqi;
+    font-weight: 500;
+    cursor: default;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cal-nav .cal-btn.icon {
+    width: 1.9cqi;
+    padding: 0;
+  }
+  .cal-nav .cal-btn.icon svg {
+    width: 1.0cqi;
+    height: 1.0cqi;
+  }
+  .cal-title {
+    margin-left: 1.6cqi;
+    margin-right: auto;
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.0cqi;
+    font-weight: 600;
+    color: var(--bone);
+    white-space: nowrap;
+  }
+  .cal-view {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 5px;
+    padding: 0.2cqi;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.82cqi;
+    color: var(--ash);
+  }
+  .cal-view span {
+    padding: 0.35cqi 0.75cqi;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .cal-view span.active {
+    background: rgba(236, 231, 221, 0.10);
+    color: var(--bone);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+
+  .cal-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 3cqi repeat(5, 1fr);
+    position: relative;
+    min-height: 0;
+  }
+  .cal-time-col {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255,255,255,0.05);
+  }
+  .cal-time-spacer {
+    height: 10%;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .cal-time {
+    flex: 1;
+    padding: 0.35cqi 0.5cqi 0 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72cqi;
+    color: var(--ash);
+    text-align: right;
+    letter-spacing: 0.02em;
+  }
+  .cal-day {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255,255,255,0.05);
+  }
+  .cal-day:last-of-type { border-right: none; }
+  .cal-day.today {
+    background: rgba(232, 120, 170, 0.04);
+  }
+  .cal-day-head {
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.1cqi;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .cal-day-head .dow {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.78cqi;
+    font-weight: 600;
+    color: var(--ash);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .cal-day-head .dom {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.25cqi;
+    font-weight: 500;
+    color: var(--bone);
+  }
+  .cal-day-head .dom.today-dot {
+    width: 2.0cqi;
+    height: 2.0cqi;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #FF6B8A 0%, #E04E70 100%);
+    color: #FFFFFF;
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+    box-shadow: 0 0 12px rgba(232, 120, 170, 0.4);
+  }
+  .cal-day-body {
+    flex: 1;
+    position: relative;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(11.11% - 1px),
+      rgba(255,255,255,0.04) calc(11.11% - 1px),
+      rgba(255,255,255,0.04) 11.11%
+    );
+  }
+  .cal-event {
+    position: absolute;
+    left: 4%;
+    right: 4%;
+    padding: 0.35cqi 0.55cqi;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15cqi;
+    overflow: hidden;
+    font-family: 'Manrope', sans-serif;
+    line-height: 1.2;
+  }
+  .cal-event .ev-title {
+    font-size: 0.85cqi;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.96);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .cal-event .ev-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7cqi;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.02em;
+  }
+  .cal-event.ev-blue {
+    background: linear-gradient(180deg, rgba(127, 146, 255, 0.32), rgba(92, 138, 255, 0.42));
+    border-left: 2.5px solid #5C8AFF;
+  }
+  .cal-event.ev-ember {
+    background: linear-gradient(180deg, rgba(212, 149, 99, 0.32), rgba(220, 130, 90, 0.42));
+    border-left: 2.5px solid #D49563;
+  }
+  .cal-event.ev-jade {
+    background: linear-gradient(180deg, rgba(108, 179, 154, 0.32), rgba(86, 158, 130, 0.42));
+    border-left: 2.5px solid #6CB39A;
+  }
+  .cal-event.ev-violet {
+    background: linear-gradient(180deg, rgba(186, 124, 220, 0.32), rgba(160, 100, 200, 0.42));
+    border-left: 2.5px solid #B07DDC;
+  }
+  .cal-event.ev-jade.soft {
+    background: linear-gradient(180deg, rgba(108, 179, 154, 0.18), rgba(86, 158, 130, 0.24));
+  }
+  .cal-event.focus {
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0 4px, transparent 4px 8px),
+      linear-gradient(180deg, rgba(212, 149, 99, 0.28), rgba(220, 130, 90, 0.36));
+  }
+  .cal-now-line {
+    position: absolute;
+    left: 3cqi;
+    right: 0;
+    top: calc(10% + (1.5 / 9) * 90%);
+    height: 0;
+    border-top: 1.5px solid #FF6B8A;
+    box-shadow: 0 0 6px rgba(255, 107, 138, 0.6);
+    pointer-events: none;
+    z-index: 4;
+  }
+  .cal-now-line::before {
+    content: "";
+    position: absolute;
+    left: -0.45cqi;
+    top: -0.45cqi;
+    width: 0.9cqi;
+    height: 0.9cqi;
+    border-radius: 50%;
+    background: #FF6B8A;
+    box-shadow: 0 0 10px rgba(255, 107, 138, 0.65);
+  }
+
+  /* spreadsheet (panel-tracker) */
+  .sc-sheet {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 84%;
+    aspect-ratio: 11/9;
+    background: linear-gradient(180deg, #FAF7F0 0%, #EFE9DC 100%);
+    border-radius: 9px;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.7),
+      0 30px 60px -16px rgba(0,0,0,0.55),
+      0 60px 110px -30px rgba(212, 149, 99, 0.18);
+    overflow: hidden;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    color: #1B1813;
+  }
+  .sc-sheet-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.6cqi;
+    padding: 1.2cqi 1.6cqi;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    background: linear-gradient(180deg, #EEE8DA, #E2DBCA);
+  }
+  .sc-sheet-bar .light { width: 0.9cqi; height: 0.9cqi; border-radius: 50%; }
+  .sc-sheet-bar .light.red { background: #FF5F57; }
+  .sc-sheet-bar .light.yellow { background: #FEBC2E; }
+  .sc-sheet-bar .light.green { background: #28C840; }
+  .sc-sheet-bar .crumb {
+    margin-left: 0.6cqi;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.95cqi;
+    color: #5C564C;
+  }
+  .sc-sheet table {
+    flex: 1;
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.0cqi;
+  }
+  .sc-sheet th, .sc-sheet td {
+    padding: 1.0cqi 1.4cqi;
+    text-align: left;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    border-right: 1px solid rgba(0,0,0,0.04);
+  }
+  .sc-sheet th {
+    background: #E6DFCD;
+    font-weight: 600;
+    font-size: 0.95cqi;
+    color: #5C564C;
+    letter-spacing: 0.01em;
+  }
+  .sc-sheet td:last-child, .sc-sheet th:last-child { border-right: none; }
+  .sc-sheet .pill {
+    display: inline-block;
+    padding: 0.3cqi 0.8cqi;
+    border-radius: 100px;
+    font-size: 0.85cqi;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .sc-sheet .pill.signed { background: rgba(108, 179, 154, 0.18); color: #2F7558; }
+  .sc-sheet .pill.trial { background: rgba(212, 149, 99, 0.20); color: #8A4F1F; }
+  .sc-sheet .pill.reach { background: rgba(127, 146, 255, 0.16); color: #3850C0; }
+  .sc-sheet .pill.neg { background: rgba(212, 149, 99, 0.10); color: #8A4F1F; }
+  .sc-sheet .row-active td { background: rgba(212, 149, 99, 0.10); }
+  .sc-sheet td.dim { color: #837C70; }
+
+  /* notes (panel-notes) — Google Docs-style review with annotations */
+  .sc-review {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 90%;
+    aspect-ratio: 13/11;
+    background: linear-gradient(180deg, #FAF7F0 0%, #F1ECE0 100%);
+    border-radius: 9px;
+    overflow: hidden;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    color: #1B1813;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.7),
+      0 30px 60px -16px rgba(0,0,0,0.55),
+      0 60px 110px -30px rgba(127, 146, 255, 0.18);
+  }
+  .sc-review-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.6cqi;
+    padding: 1.1cqi 1.6cqi;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    background: linear-gradient(180deg, #EEE8DA, #E4DDC9);
+  }
+  .sc-review-bar .light { width: 0.9cqi; height: 0.9cqi; border-radius: 50%; }
+  .sc-review-bar .light.red { background: #FF5F57; }
+  .sc-review-bar .light.yellow { background: #FEBC2E; }
+  .sc-review-bar .light.green { background: #28C840; }
+  .sc-review-bar .crumb {
+    margin-left: 0.6cqi;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.95cqi;
+    color: #5C564C;
+    font-weight: 500;
+  }
+  .sc-review-bar .crumb-right {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5cqi;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.85cqi;
+    color: #5C564C;
+  }
+  .sc-review-bar .crumb-mark {
+    width: 1.3cqi;
+    height: 1.3cqi;
+    display: block;
+  }
+  .sc-review-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.55fr 1fr;
+    min-height: 0;
+  }
+  .sc-review-doc {
+    padding: 2cqi 2.6cqi;
+    overflow: hidden;
+    color: #1B1813;
+  }
+  .sc-review-doc h2 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 2.0cqi;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 0.4cqi;
+  }
+  .sc-review-meta {
+    font-size: 0.9cqi;
+    color: #837C70;
+    margin-bottom: 1.8cqi;
+  }
+  .sc-review-doc h3 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.25cqi;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 1.5cqi 0 0.5cqi;
+  }
+  .sc-review-doc p {
+    font-size: 1.0cqi;
+    line-height: 1.55;
+    color: #2A251D;
+    margin-bottom: 0.6cqi;
+  }
+  .sc-review-ol {
+    padding-left: 1.4cqi;
+    margin: 0.2cqi 0;
+  }
+  .sc-review-ol li {
+    font-size: 1.0cqi;
+    line-height: 1.55;
+    color: #2A251D;
+    margin-bottom: 0.4cqi;
+  }
+  .hl {
+    padding: 0 0.15cqi;
+    border-radius: 2px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .hl-blue {
+    background: linear-gradient(180deg, transparent 8%, rgba(127, 146, 255, 0.32) 8%);
+    border-bottom: 1.5px solid rgba(92, 138, 255, 0.85);
+  }
+  .hl-amber {
+    background: linear-gradient(180deg, transparent 8%, rgba(212, 149, 99, 0.35) 8%);
+    border-bottom: 1.5px solid rgba(212, 149, 99, 0.9);
+  }
+  .hl-jade {
+    background: linear-gradient(180deg, transparent 8%, rgba(108, 179, 154, 0.32) 8%);
+    border-bottom: 1.5px solid rgba(108, 179, 154, 0.9);
+  }
+
+  .sc-review-comments {
+    position: relative;
+    padding: 1.6cqi 1.4cqi;
+    background: linear-gradient(180deg, #F2ECDD 0%, #EAE3D0 100%);
+    border-left: 1px solid rgba(0,0,0,0.05);
+  }
+  .annotation {
+    position: absolute;
+    left: 1.4cqi;
+    right: 1.4cqi;
+    top: var(--y, 0%);
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 0.9cqi 1.0cqi 0.8cqi;
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.04),
+      0 4px 12px -4px rgba(0,0,0,0.10);
+    border-left: 3px solid var(--sapphire);
+  }
+  .annotation.an-blue { border-left-color: #5C8AFF; }
+  .annotation.an-amber { border-left-color: #D49563; }
+  .annotation.an-jade { border-left-color: #6CB39A; }
+  .annotation-head {
+    display: flex;
+    align-items: center;
+    gap: 0.5cqi;
+    margin-bottom: 0.45cqi;
+  }
+  .annotation-avatar {
+    width: 1.5cqi;
+    height: 1.5cqi;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #5873FF 0%, #334ED0 60%, #162554 100%);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 0 0 1px rgba(127, 146, 255, 0.3);
+  }
+  .annotation-avatar svg {
+    width: 70%;
+    height: 70%;
+  }
+  .annotation-name {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.95cqi;
+    font-weight: 600;
+    color: #1B1813;
+  }
+  .annotation-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78cqi;
+    color: #837C70;
+    margin-left: auto;
+    letter-spacing: 0.04em;
+  }
+  .annotation-body {
+    font-size: 0.92cqi;
+    line-height: 1.45;
+    color: #2A251D;
+    margin-bottom: 0.5cqi;
+  }
+  .annotation-body em {
+    font-style: normal;
+    font-weight: 600;
+    color: #1B1813;
+    background: rgba(127, 146, 255, 0.12);
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+  .an-amber .annotation-body em { background: rgba(212, 149, 99, 0.16); }
+  .an-jade .annotation-body em { background: rgba(108, 179, 154, 0.16); }
+  .annotation-actions {
+    display: flex;
+    gap: 0.5cqi;
+    align-items: center;
+    font-size: 0.85cqi;
+    color: #5C8AFF;
+    font-weight: 500;
+  }
+  .an-amber .annotation-actions { color: #B97241; }
+  .an-jade .annotation-actions { color: #4E8E76; }
+  .annotation-actions .dot { color: #C7C0B3; }
+
+  /* mobile */
+  @media (max-width: 800px) {
+    .scenarios {
+      padding: 0 16px 56px;
+    }
+    .scenarios-tabbar {
+      justify-content: flex-start;
+      margin: 22px -16px 18px;
+      padding: 0 16px;
+    }
+    .scenario-stage {
+      aspect-ratio: 4/5;
+      border-radius: 14px;
+    }
+    .sc-doc, .sc-finder, .sc-calendar, .sc-sheet, .sc-review {
+      left: 50%;
+      height: auto;
+      width: 84%;
+    }
+    .sc-doc { aspect-ratio: 8.5/11; height: 80%; width: auto; }
+    .sc-finder { aspect-ratio: 11/9; height: 64%; width: auto; }
+    .sc-calendar { aspect-ratio: 11/9; height: 64%; width: auto; }
+    .sc-sheet { aspect-ratio: 11/9; height: 60%; width: auto; }
+    .sc-review { aspect-ratio: 10/12; height: 78%; width: auto; }
+    .panel-files .sc-finder,
+    .panel-apps .sc-calendar,
+    .panel-tracker .sc-sheet,
+    .panel-notes .sc-review { left: 50%; }
+    /* Mobile: stack doc + comments vertically */
+    .sc-review-body { grid-template-columns: 1fr; }
+    .sc-review-comments { display: none; }
+    .sc-prompt {
+      top: auto;
+      bottom: 5%;
+      left: 5%;
+      right: 5%;
+      width: auto;
+    }
+    .panel-files .sc-prompt,
+    .panel-tracker .sc-prompt {
+      left: 5%;
+      right: 5%;
+    }
+    .sc-note, .sc-hint { display: none; }
+  }
+
   /* feature cards (2x2 grid) */
   .features {
     padding: 32px 28px 96px;
@@ -1026,6 +2191,20 @@
         <path stroke-width="3.13" d="M 65.31 120 L 65.31 80 L 100 100 Z"/>
       </g>
     </symbol>
+    <linearGradient id="fg-folder-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#86A8E8"/>
+      <stop offset="100%" stop-color="#4E78C8"/>
+    </linearGradient>
+    <symbol id="fg-folder" viewBox="0 0 24 20">
+      <path d="M2 5.5 Q 2 4 3.5 4 L 9 4 L 11 6 L 20.5 6 Q 22 6 22 7.5 L 22 16.5 Q 22 18 20.5 18 L 3.5 18 Q 2 18 2 16.5 Z" fill="url(#fg-folder-grad)" stroke="rgba(0,0,0,0.18)" stroke-width="0.4"/>
+      <path d="M2 5.5 Q 2 4 3.5 4 L 9 4 L 11 6 L 11 7 L 2 7 Z" fill="rgba(0,0,0,0.12)"/>
+    </symbol>
+    <symbol id="fg-png" viewBox="0 0 18 22">
+      <path d="M2 2 Q 2 1 3 1 L 12 1 L 16 5 L 16 20 Q 16 21 15 21 L 3 21 Q 2 21 2 20 Z" fill="#F3EEE1" stroke="rgba(0,0,0,0.18)" stroke-width="0.5"/>
+      <path d="M12 1 L 12 5 L 16 5" fill="rgba(0,0,0,0.06)" stroke="rgba(0,0,0,0.18)" stroke-width="0.5"/>
+      <rect x="4" y="13" width="8" height="4.5" rx="0.6" fill="#6CB39A"/>
+      <text x="8" y="16.6" text-anchor="middle" font-family="Manrope, sans-serif" font-size="2.6" fill="#FAF7F0" font-weight="700">PNG</text>
+    </symbol>
   </defs>
 </svg>
 
@@ -1067,6 +2246,576 @@
 </header>
 
 <p class="lede">Most AI apps feel like a tab. Darius feels like a place — quiet, fast, native. Built for the way knowledge workers actually think.</p>
+
+<section class="scenarios">
+  <div class="scenarios-head">
+    <div class="scenarios-eyebrow">— A workspace for real work</div>
+    <h2 class="scenarios-title">Pick a job. Watch the work get done.</h2>
+  </div>
+
+  <div class="scenarios-tabbar">
+    <div class="scenario-tabs" role="tablist">
+      <button class="scenario-tab active" role="tab" aria-selected="true" data-tab="draft">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3l7 7-11 11H3v-7L14 3z"/><path d="M13 4l7 7"/></svg>
+        Draft a brief
+      </button>
+      <button class="scenario-tab" role="tab" aria-selected="false" data-tab="files">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+        Organize your folders
+      </button>
+      <button class="scenario-tab" role="tab" aria-selected="false" data-tab="apps">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+        Pull from your Mac
+      </button>
+      <button class="scenario-tab" role="tab" aria-selected="false" data-tab="tracker">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M3 15h18M9 4v16M15 4v16"/></svg>
+        Build a tracker
+      </button>
+      <button class="scenario-tab" role="tab" aria-selected="false" data-tab="notes">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16M4 10h16M4 15h10M4 20h7"/></svg>
+        Review a draft
+      </button>
+    </div>
+  </div>
+
+  <div class="scenario-stage">
+
+    <!-- Panel 1: Draft a brief -->
+    <div class="scenario-panel panel-draft active" data-panel="draft" role="tabpanel">
+      <div class="scenario-wash"></div>
+
+      <article class="sc-doc">
+        <div class="sc-doc-eyebrow">Draft · v3</div>
+        <h2>Q2 founders' brief</h2>
+        <div class="sc-doc-meta">Acme · May 11, 2026 · prepared for Monday standup</div>
+
+        <h3>Where we stand</h3>
+        <p>Activation is up <strong>14%</strong> month-over-month, driven by the new onboarding flow. Three enterprise pilots converted last week; two are close on annual contracts.</p>
+
+        <h3>Three things to decide</h3>
+        <ul>
+          <li>Hold the May 22 ship date, or slip a week to ship with the Mac app?</li>
+          <li>Hire the second Solutions Engineer now or wait for the next pilot cohort?</li>
+          <li>Move pricing to per-seat for teams, or keep flat?</li>
+        </ul>
+
+        <h3>What I'm watching</h3>
+        <p>Inference cost per active user dropped to <strong>$0.42</strong> after the routing change. North-star — weekly active workspaces — sits at <strong>1,284</strong>, on pace for the quarter goal.</p>
+      </article>
+
+      <aside class="sc-card sc-prompt">
+        <div class="sc-card-eyebrow">Prompt</div>
+        <div class="sc-card-body">Draft the brief for Monday's founders' standup. Pull the launch deltas from <em>#launch</em> and last week's customer notes. Keep it scannable — three decisions, three numbers.</div>
+      </aside>
+
+      <aside class="sc-card sc-note">
+        <div class="sc-card-eyebrow">Sources · 12 indexed</div>
+        <div class="sc-note-row"><span>Slack · #launch</span><span class="mono">38 msgs</span></div>
+        <div class="sc-note-row"><span>Linear · Q2 milestones</span><span class="mono">7 issues</span></div>
+        <div class="sc-note-row"><span>Notion · Pilot notes</span><span class="mono">4 pages</span></div>
+      </aside>
+
+      <div class="sc-hint">
+        <div>
+          <span class="sc-hint-eyebrow">Note</span>
+          Decisions and numbers stay editable — hover any line to revise with Darius.
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 2: Tame your Downloads -->
+    <div class="scenario-panel panel-files" data-panel="files" role="tabpanel">
+      <div class="scenario-wash"></div>
+
+      <div class="sc-finder">
+        <div class="finder-bar">
+          <span class="light red"></span>
+          <span class="light yellow"></span>
+          <span class="light green"></span>
+          <div class="finder-nav">
+            <button class="nav-btn" aria-label="Back"><svg viewBox="0 0 16 16"><path d="M10 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="nav-btn dim" aria-label="Forward"><svg viewBox="0 0 16 16"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+          <span class="finder-title">Downloads</span>
+          <div class="finder-search">
+            <svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            <span>Search</span>
+          </div>
+        </div>
+
+        <div class="finder-body">
+          <aside class="finder-sidebar">
+            <div class="sidebar-section">Favorites</div>
+            <div class="sidebar-item">
+              <svg viewBox="0 0 16 16" class="sb-ico"><path d="M8 1l3 3.2-1.5 1.5L9 5.2V10H7V5.2L6.5 5.7 5 4.2 8 1z M3 11h10v3H3z" fill="currentColor"/></svg>
+              AirDrop
+            </div>
+            <div class="sidebar-item">
+              <svg viewBox="0 0 16 16" class="sb-ico"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="M8 4v4l2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none"/></svg>
+              Recents
+            </div>
+            <div class="sidebar-item">
+              <svg viewBox="0 0 16 16" class="sb-ico"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3" fill="none"/><path d="M5 6h6M5 9h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              Documents
+            </div>
+            <div class="sidebar-item">
+              <svg viewBox="0 0 16 16" class="sb-ico"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3" fill="none"/><circle cx="6" cy="7" r="1" fill="currentColor"/><path d="M4 11l3-2 4 3" stroke="currentColor" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Desktop
+            </div>
+            <div class="sidebar-item active">
+              <svg viewBox="0 0 16 16" class="sb-ico"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12h10" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Downloads
+            </div>
+            <div class="sidebar-section" style="margin-top: 1.4cqi;">Tags</div>
+            <div class="sidebar-item">
+              <span class="sb-dot" style="background:#D49563"></span>
+              Important
+            </div>
+            <div class="sidebar-item">
+              <span class="sb-dot" style="background:#6CB39A"></span>
+              Reviewed
+            </div>
+          </aside>
+
+          <div class="finder-main">
+            <div class="finder-cols-head">
+              <span>Name</span>
+              <span>Date Modified</span>
+              <span>Size</span>
+            </div>
+            <div class="finder-rows">
+              <div class="finder-row folder">
+                <span class="name-col">
+                  <svg class="chev" viewBox="0 0 12 12"><path d="M4 3l3 3-3 3" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg class="folder-ico" viewBox="0 0 24 20" aria-hidden="true">
+                    <defs><linearGradient id="fg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#86A8E8"/><stop offset="100%" stop-color="#4E78C8"/></linearGradient></defs>
+                    <path d="M2 5.5 Q 2 4 3.5 4 L 9 4 L 11 6 L 20.5 6 Q 22 6 22 7.5 L 22 16.5 Q 22 18 20.5 18 L 3.5 18 Q 2 18 2 16.5 Z" fill="url(#fg1)" stroke="rgba(0,0,0,0.18)" stroke-width="0.4"/>
+                    <path d="M2 5.5 Q 2 4 3.5 4 L 9 4 L 11 6 L 11 7 L 2 7 Z" fill="rgba(0,0,0,0.12)"/>
+                  </svg>
+                  <span>Invoices</span>
+                  <span class="badge-new">+ new</span>
+                </span>
+                <span class="modified">Today, 11:42</span>
+                <span class="size">3 items</span>
+              </div>
+              <div class="finder-row folder">
+                <span class="name-col">
+                  <svg class="chev" viewBox="0 0 12 12"><path d="M4 3l3 3-3 3" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg class="folder-ico" viewBox="0 0 24 20" aria-hidden="true"><use href="#fg-folder"/></svg>
+                  <span>Contracts</span>
+                  <span class="badge-new">+ new</span>
+                </span>
+                <span class="modified">Today, 11:43</span>
+                <span class="size">2 items</span>
+              </div>
+              <div class="finder-row folder selected">
+                <span class="name-col">
+                  <svg class="chev down" viewBox="0 0 12 12"><path d="M3 4l3 3 3-3" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg class="folder-ico" viewBox="0 0 24 20" aria-hidden="true"><use href="#fg-folder"/></svg>
+                  <span>Screenshots</span>
+                </span>
+                <span class="modified">Today, 11:44</span>
+                <span class="size">14 items</span>
+              </div>
+              <div class="finder-row file indent">
+                <span class="name-col">
+                  <svg class="file-ico" viewBox="0 0 18 22" aria-hidden="true">
+                    <path d="M2 2 Q 2 1 3 1 L 12 1 L 16 5 L 16 20 Q 16 21 15 21 L 3 21 Q 2 21 2 20 Z" fill="#F3EEE1" stroke="rgba(0,0,0,0.18)" stroke-width="0.5"/>
+                    <path d="M12 1 L 12 5 L 16 5" fill="rgba(0,0,0,0.06)" stroke="rgba(0,0,0,0.18)" stroke-width="0.5"/>
+                    <rect x="4" y="13" width="8" height="4.5" rx="0.6" fill="#6CB39A"/>
+                    <text x="8" y="16.6" text-anchor="middle" font-family="Manrope" font-size="2.6" fill="#FAF7F0" font-weight="700">PNG</text>
+                  </svg>
+                  <span>2026-05-04_onboarding-bug.png</span>
+                </span>
+                <span class="modified">Today, 11:44</span>
+                <span class="size">2.4 MB</span>
+              </div>
+              <div class="finder-row file indent">
+                <span class="name-col">
+                  <svg class="file-ico" viewBox="0 0 18 22" aria-hidden="true"><use href="#fg-png"/></svg>
+                  <span>2026-05-06_pricing-table.png</span>
+                </span>
+                <span class="modified">Today, 11:44</span>
+                <span class="size">1.8 MB</span>
+              </div>
+              <div class="finder-row file indent">
+                <span class="name-col">
+                  <svg class="file-ico" viewBox="0 0 18 22" aria-hidden="true"><use href="#fg-png"/></svg>
+                  <span>2026-05-09_dashboard.png</span>
+                </span>
+                <span class="modified">Today, 11:44</span>
+                <span class="size">3.1 MB</span>
+              </div>
+              <div class="finder-row folder">
+                <span class="name-col">
+                  <svg class="chev" viewBox="0 0 12 12"><path d="M4 3l3 3-3 3" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg class="folder-ico" viewBox="0 0 24 20" aria-hidden="true"><use href="#fg-folder"/></svg>
+                  <span>Photos</span>
+                </span>
+                <span class="modified">Today, 11:45</span>
+                <span class="size">84 items</span>
+              </div>
+              <div class="finder-row file">
+                <span class="name-col">
+                  <svg class="file-ico" viewBox="0 0 18 22" aria-hidden="true">
+                    <path d="M2 2 Q 2 1 3 1 L 12 1 L 16 5 L 16 20 Q 16 21 15 21 L 3 21 Q 2 21 2 20 Z" fill="#F3EEE1" stroke="rgba(0,0,0,0.18)" stroke-width="0.5"/>
+                    <path d="M12 1 L 12 5 L 16 5" fill="rgba(0,0,0,0.06)" stroke="rgba(0,0,0,0.18)" stroke-width="0.5"/>
+                    <rect x="4" y="13" width="8" height="4.5" rx="0.6" fill="#837C70"/>
+                    <text x="8" y="16.6" text-anchor="middle" font-family="Manrope" font-size="2.6" fill="#FAF7F0" font-weight="700">ZIP</text>
+                  </svg>
+                  <span>_archive_2026-05.zip</span>
+                </span>
+                <span class="modified">Today, 11:50</span>
+                <span class="size">124 MB</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="sc-card sc-prompt">
+        <div class="sc-card-eyebrow">Prompt</div>
+        <div class="sc-card-body">Sort everything in <em>~/Downloads</em>. Group by what it is, not when it landed. Rename screenshots to <em>date_slug.png</em>. Ask before deleting anything over 50MB.</div>
+      </aside>
+
+      <aside class="sc-card sc-note">
+        <div class="sc-card-eyebrow">Working folder</div>
+        <div class="sc-note-row"><span>~/Downloads</span><span class="mono">412 items</span></div>
+        <div class="sc-note-row"><span>Renamed</span><span class="mono">38</span></div>
+        <div class="sc-note-row"><span>Moved</span><span class="mono">126</span></div>
+        <div class="sc-note-row"><span>Awaiting review</span><span class="mono">3</span></div>
+      </aside>
+
+      <div class="sc-hint">
+        <div>
+          <span class="sc-hint-eyebrow">Safe</span>
+          Nothing is deleted without your nod — every action is one undo away.
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel: Pull from your Mac -->
+    <div class="scenario-panel panel-apps" data-panel="apps" role="tabpanel">
+      <div class="scenario-wash"></div>
+
+      <div class="sc-calendar">
+        <div class="cal-bar">
+          <span class="light red"></span>
+          <span class="light yellow"></span>
+          <span class="light green"></span>
+          <div class="cal-nav">
+            <button class="cal-btn" aria-label="Today">Today</button>
+            <button class="cal-btn icon" aria-label="Previous"><svg viewBox="0 0 16 16"><path d="M10 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="cal-btn icon" aria-label="Next"><svg viewBox="0 0 16 16"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+          <span class="cal-title">May 11 – 15, 2026</span>
+          <div class="cal-view">
+            <span>Day</span><span class="active">Week</span><span>Month</span><span>Year</span>
+          </div>
+        </div>
+
+        <div class="cal-grid">
+          <div class="cal-time-col">
+            <div class="cal-time-spacer"></div>
+            <div class="cal-time">8 AM</div>
+            <div class="cal-time">9</div>
+            <div class="cal-time">10</div>
+            <div class="cal-time">11</div>
+            <div class="cal-time">12 PM</div>
+            <div class="cal-time">1</div>
+            <div class="cal-time">2</div>
+            <div class="cal-time">3</div>
+            <div class="cal-time">4</div>
+          </div>
+
+          <div class="cal-day">
+            <div class="cal-day-head"><span class="dow">Mon</span><span class="dom">11</span></div>
+            <div class="cal-day-body">
+              <div class="cal-event ev-jade" style="top: 11.11%; height: 11.11%">
+                <span class="ev-title">Team standup</span>
+                <span class="ev-time">9 – 9:30</span>
+              </div>
+              <div class="cal-event ev-blue" style="top: 22.22%; height: 11.11%">
+                <span class="ev-title">1:1 · Jules</span>
+                <span class="ev-time">10 – 11</span>
+              </div>
+              <div class="cal-event ev-jade soft" style="top: 44.44%; height: 11.11%">
+                <span class="ev-title">Lunch · Sundar</span>
+                <span class="ev-time">12 – 1 PM</span>
+              </div>
+              <div class="cal-event ev-ember" style="top: 66.66%; height: 11.11%">
+                <span class="ev-title">Product review</span>
+                <span class="ev-time">2 – 3 PM</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cal-day today">
+            <div class="cal-day-head"><span class="dow">Tue</span><span class="dom today-dot">12</span></div>
+            <div class="cal-day-body">
+              <div class="cal-event ev-jade" style="top: 11.11%; height: 11.11%">
+                <span class="ev-title">Team standup</span>
+                <span class="ev-time">9 – 9:30</span>
+              </div>
+              <div class="cal-event ev-blue" style="top: 33.33%; height: 22.22%">
+                <span class="ev-title">Sequoia sync</span>
+                <span class="ev-time">11 – 1 PM</span>
+              </div>
+              <div class="cal-event ev-ember" style="top: 77.77%; height: 11.11%">
+                <span class="ev-title">Demo dry-run</span>
+                <span class="ev-time">3 – 4 PM</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cal-day">
+            <div class="cal-day-head"><span class="dow">Wed</span><span class="dom">13</span></div>
+            <div class="cal-day-body">
+              <div class="cal-event ev-jade" style="top: 11.11%; height: 11.11%">
+                <span class="ev-title">Team standup</span>
+                <span class="ev-time">9 – 9:30</span>
+              </div>
+              <div class="cal-event ev-violet" style="top: 22.22%; height: 11.11%">
+                <span class="ev-title">Board prep</span>
+                <span class="ev-time">10 – 11</span>
+              </div>
+              <div class="cal-event ev-jade soft" style="top: 55.55%; height: 11.11%">
+                <span class="ev-title">Lunch · Sam</span>
+                <span class="ev-time">1 – 2 PM</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cal-day">
+            <div class="cal-day-head"><span class="dow">Thu</span><span class="dom">14</span></div>
+            <div class="cal-day-body">
+              <div class="cal-event ev-jade" style="top: 11.11%; height: 11.11%">
+                <span class="ev-title">Team standup</span>
+                <span class="ev-time">9 – 9:30</span>
+              </div>
+              <div class="cal-event ev-blue" style="top: 33.33%; height: 11.11%">
+                <span class="ev-title">Ridgeline call</span>
+                <span class="ev-time">11 – 12 PM</span>
+              </div>
+              <div class="cal-event ev-ember focus" style="top: 66.66%; height: 17%">
+                <span class="ev-title">Focus · Q2 plan</span>
+                <span class="ev-time">2 – 3:30 PM</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cal-day">
+            <div class="cal-day-head"><span class="dow">Fri</span><span class="dom">15</span></div>
+            <div class="cal-day-body">
+              <div class="cal-event ev-jade" style="top: 11.11%; height: 11.11%">
+                <span class="ev-title">Team standup</span>
+                <span class="ev-time">9 – 9:30</span>
+              </div>
+              <div class="cal-event ev-blue" style="top: 33.33%; height: 11.11%">
+                <span class="ev-title">Northbeam demo</span>
+                <span class="ev-time">11 – 12 PM</span>
+              </div>
+              <div class="cal-event ev-jade soft" style="top: 44.44%; height: 11.11%">
+                <span class="ev-title">Lunch · Dario</span>
+                <span class="ev-time">12 – 1 PM</span>
+              </div>
+              <div class="cal-event ev-violet" style="top: 55.55%; height: 11.11%">
+                <span class="ev-title">Investor 1:1</span>
+                <span class="ev-time">1 – 2 PM</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cal-now-line"></div>
+        </div>
+      </div>
+
+      <aside class="sc-card sc-prompt">
+        <div class="sc-card-eyebrow">Prompt</div>
+        <div class="sc-card-body">Pull this week from <em>Calendar</em>. Flag conflicts, find my unprotected focus blocks, and draft a one-line agenda for every customer call.</div>
+      </aside>
+
+      <aside class="sc-card sc-note">
+        <div class="sc-card-eyebrow">Connected apps</div>
+        <div class="sc-note-row"><span>Calendar · iCloud</span><span class="mono">live</span></div>
+        <div class="sc-note-row"><span>Contacts</span><span class="mono">on</span></div>
+        <div class="sc-note-row"><span>Mail</span><span class="mono">on</span></div>
+        <div class="sc-note-row"><span>Notes</span><span class="mono">on</span></div>
+      </aside>
+    </div>
+
+    <!-- Panel 3: Build a tracker -->
+    <div class="scenario-panel panel-tracker" data-panel="tracker" role="tabpanel">
+      <div class="scenario-wash"></div>
+
+      <div class="sc-sheet">
+        <div class="sc-sheet-bar">
+          <span class="light red"></span>
+          <span class="light yellow"></span>
+          <span class="light green"></span>
+          <span class="crumb">Vendors — Q2 pipeline.numbers</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Vendor</th>
+              <th>Stage</th>
+              <th>Owner</th>
+              <th>Next step</th>
+              <th>Due</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Northbeam</td>
+              <td><span class="pill signed">Signed</span></td>
+              <td>Mara</td>
+              <td>Kickoff call</td>
+              <td class="dim">May 14</td>
+            </tr>
+            <tr class="row-active">
+              <td>Ridgeline</td>
+              <td><span class="pill neg">Negotiation</span></td>
+              <td>Jules</td>
+              <td>Counter on MSA</td>
+              <td class="dim">May 16</td>
+            </tr>
+            <tr>
+              <td>Beacon Labs</td>
+              <td><span class="pill trial">Trial</span></td>
+              <td>Sam</td>
+              <td>Mid-trial review</td>
+              <td class="dim">May 20</td>
+            </tr>
+            <tr>
+              <td>Foundry IO</td>
+              <td><span class="pill reach">Outreach</span></td>
+              <td>Mara</td>
+              <td>Intro reply</td>
+              <td class="dim">May 21</td>
+            </tr>
+            <tr>
+              <td>Halcyon</td>
+              <td><span class="pill trial">Trial</span></td>
+              <td>Jules</td>
+              <td>Send onboarding</td>
+              <td class="dim">May 22</td>
+            </tr>
+            <tr>
+              <td>Cascade AI</td>
+              <td><span class="pill reach">Outreach</span></td>
+              <td>Sam</td>
+              <td>Warm intro via Eli</td>
+              <td class="dim">May 24</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <aside class="sc-card sc-prompt">
+        <div class="sc-card-eyebrow">Prompt</div>
+        <div class="sc-card-body">Build a vendor onboarding tracker. Stages: <em>Outreach, Trial, Negotiation, Signed, Live.</em> Pull owners from the shared doc and pull due dates from my calendar.</div>
+      </aside>
+
+      <aside class="sc-card sc-note">
+        <div class="sc-card-eyebrow">Saved to</div>
+        <div class="sc-note-row"><span>~/Trackers/Vendors.numbers</span><span class="mono">live</span></div>
+        <div class="sc-note-row"><span>Synced with calendar</span><span class="mono">✓</span></div>
+        <div class="sc-note-row"><span>Updated</span><span class="mono">2 min ago</span></div>
+      </aside>
+
+      <div class="sc-hint">
+        <div>
+          <span class="sc-hint-eyebrow">Live</span>
+          Darius keeps the sheet in sync — change a stage in chat, the cell follows.
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 4: Distill a thread -->
+    <div class="scenario-panel panel-notes" data-panel="notes" role="tabpanel">
+      <div class="scenario-wash"></div>
+
+      <div class="sc-review">
+        <div class="sc-review-bar">
+          <span class="light red"></span>
+          <span class="light yellow"></span>
+          <span class="light green"></span>
+          <span class="crumb">Q2 product strategy.pdf</span>
+          <span class="crumb-right">
+            <svg viewBox="0 0 200 200" aria-hidden="true" class="crumb-mark"><use href="#darius-mark"/></svg>
+            3 comments
+          </span>
+        </div>
+
+        <div class="sc-review-body">
+          <article class="sc-review-doc">
+            <h2>Q2 product strategy</h2>
+            <div class="sc-review-meta">Acme · for the leadership team · v3</div>
+
+            <h3>Where we're heading</h3>
+            <p>Our biggest opportunity in Q2 is to <mark class="hl hl-blue">deepen the integration story</mark>. Top customers have asked for it by name and the engineering investment is mostly behind us.</p>
+
+            <h3>Top three bets</h3>
+            <ol class="sc-review-ol">
+              <li>Mobile beta to GA — <mark class="hl hl-amber">ship by May 22</mark></li>
+              <li>Two new model providers (xAI, Mistral)</li>
+              <li><mark class="hl hl-jade">Enterprise pilot conversion engine</mark></li>
+            </ol>
+
+            <h3>What I'm watching</h3>
+            <p>Customer concentration is creeping up: our top three accounts now drive 38% of revenue. Worth flagging at the next board sync.</p>
+          </article>
+
+          <aside class="sc-review-comments">
+            <div class="annotation an-blue" style="--y: 14%">
+              <div class="annotation-head">
+                <span class="annotation-avatar"><svg viewBox="0 0 200 200"><use href="#darius-mark-white"/></svg></span>
+                <span class="annotation-name">Darius</span>
+                <span class="annotation-time">just now</span>
+              </div>
+              <div class="annotation-body">Strong opener. Lead with the number — <em>"3 of our top 5"</em> — to anchor the reader.</div>
+              <div class="annotation-actions"><span>Reply</span><span class="dot">·</span><span>Apply</span></div>
+            </div>
+
+            <div class="annotation an-amber" style="--y: 44%">
+              <div class="annotation-head">
+                <span class="annotation-avatar"><svg viewBox="0 0 200 200"><use href="#darius-mark-white"/></svg></span>
+                <span class="annotation-name">Darius</span>
+                <span class="annotation-time">2m</span>
+              </div>
+              <div class="annotation-body">May 22 collides with the App Review window. <em>May 26–27</em> avoids the weekend submit risk.</div>
+              <div class="annotation-actions"><span>Reply</span><span class="dot">·</span><span>Apply</span></div>
+            </div>
+
+            <div class="annotation an-jade" style="--y: 70%">
+              <div class="annotation-head">
+                <span class="annotation-avatar"><svg viewBox="0 0 200 200"><use href="#darius-mark-white"/></svg></span>
+                <span class="annotation-name">Darius</span>
+                <span class="annotation-time">2m</span>
+              </div>
+              <div class="annotation-body">Vague — split this into two named workstreams (e.g. onboarding playbook + ROI sheet).</div>
+              <div class="annotation-actions"><span>Reply</span><span class="dot">·</span><span>Apply</span></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <aside class="sc-card sc-prompt">
+        <div class="sc-card-eyebrow">Prompt</div>
+        <div class="sc-card-body">Mark up Mara's Q2 strategy. Flag anything vague, anything that conflicts with the launch calendar, and propose tighter openers — leave the rest alone.</div>
+      </aside>
+
+      <aside class="sc-card sc-note">
+        <div class="sc-card-eyebrow">Document</div>
+        <div class="sc-note-row"><span>Pages</span><span class="mono">3</span></div>
+        <div class="sc-note-row"><span>Comments</span><span class="mono">3 new</span></div>
+        <div class="sc-note-row"><span>Suggestions</span><span class="mono">2</span></div>
+      </aside>
+    </div>
+
+  </div>
+</section>
 
 <section class="features">
   <div class="features-eyebrow">— What makes Darius different</div>
@@ -1304,6 +3053,24 @@
         try { localStorage.setItem('darius-dl', JSON.stringify({ t: Date.now(), url: asset.browser_download_url })); } catch {}
       })
       .catch(() => { /* static href on the button is the fallback */ });
+  })();
+
+  // Scenario tabs
+  (() => {
+    const tabs = document.querySelectorAll('.scenario-tab');
+    const panels = document.querySelectorAll('.scenario-panel');
+    if (!tabs.length || !panels.length) return;
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+        tabs.forEach(t => {
+          const on = t === tab;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        panels.forEach(p => p.classList.toggle('active', p.dataset.panel === target));
+      });
+    });
   })();
 </script>
 
