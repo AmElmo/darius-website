@@ -2135,8 +2135,8 @@
       0 20px 60px -28px rgba(236,231,221,0.55);
   }
   .cta-field {
-    background:
-      linear-gradient(180deg, #100E0B 0%, #0C0A08 100%);
+    background: #07060A;
+    --cta-dot: rgba(236, 231, 221, 0.28);
   }
   .cta-field::before {
     content: "";
@@ -2144,32 +2144,68 @@
     inset: 0;
     z-index: -2;
     background:
-      linear-gradient(rgba(236,231,221,0.042) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(236,231,221,0.035) 1px, transparent 1px),
-      linear-gradient(135deg, rgba(92,138,255,0.1), transparent 36%, rgba(212,149,99,0.08) 62%, transparent);
-    background-size: 72px 72px, 72px 72px, 160% 160%;
-    transform-origin: 50% 58%;
-    transform: perspective(900px) rotateX(58deg) scale(1.25);
-    animation: ctaFieldSlide 18s linear infinite;
+      radial-gradient(circle at 50% 50%, rgba(255,  80, 110, 0.55) 0%, transparent 38%),
+      radial-gradient(circle at 50% 50%, rgba(255, 200,  90, 0.45) 0%, transparent 38%),
+      radial-gradient(circle at 50% 50%, rgba( 90, 220, 150, 0.45) 0%, transparent 38%),
+      radial-gradient(circle at 50% 50%, rgba( 92, 138, 255, 0.60) 0%, transparent 38%),
+      radial-gradient(circle at 50% 50%, rgba(180, 110, 255, 0.45) 0%, transparent 38%),
+      radial-gradient(circle at 50% 50%, rgba( 90, 210, 255, 0.45) 0%, transparent 38%);
+    background-repeat: no-repeat;
+    background-size:
+      90% 90%, 80% 80%, 95% 95%,
+      85% 85%, 75% 75%, 100% 100%;
+    background-position:
+      30% 80%, 70% 25%, 20% 30%,
+      75% 85%, 50% 45%, 60% 15%;
+    will-change: background-position, filter;
+    animation:
+      ctaBloomDrift 30s linear infinite,
+      ctaHueShift   6s linear infinite;
   }
   .cta-field .cta-rail {
     position: absolute;
-    inset: auto -10% 18%;
+    inset: 0;
     z-index: -1;
-    height: 26%;
-    background:
-      linear-gradient(90deg, transparent, rgba(92,138,255,0.13), rgba(236,231,221,0.08), rgba(113,183,161,0.1), transparent);
-    filter: blur(28px);
-    transform: skewY(-4deg);
-    animation: ctaRailBreathe 8s ease-in-out infinite alternate;
+    height: auto;
+    background-image:
+      radial-gradient(circle, var(--cta-dot) 1.1px, transparent 1.7px),
+      radial-gradient(circle, var(--cta-dot) 1.1px, transparent 1.7px);
+    background-size: 22px 38.1px, 22px 38.1px;
+    background-position: 0 0, 11px 19.05px;
+    filter: none;
+    transform: none;
+    animation: ctaDotsDrift 22s linear infinite;
+    -webkit-mask-image: radial-gradient(ellipse 78% 78% at 50% 58%, #000 0%, rgba(0,0,0,0.72) 46%, transparent 92%);
+            mask-image: radial-gradient(ellipse 78% 78% at 50% 58%, #000 0%, rgba(0,0,0,0.72) 46%, transparent 92%);
   }
-  @keyframes ctaFieldSlide {
-    from { background-position: 0 0, 0 0, 0% 50%; }
-    to { background-position: 0 144px, 144px 0, 100% 50%; }
+  @keyframes ctaBloomDrift {
+    0% {
+      background-position:
+        30% 80%, 70% 25%, 20% 30%,
+        75% 85%, 50% 45%, 60% 15%;
+    }
+    50% {
+      background-position:
+        75% 35%, 25% 75%, 80% 80%,
+        20% 25%, 35% 80%, 20% 70%;
+    }
+    100% {
+      background-position:
+        30% 80%, 70% 25%, 20% 30%,
+        75% 85%, 50% 45%, 60% 15%;
+    }
   }
-  @keyframes ctaRailBreathe {
-    from { opacity: 0.48; transform: skewY(-4deg) translateY(8px); }
-    to { opacity: 0.82; transform: skewY(-4deg) translateY(-6px); }
+  @keyframes ctaHueShift {
+    from { filter: hue-rotate(0deg); }
+    to   { filter: hue-rotate(360deg); }
+  }
+  @keyframes ctaDotsDrift {
+    from { background-position:    0 0,    11px 19.05px; }
+    to   { background-position: 22px 38.1px, 33px 57.15px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cta-field::before,
+    .cta-field .cta-rail { animation: none; }
   }
 
   /* footer */
@@ -2326,14 +2362,16 @@
   }
 
   [data-theme="light"] .cta-field {
-    background:
-      linear-gradient(180deg, #F1ECE0 0%, #E6DFCD 100%);
+    background: #EFE9DC;
   }
   [data-theme="light"] .cta-field::before {
     background:
-      linear-gradient(rgba(20, 17, 13, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(20, 17, 13, 0.04) 1px, transparent 1px),
-      linear-gradient(135deg, rgba(92, 138, 255, 0.10), transparent 36%, rgba(212, 149, 99, 0.08) 62%, transparent);
+      radial-gradient(ellipse 62% 55% at 50% 84%, rgba(92, 138, 255, 0.48), transparent 68%),
+      radial-gradient(ellipse 40% 32% at 20% 34%, rgba(127, 146, 255, 0.24), transparent 72%),
+      radial-gradient(ellipse 40% 32% at 80% 32%, rgba(212, 149, 99, 0.28), transparent 72%);
+  }
+  [data-theme="light"] .cta-field .cta-rail {
+    background-image: radial-gradient(circle, rgba(20, 17, 13, 0.30) 1.1px, transparent 1.7px);
   }
   [data-theme="light"] .cta-variant::after {
     background:
@@ -2346,25 +2384,32 @@
       0 20px 60px -28px rgba(20, 17, 13, 0.35);
   }
 
-  /* MacBook icon — silver in dark mode, charcoal (default) in light mode */
+  /* MacBook chassis — Silver (cool aluminum) in dark mode, Space Black in light mode (default).
+     Multi-stop gradient + top sheen + edge insets give the lid real metallic depth instead
+     of looking like a flat cream rectangle on the dark background. */
   [data-theme="dark"] .mb-lid {
-    background: linear-gradient(180deg, #D9D3C5 0%, #B0A99A 100%);
-    border-color: rgba(20, 17, 13, 0.2);
+    background:
+      radial-gradient(ellipse 110% 70% at 50% 0%, rgba(255, 255, 255, 0.22), transparent 60%),
+      linear-gradient(180deg, #CCCED1 0%, #B4B6B9 48%, #9EA1A4 100%);
+    border-color: rgba(20, 17, 13, 0.32);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.7),
+      inset 0 -1px 0 rgba(20, 17, 13, 0.18),
+      0 30px 50px -15px rgba(0, 0, 0, 0.75);
+  }
+  [data-theme="dark"] .mb-base {
+    background: linear-gradient(180deg, #BDBFC2 0%, #9DA0A4 55%, #7E8186 100%);
+    border-color: rgba(20, 17, 13, 0.28);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.55),
       inset 0 -1px 0 rgba(20, 17, 13, 0.18),
-      0 30px 50px -15px rgba(0, 0, 0, 0.65);
-  }
-  [data-theme="dark"] .mb-base {
-    background: linear-gradient(180deg, rgba(217, 211, 197, 0.95) 0%, rgba(176, 169, 154, 0.95) 50%, rgba(140, 132, 119, 0.95) 100%);
-    border-color: rgba(20, 17, 13, 0.18);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.45),
-      inset 0 -1px 0 rgba(20, 17, 13, 0.1),
-      0 18px 24px -8px rgba(0, 0, 0, 0.55);
+      0 18px 24px -8px rgba(0, 0, 0, 0.6);
   }
   [data-theme="dark"] .mb-hinge {
-    background: rgba(80, 74, 65, 0.85);
+    background: rgba(40, 42, 45, 0.9);
+  }
+  [data-theme="dark"] .mb-stand::after {
+    background: radial-gradient(ellipse at center top, rgba(255, 255, 255, 0.12) 0%, transparent 70%);
   }
 </style>
 </head>
