@@ -2138,12 +2138,6 @@
     background:
       linear-gradient(180deg, #100E0B 0%, #0C0A08 100%);
   }
-  [data-theme="light"] .cta-field {
-    --bone: #ECE7DD;
-    --bone-dim: #C7C0B3;
-    --bg: #14110D;
-    color: var(--bone);
-  }
   .cta-field::before {
     content: "";
     position: absolute;
@@ -2233,6 +2227,123 @@
       padding: 16px 24px;
       font-size: 22px;
     }
+  }
+
+  /* ——— light-mode polish for mockup chrome ——— */
+  [data-theme="light"] .sc-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 241, 232, 0.96));
+    border: 1px solid rgba(20, 17, 13, 0.08);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      0 18px 36px -12px rgba(20, 17, 13, 0.12);
+  }
+  [data-theme="light"] .sc-card-eyebrow { color: var(--ash); }
+  [data-theme="light"] .sc-card-body { color: var(--bone-dim); }
+  [data-theme="light"] .sc-card-body em { color: var(--bone); }
+  [data-theme="light"] .sc-note-row + .sc-note-row { border-top-color: rgba(20, 17, 13, 0.06); }
+
+  [data-theme="light"] .sc-finder,
+  [data-theme="light"] .sc-calendar {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F5F1E8 100%);
+    border-color: rgba(20, 17, 13, 0.10);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      0 30px 60px -16px rgba(20, 17, 13, 0.18),
+      0 60px 100px -30px rgba(108, 179, 154, 0.12);
+    color: var(--bone);
+  }
+  [data-theme="light"] .finder-bar,
+  [data-theme="light"] .cal-bar {
+    background: linear-gradient(180deg, rgba(20, 17, 13, 0.03), transparent);
+    border-bottom-color: rgba(20, 17, 13, 0.08);
+  }
+  [data-theme="light"] .finder-nav .nav-btn,
+  [data-theme="light"] .finder-search,
+  [data-theme="light"] .cal-nav .cal-btn,
+  [data-theme="light"] .cal-view {
+    background: rgba(20, 17, 13, 0.04);
+    border-color: rgba(20, 17, 13, 0.06);
+  }
+  [data-theme="light"] .finder-sidebar {
+    background: rgba(20, 17, 13, 0.025);
+    border-right-color: rgba(20, 17, 13, 0.06);
+  }
+  [data-theme="light"] .finder-cols-head {
+    background: rgba(20, 17, 13, 0.03);
+    border-bottom-color: rgba(20, 17, 13, 0.06);
+  }
+  [data-theme="light"] .finder-row.selected {
+    background: rgba(92, 138, 255, 0.14);
+  }
+  [data-theme="light"] .cal-day {
+    border-right-color: rgba(20, 17, 13, 0.06);
+  }
+  [data-theme="light"] .cal-day.today {
+    background: rgba(92, 138, 255, 0.05);
+  }
+  [data-theme="light"] .cal-day-head {
+    border-bottom-color: rgba(20, 17, 13, 0.06);
+  }
+  [data-theme="light"] .cal-time,
+  [data-theme="light"] .cal-time-spacer {
+    border-right-color: rgba(20, 17, 13, 0.06);
+  }
+
+  [data-theme="light"] .composer {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 241, 232, 0.94));
+    border: 1px solid rgba(20, 17, 13, 0.10);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      0 24px 60px -20px rgba(20, 17, 13, 0.18),
+      0 0 30px rgba(127, 146, 255, 0.12);
+  }
+  [data-theme="light"] .composer-input { color: var(--bone-dim); }
+  [data-theme="light"] .composer-model {
+    background: rgba(20, 17, 13, 0.04);
+    border-color: rgba(20, 17, 13, 0.08);
+    color: var(--bone-dim);
+  }
+  [data-theme="light"] .composer-send {
+    background: linear-gradient(135deg, #1B1813, #4A4239);
+    color: #FAF7F0;
+  }
+
+  [data-theme="light"] .agents-window {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 241, 232, 0.94));
+    border: 1px solid rgba(20, 17, 13, 0.10);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      0 24px 60px -20px rgba(20, 17, 13, 0.18);
+  }
+  [data-theme="light"] .agents-bar { border-bottom-color: rgba(20, 17, 13, 0.06); }
+  [data-theme="light"] .agents-title { color: var(--bone-dim); }
+  [data-theme="light"] .agent-row { color: var(--bone-dim); }
+  [data-theme="light"] .agent-row.active {
+    background: rgba(92, 138, 255, 0.10);
+    border-color: rgba(92, 138, 255, 0.30);
+    color: var(--bone);
+    box-shadow: 0 0 14px rgba(92, 138, 255, 0.12);
+  }
+
+  [data-theme="light"] .cta-field {
+    background:
+      linear-gradient(180deg, #F1ECE0 0%, #E6DFCD 100%);
+  }
+  [data-theme="light"] .cta-field::before {
+    background:
+      linear-gradient(rgba(20, 17, 13, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20, 17, 13, 0.04) 1px, transparent 1px),
+      linear-gradient(135deg, rgba(92, 138, 255, 0.10), transparent 36%, rgba(212, 149, 99, 0.08) 62%, transparent);
+  }
+  [data-theme="light"] .cta-variant::after {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.20), transparent 24%, transparent 74%, rgba(20, 17, 13, 0.06)),
+      radial-gradient(ellipse 86% 32% at 50% 105%, rgba(20, 17, 13, 0.03), transparent 68%);
+  }
+  [data-theme="light"] .cta-variant .cta-btn {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.7),
+      0 20px 60px -28px rgba(20, 17, 13, 0.35);
   }
 </style>
 </head>
