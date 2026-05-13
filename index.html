@@ -3363,7 +3363,7 @@
     }
   })();
 
-  // Start the hero preview only once the screen is actually in view.
+  // Start the hero preview once scrolling brings its center to the viewport center.
   (() => {
     const video = document.querySelector('.hero-video');
     if (!video) return;
@@ -3391,17 +3391,31 @@
       if (!video.paused) video.pause();
     };
 
-    if (!('IntersectionObserver' in window)) {
-      playVideo();
-      return;
-    }
+    const shouldPlay = () => {
+      const rect = video.getBoundingClientRect();
+      const viewportCenter = window.innerHeight / 2;
+      const videoCenter = rect.top + rect.height / 2;
+      return videoCenter <= viewportCenter && rect.bottom >= viewportCenter;
+    };
 
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) playVideo();
+    const updatePlayback = () => {
+      if (shouldPlay()) playVideo();
       else pauseVideo();
-    }, { threshold: 0.4 });
+    };
 
-    observer.observe(video);
+    let ticking = false;
+    const queueUpdate = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        updatePlayback();
+      });
+    };
+
+    window.addEventListener('scroll', queueUpdate, { passive: true });
+    window.addEventListener('resize', queueUpdate);
+    queueUpdate();
   })();
 
   // Scenario tabs
