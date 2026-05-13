@@ -2523,8 +2523,8 @@
 
   <div class="hero-canvas">
     <div class="hero-screen">
-      <video class="hero-video" aria-label="Darius app workspace preview" width="1876" height="1080" poster="assets/darius-hero-screen-poster.jpg" preload="auto" autoplay muted loop playsinline>
-        <source src="assets/darius-hero-screen.mp4" type="video/mp4">
+      <video class="hero-video" aria-label="Darius app workspace preview" width="1876" height="1080" poster="assets/darius-hero-screen-poster.jpg" preload="metadata" muted loop playsinline>
+        <source data-src="assets/darius-hero-screen.mp4" type="video/mp4">
       </video>
     </div>
   </div>
@@ -3361,6 +3361,44 @@
       if (mq.addEventListener) mq.addEventListener('change', onChange);
       else if (mq.addListener) mq.addListener(onChange);
     }
+  })();
+
+  // Start the hero preview once 90% of the screen is visible, then keep it looping.
+  (() => {
+    const video = document.querySelector('.hero-video');
+    if (!video) return;
+
+    const prefersReducedMotion = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const loadVideo = () => {
+      const source = video.querySelector('source[data-src]');
+      if (!source) return;
+      source.src = source.dataset.src;
+      source.removeAttribute('data-src');
+      video.load();
+    };
+
+    const playVideo = () => {
+      loadVideo();
+      video.muted = true;
+      const play = video.play();
+      if (play && typeof play.catch === 'function') play.catch(() => {});
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      playVideo();
+      return;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.intersectionRatio < 0.9) return;
+      playVideo();
+      observer.disconnect();
+    }, { threshold: 0.9 });
+
+    observer.observe(video);
   })();
 
   // Scenario tabs
