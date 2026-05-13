@@ -3363,7 +3363,7 @@
     }
   })();
 
-  // Start the hero preview once scrolling brings its center to the viewport center.
+  // Start the hero preview once 90% of the screen is visible, then keep it looping.
   (() => {
     const video = document.querySelector('.hero-video');
     if (!video) return;
@@ -3387,35 +3387,18 @@
       if (play && typeof play.catch === 'function') play.catch(() => {});
     };
 
-    const pauseVideo = () => {
-      if (!video.paused) video.pause();
-    };
+    if (!('IntersectionObserver' in window)) {
+      playVideo();
+      return;
+    }
 
-    const shouldPlay = () => {
-      const rect = video.getBoundingClientRect();
-      const viewportCenter = window.innerHeight / 2;
-      const videoCenter = rect.top + rect.height / 2;
-      return videoCenter <= viewportCenter && rect.bottom >= viewportCenter;
-    };
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.intersectionRatio < 0.9) return;
+      playVideo();
+      observer.disconnect();
+    }, { threshold: 0.9 });
 
-    const updatePlayback = () => {
-      if (shouldPlay()) playVideo();
-      else pauseVideo();
-    };
-
-    let ticking = false;
-    const queueUpdate = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        ticking = false;
-        updatePlayback();
-      });
-    };
-
-    window.addEventListener('scroll', queueUpdate, { passive: true });
-    window.addEventListener('resize', queueUpdate);
-    queueUpdate();
+    observer.observe(video);
   })();
 
   // Scenario tabs
