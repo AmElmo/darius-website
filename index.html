@@ -675,7 +675,10 @@
   }
   .sc-hint::before {
     content: "";
-    margin-top: 0.55cqi;
+    /* align dot's vertical center with the eyebrow's cap-height center
+       (eyebrow font-size 0.8cqi at line-height 1.4 → center at ~0.56cqi;
+       dot is 0.55cqi tall, so top = 0.56 − 0.275 ≈ 0.285cqi) */
+    margin-top: 0.285cqi;
     width: 0.55cqi;
     height: 0.55cqi;
     flex: 0 0 auto;
