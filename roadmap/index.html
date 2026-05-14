@@ -1231,6 +1231,224 @@
   footer .brand svg { width: 16px; height: 16px; }
   footer .brand-name { font-size: 11px; letter-spacing: 0.18em; }
 
+  /* ============================================================ */
+  /*  Light-mode polish for mockup chrome                         */
+  /* ============================================================ */
+  [data-theme="light"] .road-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 241, 232, 0.92));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      0 18px 36px -12px rgba(20, 17, 13, 0.10);
+  }
+  [data-theme="light"] .road-art::before {
+    background-image: radial-gradient(rgba(20, 17, 13, 0.05) 1px, transparent 1.4px);
+  }
+
+  /* Feature 1 — Subscription sign-in */
+  [data-theme="light"] .sub-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 241, 232, 0.94));
+    border-color: rgba(20, 17, 13, 0.10);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      0 24px 60px -20px rgba(20, 17, 13, 0.18);
+  }
+  [data-theme="light"] .sub-card-title { color: var(--bone); }
+  [data-theme="light"] .sub-row {
+    border-color: rgba(20, 17, 13, 0.08);
+    background: rgba(20, 17, 13, 0.025);
+  }
+  [data-theme="light"] .sub-mark {
+    background: #FFFFFF;
+    border-color: rgba(20, 17, 13, 0.10);
+  }
+  [data-theme="light"] .sub-mark.openai img { filter: none; }
+  [data-theme="light"] .sub-cta {
+    background: linear-gradient(135deg, #1B1813, #4A4239);
+    color: #FAF7F0;
+  }
+  [data-theme="light"] .sub-cta.connected {
+    background: rgba(79, 144, 120, 0.14);
+    color: #2F6A53;
+    border-color: rgba(79, 144, 120, 0.35);
+  }
+
+  /* Feature 2 — Spreadsheet */
+  [data-theme="light"] .sheet-window {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F5F1E8 100%);
+    border-color: rgba(20, 17, 13, 0.10);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      0 24px 60px -20px rgba(20, 17, 13, 0.15);
+  }
+  [data-theme="light"] .sheet-bar {
+    border-bottom-color: rgba(20, 17, 13, 0.06);
+    background: linear-gradient(180deg, rgba(20, 17, 13, 0.03), transparent);
+  }
+  [data-theme="light"] .sheet-grid > div {
+    border-right-color: rgba(20, 17, 13, 0.06);
+    border-bottom-color: rgba(20, 17, 13, 0.06);
+  }
+  [data-theme="light"] .sheet-h {
+    background: rgba(20, 17, 13, 0.04);
+  }
+  [data-theme="light"] .sheet-rh {
+    background: rgba(20, 17, 13, 0.025);
+  }
+  [data-theme="light"] .sheet-cell.edit {
+    background: rgba(92, 138, 255, 0.12);
+    box-shadow: inset 0 0 12px rgba(92, 138, 255, 0.14);
+  }
+
+  /* Feature 3 — Projects */
+  [data-theme="light"] .proj-window {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F5F1E8 100%);
+    border-color: rgba(20, 17, 13, 0.10);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      0 24px 60px -20px rgba(20, 17, 13, 0.15);
+  }
+  [data-theme="light"] .proj-side {
+    border-right-color: rgba(20, 17, 13, 0.06);
+    background: rgba(20, 17, 13, 0.025);
+  }
+  [data-theme="light"] .proj-item.open {
+    background: rgba(92, 138, 255, 0.10);
+    border-color: rgba(92, 138, 255, 0.30);
+  }
+  [data-theme="light"] .proj-folder-tag {
+    background: rgba(20, 17, 13, 0.04);
+    border-color: rgba(20, 17, 13, 0.08);
+  }
+  [data-theme="light"] .proj-line {
+    background: rgba(20, 17, 13, 0.07);
+  }
+
+  /* Feature 4 — ⌘K Quick Actions */
+  [data-theme="light"] .cmdk-bar {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(245, 241, 232, 0.96));
+    border-color: rgba(20, 17, 13, 0.10);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      0 24px 60px -20px rgba(20, 17, 13, 0.18),
+      0 0 30px rgba(92, 138, 255, 0.15);
+  }
+  [data-theme="light"] .cmdk-input {
+    border-bottom-color: rgba(20, 17, 13, 0.06);
+  }
+  [data-theme="light"] .cmdk-key,
+  [data-theme="light"] .cmdk-shortcut span {
+    background: rgba(20, 17, 13, 0.05);
+    border-color: rgba(20, 17, 13, 0.08);
+  }
+  [data-theme="light"] .cmdk-icon {
+    background: rgba(20, 17, 13, 0.04);
+    border-color: rgba(20, 17, 13, 0.07);
+  }
+  [data-theme="light"] .cmdk-row.active {
+    background: rgba(92, 138, 255, 0.10);
+  }
+  [data-theme="light"] .cmdk-row.active .cmdk-icon {
+    background: rgba(92, 138, 255, 0.18);
+    border-color: rgba(92, 138, 255, 0.35);
+  }
+
+  /* Feature 5 — Image generation */
+  [data-theme="light"] .img-bubble-user {
+    background: rgba(92, 138, 255, 0.14);
+    border-color: rgba(92, 138, 255, 0.32);
+  }
+  [data-theme="light"] .img-bubble-ai {
+    background: linear-gradient(180deg, #FFFFFF, #F5F1E8);
+    border-color: rgba(20, 17, 13, 0.10);
+    box-shadow: 0 12px 30px -12px rgba(20, 17, 13, 0.18);
+  }
+  [data-theme="light"] .img-meta {
+    border-top-color: rgba(20, 17, 13, 0.06);
+  }
+
+  /* Feature 6 — System-wide selection */
+  [data-theme="light"] .os-doc {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(245, 241, 232, 0.88));
+    border-color: rgba(20, 17, 13, 0.10);
+    box-shadow: 0 24px 60px -20px rgba(20, 17, 13, 0.15);
+  }
+  [data-theme="light"] .os-line {
+    background: rgba(20, 17, 13, 0.10);
+  }
+  [data-theme="light"] .os-line.sel {
+    background: rgba(92, 138, 255, 0.28);
+    box-shadow: inset 0 0 0 1px rgba(92, 138, 255, 0.50);
+  }
+  [data-theme="light"] .sel-menu {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(245, 241, 232, 0.96));
+    border-color: rgba(20, 17, 13, 0.12);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      0 18px 40px -12px rgba(20, 17, 13, 0.25),
+      0 0 22px rgba(92, 138, 255, 0.15);
+  }
+  [data-theme="light"] .sel-menu-item.primary {
+    background: rgba(92, 138, 255, 0.14);
+  }
+  [data-theme="light"] .sel-menu-divider {
+    background: rgba(20, 17, 13, 0.08);
+  }
+
+  /* Feature 7 — Skills & MCP marketplace */
+  [data-theme="light"] .market-window {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F5F1E8 100%);
+    border-color: rgba(20, 17, 13, 0.10);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      0 24px 60px -20px rgba(20, 17, 13, 0.15);
+  }
+  [data-theme="light"] .market-tabs {
+    border-bottom-color: rgba(20, 17, 13, 0.06);
+  }
+  [data-theme="light"] .market-tab.active {
+    background: rgba(92, 138, 255, 0.12);
+    border-color: rgba(92, 138, 255, 0.28);
+  }
+  [data-theme="light"] .market-search {
+    background: rgba(20, 17, 13, 0.04);
+    border-color: rgba(20, 17, 13, 0.06);
+  }
+  [data-theme="light"] .market-tile {
+    background: rgba(20, 17, 13, 0.025);
+    border-color: rgba(20, 17, 13, 0.08);
+  }
+  [data-theme="light"] .market-icon.bone {
+    background: rgba(20, 17, 13, 0.08);
+    border-color: rgba(20, 17, 13, 0.16);
+  }
+  [data-theme="light"] .market-badge {
+    background: rgba(20, 17, 13, 0.06);
+    border-color: rgba(20, 17, 13, 0.10);
+  }
+  [data-theme="light"] .market-badge.installed {
+    background: rgba(79, 144, 120, 0.14);
+    border-color: rgba(79, 144, 120, 0.35);
+    color: #2F6A53;
+  }
+
+  /* Feature 8 — AI discussion */
+  [data-theme="light"] .discuss-task {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(245, 241, 232, 0.85));
+    border-color: rgba(20, 17, 13, 0.08);
+  }
+  [data-theme="light"] .discuss-mark {
+    background: #FFFFFF;
+    border-color: rgba(20, 17, 13, 0.10);
+  }
+  [data-theme="light"] .discuss-mark.openai img { filter: none; }
+  [data-theme="light"] .discuss-body {
+    background: linear-gradient(180deg, #FFFFFF, #F5F1E8);
+    border-color: rgba(20, 17, 13, 0.10);
+  }
+  [data-theme="light"] .discuss-bubble.claude .discuss-body { border-color: rgba(183, 121, 74, 0.35); }
+  [data-theme="light"] .discuss-bubble.gpt .discuss-body { border-color: rgba(92, 138, 255, 0.35); }
+  [data-theme="light"] .discuss-bubble.gemini .discuss-body { border-color: rgba(79, 144, 120, 0.35); }
+
   @media (max-width: 800px) {
     .roadmap-grid { grid-template-columns: 1fr; }
     .footer-meta { flex-direction: column; gap: 14px; align-items: flex-start; }
