@@ -442,7 +442,7 @@
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
-      <a href="https://github.com/AmElmo/darius-updates/releases/download/0.19.0-beta.6/Darius-0.19.0-beta.6.dmg" class="nav-cta" data-darius-download>
+      <a href="https://github.com/AmElmo/darius-updates/releases/download/0.19.0-beta.6/Darius-0.19.0-beta.6.dmg" class="nav-cta" data-darius-download data-umami-event="download-click" data-umami-event-surface="nav" data-umami-event-platform="macos" data-umami-event-kind="github-release-asset" data-umami-event-channel="beta" data-umami-event-version="0.19.0-beta.6" data-umami-event-asset="Darius-0.19.0-beta.6.dmg" data-umami-event-filetype="dmg" data-umami-event-host="github.com" data-umami-event-url="https://github.com/AmElmo/darius-updates/releases/download/0.19.0-beta.6/Darius-0.19.0-beta.6.dmg">
         <svg class="apple-logo" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true"><path d="M13.06 10.53c-.02-2.06 1.68-3.05 1.76-3.1-.96-1.4-2.45-1.59-2.98-1.62-1.27-.13-2.48.74-3.12.74-.65 0-1.65-.72-2.71-.7-1.39.02-2.68.81-3.39 2.06-1.45 2.51-.37 6.22 1.04 8.27.69 1 1.51 2.13 2.58 2.09 1.04-.04 1.43-.67 2.69-.67 1.25 0 1.61.67 2.71.65 1.12-.02 1.83-1.02 2.51-2.02.79-1.16 1.12-2.28 1.14-2.34-.03-.01-2.18-.84-2.2-3.32zM11.04 4.55c.58-.7.97-1.67.86-2.64-.83.03-1.84.55-2.43 1.25-.53.62-.99 1.6-.87 2.55.92.07 1.86-.47 2.44-1.16z"/></svg>
         Download
       </a>
@@ -667,7 +667,30 @@
   (() => {
     const buttons = document.querySelectorAll('a[data-darius-download]');
     if (!buttons.length) return;
-    const apply = (url) => buttons.forEach(el => { el.href = url; });
+    const downloadDataFor = (url) => {
+      const parsed = new URL(url);
+      const parts = parsed.pathname.split('/');
+      const downloadIndex = parts.indexOf('download');
+      const version = downloadIndex >= 0 ? parts[downloadIndex + 1] || '' : '';
+      const asset = decodeURIComponent(downloadIndex >= 0 ? parts[downloadIndex + 2] || '' : '');
+      return {
+        url,
+        host: parsed.hostname,
+        version,
+        asset,
+        filetype: asset.split('.').pop() || '',
+        channel: version.includes('beta') ? 'beta' : 'stable',
+      };
+    };
+    const apply = (url) => {
+      const data = downloadDataFor(url);
+      buttons.forEach(el => {
+        el.href = url;
+        Object.entries(data).forEach(([key, value]) => {
+          if (value) el.setAttribute(`data-umami-event-${key}`, value);
+        });
+      });
+    };
 
     try {
       const cached = JSON.parse(localStorage.getItem('darius-dl') || 'null');
