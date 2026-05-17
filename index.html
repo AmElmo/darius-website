@@ -425,52 +425,100 @@
     inset: 0;
     pointer-events: none;
     z-index: 0;
-    mix-blend-mode: screen;
+    filter: saturate(1.1);
   }
-  /* Each panel gets a layered, vibrant wash:
-     - a saturated primary blob in one quadrant
-     - a complementary secondary blob in the opposite quadrant
-     - a small accent in a third position
-     - a soft directional overlay for depth */
+  /* Each panel gets a layered, painterly wash — overlapping saturated blobs
+     that blend into each other like watercolor, anchored to the panel palette. */
   .panel-draft .scenario-wash {
     background:
-      radial-gradient(ellipse 55% 65% at 12% 28%, rgba(127, 146, 255, 0.55) 0%, transparent 55%),
-      radial-gradient(ellipse 50% 60% at 88% 75%, rgba(186, 156, 255, 0.42) 0%, transparent 58%),
-      radial-gradient(ellipse 65% 45% at 50% 108%, rgba(92, 138, 255, 0.40) 0%, transparent 65%),
-      radial-gradient(ellipse 35% 28% at 92% 8%, rgba(159, 177, 255, 0.28) 0%, transparent 60%),
-      linear-gradient(135deg, rgba(127, 146, 255, 0.08) 0%, transparent 40%, transparent 60%, rgba(186, 156, 255, 0.06) 100%);
+      radial-gradient(ellipse 60% 70% at 8% 22%, rgba(127, 146, 255, 0.85) 0%, rgba(127, 146, 255, 0.30) 35%, transparent 65%),
+      radial-gradient(ellipse 55% 65% at 92% 78%, rgba(186, 156, 255, 0.78) 0%, rgba(186, 156, 255, 0.28) 38%, transparent 68%),
+      radial-gradient(ellipse 70% 50% at 50% 110%, rgba(92, 138, 255, 0.70) 0%, rgba(92, 138, 255, 0.22) 40%, transparent 70%),
+      radial-gradient(ellipse 40% 32% at 96% 6%, rgba(220, 200, 255, 0.55) 0%, transparent 65%),
+      radial-gradient(ellipse 38% 30% at 4% 96%, rgba(150, 175, 255, 0.50) 0%, transparent 65%),
+      linear-gradient(135deg, rgba(127, 146, 255, 0.20) 0%, transparent 50%, rgba(186, 156, 255, 0.18) 100%);
   }
   .panel-files .scenario-wash {
     background:
-      radial-gradient(ellipse 55% 65% at 86% 24%, rgba(108, 179, 154, 0.55) 0%, transparent 55%),
-      radial-gradient(ellipse 50% 55% at 14% 80%, rgba(122, 207, 197, 0.42) 0%, transparent 58%),
-      radial-gradient(ellipse 65% 45% at 50% 108%, rgba(92, 168, 200, 0.36) 0%, transparent 65%),
-      radial-gradient(ellipse 32% 26% at 8% 8%, rgba(127, 146, 255, 0.28) 0%, transparent 60%),
-      linear-gradient(225deg, rgba(108, 179, 154, 0.08) 0%, transparent 40%, transparent 60%, rgba(92, 168, 200, 0.06) 100%);
+      radial-gradient(ellipse 60% 70% at 90% 20%, rgba(108, 179, 154, 0.85) 0%, rgba(108, 179, 154, 0.30) 35%, transparent 65%),
+      radial-gradient(ellipse 55% 60% at 10% 82%, rgba(122, 207, 197, 0.78) 0%, rgba(122, 207, 197, 0.26) 38%, transparent 68%),
+      radial-gradient(ellipse 70% 50% at 50% 110%, rgba(92, 168, 200, 0.65) 0%, rgba(92, 168, 200, 0.20) 40%, transparent 70%),
+      radial-gradient(ellipse 38% 30% at 4% 6%, rgba(150, 195, 255, 0.55) 0%, transparent 65%),
+      radial-gradient(ellipse 38% 30% at 96% 96%, rgba(170, 220, 200, 0.45) 0%, transparent 65%),
+      linear-gradient(225deg, rgba(108, 179, 154, 0.20) 0%, transparent 50%, rgba(92, 168, 200, 0.18) 100%);
   }
   .panel-tracker .scenario-wash {
     background:
-      radial-gradient(ellipse 58% 65% at 14% 26%, rgba(212, 149, 99, 0.58) 0%, transparent 55%),
-      radial-gradient(ellipse 50% 55% at 86% 78%, rgba(232, 124, 92, 0.42) 0%, transparent 58%),
-      radial-gradient(ellipse 65% 45% at 50% 108%, rgba(255, 168, 110, 0.36) 0%, transparent 65%),
-      radial-gradient(ellipse 30% 26% at 96% 8%, rgba(255, 196, 130, 0.30) 0%, transparent 60%),
-      linear-gradient(135deg, rgba(212, 149, 99, 0.10) 0%, transparent 40%, transparent 60%, rgba(232, 124, 92, 0.07) 100%);
+      radial-gradient(ellipse 62% 70% at 10% 22%, rgba(212, 149, 99, 0.90) 0%, rgba(212, 149, 99, 0.32) 35%, transparent 65%),
+      radial-gradient(ellipse 55% 60% at 90% 80%, rgba(232, 124, 92, 0.78) 0%, rgba(232, 124, 92, 0.26) 38%, transparent 68%),
+      radial-gradient(ellipse 70% 50% at 50% 110%, rgba(255, 168, 110, 0.70) 0%, rgba(255, 168, 110, 0.22) 40%, transparent 70%),
+      radial-gradient(ellipse 36% 30% at 96% 6%, rgba(255, 215, 150, 0.60) 0%, transparent 65%),
+      radial-gradient(ellipse 36% 28% at 4% 94%, rgba(232, 160, 110, 0.48) 0%, transparent 65%),
+      linear-gradient(135deg, rgba(212, 149, 99, 0.22) 0%, transparent 50%, rgba(232, 124, 92, 0.20) 100%);
   }
   .panel-apps .scenario-wash {
     background:
-      radial-gradient(ellipse 55% 65% at 14% 28%, rgba(232, 120, 170, 0.50) 0%, transparent 55%),
-      radial-gradient(ellipse 50% 55% at 86% 76%, rgba(127, 146, 255, 0.42) 0%, transparent 58%),
-      radial-gradient(ellipse 65% 45% at 50% 108%, rgba(186, 124, 220, 0.38) 0%, transparent 65%),
-      radial-gradient(ellipse 32% 26% at 94% 8%, rgba(255, 168, 130, 0.28) 0%, transparent 60%),
-      linear-gradient(135deg, rgba(232, 120, 170, 0.10) 0%, transparent 40%, transparent 60%, rgba(127, 146, 255, 0.07) 100%);
+      radial-gradient(ellipse 62% 70% at 10% 24%, rgba(232, 120, 170, 0.82) 0%, rgba(232, 120, 170, 0.30) 35%, transparent 65%),
+      radial-gradient(ellipse 55% 60% at 90% 78%, rgba(127, 146, 255, 0.78) 0%, rgba(127, 146, 255, 0.28) 38%, transparent 68%),
+      radial-gradient(ellipse 70% 50% at 50% 110%, rgba(186, 124, 220, 0.72) 0%, rgba(186, 124, 220, 0.24) 40%, transparent 70%),
+      radial-gradient(ellipse 36% 30% at 96% 6%, rgba(255, 180, 140, 0.55) 0%, transparent 65%),
+      radial-gradient(ellipse 36% 28% at 4% 94%, rgba(220, 150, 200, 0.50) 0%, transparent 65%),
+      linear-gradient(135deg, rgba(232, 120, 170, 0.22) 0%, transparent 50%, rgba(127, 146, 255, 0.20) 100%);
   }
   .panel-notes .scenario-wash {
     background:
-      radial-gradient(ellipse 55% 65% at 86% 26%, rgba(160, 119, 220, 0.48) 0%, transparent 55%),
-      radial-gradient(ellipse 50% 60% at 14% 80%, rgba(127, 146, 255, 0.40) 0%, transparent 58%),
-      radial-gradient(ellipse 65% 45% at 50% 108%, rgba(108, 179, 154, 0.32) 0%, transparent 65%),
-      radial-gradient(ellipse 30% 26% at 95% 92%, rgba(232, 124, 92, 0.24) 0%, transparent 60%),
-      linear-gradient(225deg, rgba(160, 119, 220, 0.09) 0%, transparent 40%, transparent 60%, rgba(127, 146, 255, 0.07) 100%);
+      radial-gradient(ellipse 62% 70% at 88% 22%, rgba(160, 119, 220, 0.82) 0%, rgba(160, 119, 220, 0.30) 35%, transparent 65%),
+      radial-gradient(ellipse 55% 65% at 12% 82%, rgba(127, 146, 255, 0.74) 0%, rgba(127, 146, 255, 0.26) 38%, transparent 68%),
+      radial-gradient(ellipse 70% 50% at 50% 110%, rgba(108, 179, 154, 0.60) 0%, rgba(108, 179, 154, 0.20) 40%, transparent 70%),
+      radial-gradient(ellipse 34% 28% at 96% 94%, rgba(232, 124, 92, 0.50) 0%, transparent 65%),
+      radial-gradient(ellipse 36% 28% at 4% 6%, rgba(200, 170, 240, 0.48) 0%, transparent 65%),
+      linear-gradient(225deg, rgba(160, 119, 220, 0.22) 0%, transparent 50%, rgba(127, 146, 255, 0.18) 100%);
+  }
+  /* light-mode washes — tuned for contrast on cream/white panels */
+  [data-theme="light"] .panel-draft .scenario-wash {
+    background:
+      radial-gradient(ellipse 60% 70% at 8% 22%, rgba(127, 146, 255, 0.55) 0%, rgba(127, 146, 255, 0.18) 35%, transparent 65%),
+      radial-gradient(ellipse 55% 65% at 92% 78%, rgba(186, 156, 255, 0.50) 0%, rgba(186, 156, 255, 0.16) 38%, transparent 68%),
+      radial-gradient(ellipse 70% 50% at 50% 110%, rgba(92, 138, 255, 0.42) 0%, rgba(92, 138, 255, 0.14) 40%, transparent 70%),
+      radial-gradient(ellipse 40% 32% at 96% 6%, rgba(190, 170, 255, 0.40) 0%, transparent 65%),
+      radial-gradient(ellipse 38% 30% at 4% 96%, rgba(120, 155, 255, 0.38) 0%, transparent 65%),
+      linear-gradient(135deg, rgba(127, 146, 255, 0.14) 0%, transparent 50%, rgba(186, 156, 255, 0.12) 100%);
+  }
+  [data-theme="light"] .panel-files .scenario-wash {
+    background:
+      radial-gradient(ellipse 60% 70% at 90% 20%, rgba(80, 165, 138, 0.55) 0%, rgba(80, 165, 138, 0.18) 35%, transparent 65%),
+      radial-gradient(ellipse 55% 60% at 10% 82%, rgba(95, 190, 180, 0.50) 0%, rgba(95, 190, 180, 0.16) 38%, transparent 68%),
+      radial-gradient(ellipse 70% 50% at 50% 110%, rgba(80, 155, 195, 0.42) 0%, rgba(80, 155, 195, 0.14) 40%, transparent 70%),
+      radial-gradient(ellipse 38% 30% at 4% 6%, rgba(120, 170, 240, 0.38) 0%, transparent 65%),
+      radial-gradient(ellipse 38% 30% at 96% 96%, rgba(140, 200, 175, 0.35) 0%, transparent 65%),
+      linear-gradient(225deg, rgba(80, 165, 138, 0.14) 0%, transparent 50%, rgba(80, 155, 195, 0.12) 100%);
+  }
+  [data-theme="light"] .panel-tracker .scenario-wash {
+    background:
+      radial-gradient(ellipse 62% 70% at 10% 22%, rgba(212, 130, 75, 0.58) 0%, rgba(212, 130, 75, 0.20) 35%, transparent 65%),
+      radial-gradient(ellipse 55% 60% at 90% 80%, rgba(232, 104, 72, 0.50) 0%, rgba(232, 104, 72, 0.16) 38%, transparent 68%),
+      radial-gradient(ellipse 70% 50% at 50% 110%, rgba(245, 152, 90, 0.45) 0%, rgba(245, 152, 90, 0.16) 40%, transparent 70%),
+      radial-gradient(ellipse 36% 30% at 96% 6%, rgba(245, 195, 120, 0.45) 0%, transparent 65%),
+      radial-gradient(ellipse 36% 28% at 4% 94%, rgba(220, 145, 90, 0.38) 0%, transparent 65%),
+      linear-gradient(135deg, rgba(212, 130, 75, 0.16) 0%, transparent 50%, rgba(232, 104, 72, 0.14) 100%);
+  }
+  [data-theme="light"] .panel-apps .scenario-wash {
+    background:
+      radial-gradient(ellipse 62% 70% at 10% 24%, rgba(225, 100, 155, 0.55) 0%, rgba(225, 100, 155, 0.18) 35%, transparent 65%),
+      radial-gradient(ellipse 55% 60% at 90% 78%, rgba(110, 130, 245, 0.50) 0%, rgba(110, 130, 245, 0.16) 38%, transparent 68%),
+      radial-gradient(ellipse 70% 50% at 50% 110%, rgba(170, 105, 210, 0.46) 0%, rgba(170, 105, 210, 0.16) 40%, transparent 70%),
+      radial-gradient(ellipse 36% 30% at 96% 6%, rgba(245, 160, 120, 0.42) 0%, transparent 65%),
+      radial-gradient(ellipse 36% 28% at 4% 94%, rgba(205, 130, 185, 0.38) 0%, transparent 65%),
+      linear-gradient(135deg, rgba(225, 100, 155, 0.16) 0%, transparent 50%, rgba(110, 130, 245, 0.14) 100%);
+  }
+  [data-theme="light"] .panel-notes .scenario-wash {
+    background:
+      radial-gradient(ellipse 62% 70% at 88% 22%, rgba(145, 100, 210, 0.55) 0%, rgba(145, 100, 210, 0.18) 35%, transparent 65%),
+      radial-gradient(ellipse 55% 65% at 12% 82%, rgba(110, 130, 245, 0.46) 0%, rgba(110, 130, 245, 0.15) 38%, transparent 68%),
+      radial-gradient(ellipse 70% 50% at 50% 110%, rgba(85, 165, 140, 0.38) 0%, rgba(85, 165, 140, 0.14) 40%, transparent 70%),
+      radial-gradient(ellipse 34% 28% at 96% 94%, rgba(220, 110, 80, 0.38) 0%, transparent 65%),
+      radial-gradient(ellipse 36% 28% at 4% 6%, rgba(180, 150, 225, 0.36) 0%, transparent 65%),
+      linear-gradient(225deg, rgba(145, 100, 210, 0.16) 0%, transparent 50%, rgba(110, 130, 245, 0.12) 100%);
   }
   /* shared soft grain over the wash for tactility */
   .scenario-wash::after {
@@ -478,9 +526,12 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.32;
+    opacity: 0.7;
     mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.95'/></svg>");
+  }
+  [data-theme="light"] .scenario-wash::after {
+    opacity: 0.5;
   }
 
   /* the doc card — shared base */
