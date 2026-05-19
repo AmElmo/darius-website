@@ -289,6 +289,45 @@
     color: var(--bone-dim);
     line-height: 1.6;
   }
+  .features .lede {
+    padding: 0 28px 56px;
+  }
+
+  /* ai labs row */
+  .ai-labs {
+    padding: 40px 28px 104px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .ai-labs-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ash);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 28px;
+  }
+  .ai-labs-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+  }
+  .ai-labs-logo {
+    height: 32px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+  }
+  .ai-labs-logo.is-sm { height: 26px; }
+  @media (max-width: 640px) {
+    .ai-labs { padding: 40px 20px 56px; }
+    .ai-labs-row { gap: 26px; }
+    .ai-labs-logo { height: 26px; }
+    .ai-labs-logo.is-sm { height: 22px; }
+  }
 
   /* scenarios — tabbed showcase */
   .scenarios {
@@ -1522,15 +1561,6 @@
     max-width: 1100px;
     margin: 0 auto;
   }
-  .features-eyebrow {
-    text-align: center;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--ash);
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    margin-bottom: 56px;
-  }
   .feature-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -2569,11 +2599,23 @@
   </div>
 </header>
 
-<p class="lede">Most AI apps feel like a tab. Darius feels like a place — quiet, fast, native. Built for the way knowledge workers actually think.</p>
+<section class="ai-labs" aria-label="Works with leading AI labs">
+  <div class="ai-labs-eyebrow">Work seamlessly with all AI models</div>
+  <div class="ai-labs-row">
+    <img class="ai-labs-logo" src="assets/ai-labs/openai.svg" alt="OpenAI" loading="lazy" width="120" height="32">
+    <img class="ai-labs-logo" src="assets/ai-labs/claude.svg" alt="Claude" loading="lazy" width="120" height="32">
+    <img class="ai-labs-logo" src="assets/ai-labs/google-gemini.svg" alt="Google Gemini" loading="lazy" width="120" height="32">
+    <img class="ai-labs-logo" src="assets/ai-labs/xai.svg" alt="xAI" loading="lazy" width="120" height="32">
+    <img class="ai-labs-logo" src="assets/ai-labs/llama.svg" alt="Meta Llama" loading="lazy" width="120" height="32">
+    <img class="ai-labs-logo is-sm" src="assets/ai-labs/mistral.svg" alt="Mistral" loading="lazy" width="120" height="32">
+    <img class="ai-labs-logo" src="assets/ai-labs/deepseek.svg" alt="DeepSeek" loading="lazy" width="120" height="32">
+    <img class="ai-labs-logo" src="assets/ai-labs/moonshot.svg" alt="Moonshot" loading="lazy" width="120" height="32">
+    <img class="ai-labs-logo" src="assets/ai-labs/zai.svg" alt="Z.ai (GLM)" loading="lazy" width="120" height="32">
+  </div>
+</section>
 
 <section class="scenarios">
   <div class="scenarios-head">
-    <div class="scenarios-eyebrow">— A workspace for real work</div>
     <h2 class="scenarios-title">Pick a job. Watch the work get done.</h2>
   </div>
 
@@ -3142,7 +3184,7 @@
 </section>
 
 <section class="features">
-  <div class="features-eyebrow">— What makes Darius different</div>
+  <p class="lede">Most AI apps feel like a tab. Darius feels like a place — quiet, fast, native. Built for the way knowledge workers actually think.</p>
   <div class="feature-grid">
 
     <!-- Card 1: MacBook with Darius on screen -->
