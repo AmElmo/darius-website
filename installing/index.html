@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Darius — Almost there</title>
+<meta name="description" content="Your Darius download is on its way. Here's how to install it on your Mac." />
+<meta name="robots" content="noindex" />
+<link rel="icon" href="/assets/favicon-96.png" type="image/png" sizes="96x96" />
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+<link rel="shortcut icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+<script defer src="https://cloud.umami.is/script.js" data-website-id="c4ca1e12-6665-4b73-a849-aa3917d0f575"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #14110D;
+    --bg-2: #1B1813;
+    --panel: #1E1A14;
+    --panel-2: #25201A;
+    --line: rgba(236, 231, 221, 0.07);
+    --line-2: rgba(236, 231, 221, 0.11);
+    --bone: #ECE7DD;
+    --bone-dim: #C7C0B3;
+    --ash: #837C70;
+    --ember: #D49563;
+    --sapphire: #7F92FF;
+    --jade: #6CB39A;
+    --nav-bg: rgba(20, 17, 13, 0.7);
+    --ghost-bg: rgba(236, 231, 221, 0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); }
+  body {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--bone);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.55;
+    overflow-x: hidden;
+    font-feature-settings: "ss01", "cv11";
+    min-height: 100vh;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0;
+    pointer-events: none; z-index: 200;
+    opacity: 0.022; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/></svg>");
+  }
+
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 28px; max-width: 1040px; margin: 0 auto;
+  }
+  .brand { display: flex; align-items: center; gap: 6px; text-decoration: none; color: var(--bone); }
+  .brand svg { width: 36px; height: 36px; }
+  .brand-name { font-weight: 600; font-size: 21px; letter-spacing: 0.16em; text-transform: uppercase; }
+
+  .wrap {
+    position: relative;
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 88px 28px 64px;
+    text-align: center;
+  }
+  .wrap::before {
+    content: ""; position: absolute;
+    inset: 80px 5% 120px 5%;
+    background:
+      radial-gradient(ellipse 45% 55% at 50% 45%, rgba(212, 149, 99, 0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 50% at 30% 70%, rgba(127, 146, 255, 0.14) 0%, transparent 70%);
+    filter: blur(90px); pointer-events: none; z-index: 0;
+  }
+  .wrap > * { position: relative; z-index: 1; }
+
+  h1 {
+    font-weight: 600;
+    font-size: clamp(40px, 5.6vw, 72px);
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    margin-bottom: 14px;
+  }
+  h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, #9FB1FF 0%, #5C8AFF 60%, #3B5FBF 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lede {
+    font-size: 16px;
+    color: var(--bone-dim);
+    max-width: 460px;
+    margin: 0 auto;
+    letter-spacing: -0.005em;
+  }
+  .fallback {
+    margin-top: 8px;
+    font-size: 12.5px;
+    color: var(--ash);
+  }
+  .fallback a {
+    color: var(--bone-dim);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-2);
+    transition: color 220ms ease, border-color 220ms ease;
+  }
+  .fallback a:hover {
+    color: var(--bone);
+    border-bottom-color: var(--ember);
+  }
+
+  /* stage */
+  .stage {
+    position: relative;
+    margin: 64px auto 0;
+    width: 100%;
+    max-width: 640px;
+    aspect-ratio: 4 / 3;
+  }
+
+  .scene {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    will-change: opacity, transform;
+  }
+
+  /* === scene 1: chat input (plays once) === */
+  .scene-chat {
+    animation: chatVis 4.4s ease-in-out forwards;
+  }
+  @keyframes chatVis {
+    0%   { opacity: 0; transform: translateY(8px); }
+    9%   { opacity: 1; transform: translateY(0); }
+    86%  { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-8px); }
+  }
+
+  .chat {
+    position: relative;
+    width: min(440px, 78%);
+    padding: 18px 22px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(30,26,20,0.9), rgba(20,17,13,0.9));
+    border: 1px solid var(--line-2);
+    box-shadow:
+      0 30px 60px -20px rgba(0,0,0,0.6),
+      0 10px 30px -10px rgba(127, 146, 255, 0.18),
+      inset 0 1px 0 rgba(255,255,255,0.04);
+    display: flex; align-items: center; gap: 14px;
+    text-align: left;
+  }
+  .chat::before {
+    content: ""; position: absolute;
+    inset: -1px; border-radius: 16px;
+    padding: 1px;
+    background: linear-gradient(160deg, rgba(212,149,99,0.3), rgba(127,146,255,0.25) 60%, transparent 80%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    pointer-events: none;
+  }
+  .chat .field {
+    flex: 1;
+    position: relative;
+    font-size: 17px;
+    color: var(--bone);
+    letter-spacing: -0.005em;
+    line-height: 1.4;
+    min-height: 1.4em;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .chat .typeline {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .chat .typeline .ghost {
+    visibility: hidden;
+    display: inline-block;
+  }
+  .chat .typeline .real {
+    position: absolute;
+    left: 0; top: 0;
+    white-space: nowrap;
+    color: var(--bone);
+    clip-path: inset(0 100% 0 0);
+    animation: typeReveal 4.4s ease-in-out forwards;
+  }
+  @keyframes typeReveal {
+    0%   { clip-path: inset(0 100% 0 0); }
+    9%   { clip-path: inset(0 100% 0 0); }
+    54%  { clip-path: inset(0 0% 0 0); }
+    100% { clip-path: inset(0 0% 0 0); }
+  }
+  .chat .typeline .caret {
+    position: absolute;
+    left: 0; top: 0.12em;
+    width: 2px; height: 1.1em;
+    background: var(--ember);
+    border-radius: 1px;
+    animation:
+      caretMove 4.4s ease-in-out forwards,
+      caretBlink 1s steps(2) infinite;
+  }
+  @keyframes caretMove {
+    0%   { left: 0; transform: translateX(0); }
+    9%   { left: 0; transform: translateX(0); }
+    54%  { left: 100%; transform: translateX(-2px); }
+    100% { left: 100%; transform: translateX(-2px); }
+  }
+  @keyframes caretBlink { 50% { opacity: 0; } }
+
+  .chat .send {
+    flex: 0 0 auto;
+    width: 32px; height: 32px;
+    border-radius: 9px;
+    background: var(--ghost-bg);
+    border: 1px solid var(--line-2);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--ash);
+  }
+  .chat .send svg { width: 13px; height: 13px; }
+
+  /* === scene 2: floating app icon (fade-in plays once, float loops) === */
+  .scene-icon {
+    animation: iconVis 0.8s ease-out 4.2s forwards;
+  }
+  @keyframes iconVis {
+    0%   { opacity: 0; transform: scale(0.96); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .icon-wrap {
+    position: relative;
+    width: 40%;
+    aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .icon-wrap::before {
+    content: "";
+    position: absolute;
+    inset: -30%;
+    background:
+      radial-gradient(ellipse 50% 50% at 50% 55%, rgba(212, 149, 99, 0.42) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 60% at 50% 50%, rgba(127, 146, 255, 0.22) 0%, transparent 70%);
+    filter: blur(32px);
+    pointer-events: none;
+    animation: auraBreath 6s ease-in-out infinite;
+  }
+  @keyframes auraBreath {
+    0%, 100% { transform: scale(0.92); opacity: 0.7; }
+    50%      { transform: scale(1.10); opacity: 1; }
+  }
+
+  .icon-wrap::after {
+    content: "";
+    position: absolute;
+    inset: -6%;
+    border-radius: 30%;
+    border: 1px solid rgba(212, 149, 99, 0.18);
+    pointer-events: none;
+    animation: haloPulse 4.6s ease-in-out infinite;
+  }
+  @keyframes haloPulse {
+    0%, 100% { transform: scale(0.96); opacity: 0; }
+    50%      { transform: scale(1.06); opacity: 0.9; }
+  }
+
+  .icon-wrap .shadow {
+    position: absolute;
+    bottom: -22%;
+    left: 50%;
+    width: 70%;
+    height: 22px;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse 50% 100% at 50% 50%, rgba(0,0,0,0.55), transparent 70%);
+    filter: blur(8px);
+    animation: shadowBreath 5s ease-in-out infinite;
+  }
+  @keyframes shadowBreath {
+    0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.7; }
+    50%      { transform: translateX(-50%) scale(0.78); opacity: 0.4; }
+  }
+
+  .icon-wrap .app {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 24%;
+    background:
+      radial-gradient(ellipse 100% 60% at 50% 0%, rgba(255, 240, 220, 0.10) 0%, transparent 55%),
+      linear-gradient(160deg, #2E2620 0%, #1A1612 70%);
+    border: 1px solid rgba(255,255,255,0.08);
+    display: inline-flex; align-items: center; justify-content: center;
+    box-shadow:
+      0 50px 90px -20px rgba(0,0,0,0.78),
+      0 22px 60px -10px rgba(212,149,99,0.42),
+      0 0 110px -20px rgba(127,146,255,0.36),
+      inset 0 1px 0 rgba(255,255,255,0.14),
+      inset 0 -1px 0 rgba(0,0,0,0.3);
+    animation: floatIcon 5s ease-in-out infinite;
+  }
+  .icon-wrap .app::before {
+    content: ""; position: absolute; inset: -1px;
+    border-radius: 26%;
+    background: linear-gradient(160deg, rgba(212,149,99,0.55), rgba(127,146,255,0.42) 60%, transparent 82%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    padding: 1px;
+    pointer-events: none;
+  }
+  .icon-wrap .app::after {
+    content: ""; position: absolute; inset: 1px;
+    border-radius: inherit;
+    background:
+      radial-gradient(ellipse 90% 50% at 50% -6%, rgba(255, 245, 230, 0.20) 0%, transparent 55%),
+      linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 22%);
+    pointer-events: none;
+  }
+  .icon-wrap .app svg {
+    width: 64%; height: 64%;
+    color: var(--sapphire);
+    filter:
+      drop-shadow(0 0 12px rgba(127, 146, 255, 0.55))
+      drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+    position: relative;
+    z-index: 1;
+  }
+  @keyframes floatIcon {
+    0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+    50%      { transform: translateY(-10px) rotate(1.5deg); }
+  }
+
+  /* scroll hint — fades in once the icon settles */
+  .scroll-hint {
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    margin: -48px auto 0;
+    padding: 12px;
+    color: var(--ember);
+    text-decoration: none;
+    opacity: 0;
+    animation: hintFade 0.6s ease-out 5.0s forwards;
+    transition: color 220ms ease, transform 220ms ease;
+  }
+  .scroll-hint:hover {
+    color: var(--bone);
+    transform: translateY(2px);
+  }
+  .scroll-hint .chev {
+    width: 22px; height: 22px;
+    filter: drop-shadow(0 0 8px rgba(212, 149, 99, 0.5));
+    animation: chevBounce 3s ease-in-out 5.6s infinite;
+  }
+  @keyframes hintFade { to { opacity: 1; } }
+  @keyframes chevBounce {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(2px); }
+  }
+
+  /* steps */
+  .steps {
+    max-width: 600px;
+    margin: 56px auto 0;
+    text-align: left;
+    border-top: 1px solid var(--line);
+    padding-top: 28px;
+    scroll-margin-top: 80px;
+  }
+  .steps ol {
+    list-style: none;
+    display: grid;
+    gap: 4px;
+  }
+  .steps li {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 4px;
+    border-bottom: 1px solid var(--line);
+    transition: background 220ms ease;
+  }
+  .steps li:last-child { border-bottom: none; }
+  .steps li:hover { background: rgba(236,231,221,0.015); }
+  .steps .n {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--ash);
+    letter-spacing: 0.04em;
+  }
+  .steps .label {
+    font-size: 15.5px;
+    color: var(--bone);
+    letter-spacing: -0.005em;
+  }
+  .steps .label code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--bone-dim);
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: var(--ghost-bg);
+    border: 1px solid var(--line);
+  }
+  .steps .kbd {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--bone-dim);
+    letter-spacing: 0.02em;
+  }
+  .steps .kbd kbd {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 5px;
+    background: var(--ghost-bg);
+    border: 1px solid var(--line-2);
+    border-bottom-width: 2px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--bone);
+    line-height: 1;
+  }
+
+  /* mini drag illustration in step 02 */
+  .drag-mini {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .drag-mini .mi-app {
+    width: 24px; height: 24px;
+    flex: 0 0 auto;
+    border-radius: 25%;
+    background: linear-gradient(160deg, #2E2620 0%, #1A1612 70%);
+    border: 1px solid rgba(255,255,255,0.08);
+    display: inline-flex; align-items: center; justify-content: center;
+    box-shadow:
+      0 4px 10px -2px rgba(0,0,0,0.55),
+      0 0 14px -3px rgba(127,146,255,0.35),
+      inset 0 1px 0 rgba(255,255,255,0.10);
+    animation: miDrift 2.4s ease-in-out infinite;
+  }
+  .drag-mini .mi-app svg {
+    width: 70%; height: 70%;
+    color: var(--sapphire);
+    display: block;
+  }
+  @keyframes miDrift {
+    0%, 100% { transform: translateX(0); }
+    50%      { transform: translateX(3px); }
+  }
+  .drag-mini .mi-arrow {
+    width: 26px; height: 10px;
+    color: var(--ember);
+    flex: 0 0 auto;
+    opacity: 0.85;
+  }
+  .drag-mini .mi-arrow .dash {
+    animation: miDash 1.4s linear infinite;
+  }
+  @keyframes miDash {
+    to { stroke-dashoffset: -12; }
+  }
+  .drag-mini .mi-folder {
+    width: 26px; height: 20px;
+    flex: 0 0 auto;
+    filter: drop-shadow(0 4px 7px rgba(78, 120, 200, 0.4));
+  }
+
+  .req {
+    margin-top: 40px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ash);
+    letter-spacing: 0.04em;
+  }
+
+  footer {
+    margin-top: 80px;
+    padding: 28px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    color: var(--ash);
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 560px) {
+    .stage { aspect-ratio: 5 / 4; }
+    .chat { padding: 16px 18px; }
+    .chat .field { font-size: 15px; }
+    .steps li { grid-template-columns: 32px 1fr; }
+    .steps .kbd { grid-column: 2; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scene-chat { animation: none; opacity: 0; }
+    .scene-icon { animation: none; opacity: 1; }
+    .icon-wrap::before, .icon-wrap::after,
+    .icon-wrap .app, .icon-wrap .shadow,
+    .chat .typeline .real, .chat .typeline .caret,
+    .scroll-hint, .scroll-hint .chev,
+    .drag-mini .mi-app, .drag-mini .mi-arrow .dash {
+      animation: none;
+    }
+    .scroll-hint { opacity: 1; }
+    .chat .typeline .real { clip-path: inset(0 0 0 0); }
+  }
+
+  html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+
+<svg style="display:none" aria-hidden="true">
+  <symbol id="darius-mark" viewBox="0 0 200 200">
+    <g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round">
+      <path stroke-width="5.27" d="M 46.49 29.06 L 153.51 90.85 C 160.56 94.91 160.56 105.09 153.51 109.15 L 46.49 170.94 C 39.45 175.01 30.64 169.92 30.64 161.78 L 30.64 38.22 C 30.64 30.08 39.45 25.00 46.49 29.06 Z"/>
+      <path stroke-width="4.30" d="M 100 140 L 30.64 100 L 100 60 Z"/>
+      <path stroke-width="3.13" d="M 65.31 120 L 65.31 80 L 100 100 Z"/>
+    </g>
+  </symbol>
+</svg>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="/">
+      <svg><use href="#darius-mark"/></svg>
+      <span class="brand-name">DARIUS</span>
+    </a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <h1>Almost <em>there.</em></h1>
+  <p class="lede">Your download is on its way.</p>
+  <p class="fallback">Doesn't start? <a id="manual-download" href="https://github.com/AmElmo/darius-updates/releases/download/0.19.0-beta.6/Darius-0.19.0-beta.6.dmg" rel="noopener">Click to download.</a></p>
+
+  <div class="stage" aria-hidden="true">
+
+    <div class="scene scene-chat">
+      <div class="chat">
+        <div class="field">
+          <span class="typeline">
+            <span class="ghost">Ask Darius anything</span>
+            <span class="real">Ask Darius anything</span>
+            <span class="caret"></span>
+          </span>
+        </div>
+        <span class="send" aria-hidden="true">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 8h12M9 3l5 5-5 5"/>
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    <div class="scene scene-icon">
+      <div class="icon-wrap">
+        <span class="shadow"></span>
+        <div class="app">
+          <svg viewBox="0 0 200 200"><use href="#darius-mark"/></svg>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <a class="scroll-hint" href="#install-steps" aria-label="Scroll to installation steps">
+    <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 6l4 4 4-4"/>
+    </svg>
+  </a>
+
+  <section class="steps" id="install-steps">
+    <ol>
+      <li>
+        <span class="n">01</span>
+        <span class="label">Open <code>Darius.dmg</code> from your Downloads.</span>
+        <span class="kbd"></span>
+      </li>
+      <li>
+        <span class="n">02</span>
+        <span class="label">Drag Darius into Applications.</span>
+        <span class="drag-mini" aria-hidden="true">
+          <span class="mi-app">
+            <svg viewBox="0 0 200 200"><use href="#darius-mark"/></svg>
+          </span>
+          <svg class="mi-arrow" viewBox="0 0 28 10" fill="none">
+            <path class="dash" d="M1 5 L 21 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-dasharray="3 3"/>
+            <path d="M19 1.5 L 26.5 5 L 19 8.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <svg class="mi-folder" viewBox="0 0 28 22" fill="none">
+            <defs>
+              <linearGradient id="mfg1" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#9FBAE8"/>
+                <stop offset="100%" stop-color="#4E78C8"/>
+              </linearGradient>
+              <linearGradient id="mfg2" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#B0C7EE"/>
+                <stop offset="100%" stop-color="#5E88D8"/>
+              </linearGradient>
+            </defs>
+            <path d="M2 5 Q 2 3 4 3 L 10 3 L 12 5 L 24 5 Q 26 5 26 7 L 26 18 Q 26 20 24 20 L 4 20 Q 2 20 2 18 Z"
+                  fill="url(#mfg1)" stroke="rgba(0,0,0,0.22)" stroke-width="0.4"/>
+            <path d="M2 8 Q 2 6 4 6 L 24 6 Q 26 6 26 8 L 26 18 Q 26 20 24 20 L 4 20 Q 2 20 2 18 Z"
+                  fill="url(#mfg2)" stroke="rgba(0,0,0,0.16)" stroke-width="0.4"/>
+          </svg>
+        </span>
+      </li>
+      <li>
+        <span class="n">03</span>
+        <span class="label">Launch the app.</span>
+        <span class="kbd"></span>
+      </li>
+    </ol>
+  </section>
+
+  <p class="req">macOS 15.5+ · Apple Silicon · Free during beta</p>
+</main>
+
+<footer>© 2026 DARIUS · BETA · APPLE SILICON</footer>
+
+<script>
+  // Auto-trigger the .dmg download, with a hardcoded fallback URL and the
+  // newest release pulled from the GitHub API (cached for an hour). The
+  // visible "Click to download" link is also kept in sync so users with
+  // popup blockers / JS disabled still have a working path.
+  (() => {
+    const FALLBACK = 'https://github.com/AmElmo/darius-updates/releases/download/0.19.0-beta.6/Darius-0.19.0-beta.6.dmg';
+    const CACHE_KEY = 'darius-dl';
+    const TTL = 60 * 60 * 1000;
+
+    const downloadDataFor = (url) => {
+      try {
+        const parsed = new URL(url);
+        const parts = parsed.pathname.split('/');
+        const dl = parts.indexOf('download');
+        const version = dl >= 0 ? parts[dl + 1] || '' : '';
+        const asset = decodeURIComponent(dl >= 0 ? parts[dl + 2] || '' : '');
+        return {
+          url, host: parsed.hostname, version, asset,
+          filetype: asset.split('.').pop() || '',
+          channel: version.includes('beta') ? 'beta' : 'stable',
+        };
+      } catch { return { url }; }
+    };
+
+    const getCached = () => {
+      try {
+        const raw = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+        if (raw && raw.url && Date.now() - raw.t < TTL) return raw.url;
+      } catch {}
+      return null;
+    };
+    const setCached = (url) => {
+      try { localStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), url })); } catch {}
+    };
+
+    const fetchLatest = () => fetch('https://api.github.com/repos/AmElmo/darius-updates/releases?per_page=1')
+      .then(r => r.ok ? r.json() : Promise.reject(r.status))
+      .then(([release]) => {
+        const asset = release && (
+          release.assets.find(a => /^Darius-.+\.dmg$/.test(a.name)) ||
+          release.assets.find(a => a.name === 'Darius.dmg')
+        );
+        if (!asset) throw new Error('no dmg');
+        return asset.browser_download_url;
+      });
+
+    const setFallbackHref = (url) => {
+      const link = document.getElementById('manual-download');
+      if (link) link.href = url;
+    };
+
+    const triggerDownload = (url) => {
+      setFallbackHref(url);
+      const a = document.createElement('a');
+      a.href = url;
+      a.style.display = 'none';
+      a.rel = 'noopener';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      try {
+        const data = downloadDataFor(url);
+        if (window.umami && typeof window.umami.track === 'function') {
+          window.umami.track('download-started', {
+            surface: 'installing-page',
+            platform: 'macos',
+            kind: 'github-release-asset',
+            ...data,
+          });
+        }
+      } catch {}
+    };
+
+    // Guard against double-trigger on accidental reload within the same session.
+    let alreadyTriggered = false;
+    try { alreadyTriggered = sessionStorage.getItem('darius-dl-fired') === '1'; } catch {}
+
+    const start = async () => {
+      let url;
+      const cached = getCached();
+      if (cached) {
+        url = cached;
+        // refresh in background so next visit has the latest
+        fetchLatest().then(setCached).catch(() => {});
+      } else {
+        try {
+          url = await Promise.race([
+            fetchLatest(),
+            new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 2500)),
+          ]);
+          setCached(url);
+        } catch {
+          url = FALLBACK;
+        }
+      }
+
+      setFallbackHref(url);
+
+      if (alreadyTriggered) return;
+
+      // small delay so the page renders and the download feels intentional
+      setTimeout(() => {
+        triggerDownload(url);
+        try { sessionStorage.setItem('darius-dl-fired', '1'); } catch {}
+      }, 700);
+    };
+
+    start();
+  })();
+</script>
+
+</body>
+</html>

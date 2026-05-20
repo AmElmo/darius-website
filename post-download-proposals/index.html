@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Darius — Post-download proposals</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #14110D;
+    --panel: #1E1A14;
+    --panel-2: #25201A;
+    --line: rgba(236, 231, 221, 0.07);
+    --line-2: rgba(236, 231, 221, 0.11);
+    --bone: #ECE7DD;
+    --bone-dim: #C7C0B3;
+    --ash: #837C70;
+    --ember: #D49563;
+    --sapphire: #7F92FF;
+    --jade: #6CB39A;
+    --rose: #D87C8E;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--bone);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+    padding: 80px 28px 60px;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; }
+  h1 {
+    font-size: clamp(28px, 3.4vw, 40px);
+    font-weight: 600; letter-spacing: -0.025em;
+    margin-bottom: 12px;
+  }
+  h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, #9FB1FF 0%, #5C8AFF 60%, #3B5FBF 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lede { color: var(--bone-dim); max-width: 560px; margin-bottom: 40px; font-size: 16px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  a.card {
+    display: block;
+    padding: 28px 28px 28px;
+    background: var(--panel);
+    border: 1px solid var(--line-2);
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--bone);
+    transition: border-color 220ms ease, transform 220ms ease, background 220ms ease;
+    position: relative;
+    overflow: hidden;
+  }
+  a.card:hover { transform: translateY(-3px); background: var(--panel-2); border-color: var(--accent); }
+  .tag {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 4px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  a.card h3 { font-size: 22px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 6px; }
+  a.card .vibe { color: var(--accent); font-size: 13px; margin-bottom: 14px; font-family: 'JetBrains Mono', monospace; }
+  a.card p { color: var(--bone-dim); font-size: 14px; line-height: 1.6; }
+  a.card .arrow {
+    margin-top: 18px;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+  }
+  a.card:hover .arrow::after { transform: translateX(3px); }
+  a.card .arrow::after { content: "→"; transition: transform 200ms ease; }
+
+  .v1 { --accent: var(--jade);     --accent-soft: rgba(108,179,154,0.14); }
+  .v2 { --accent: var(--ember);    --accent-soft: rgba(212,149,99,0.14); }
+  .v3 { --accent: var(--sapphire); --accent-soft: rgba(127,146,255,0.14); }
+  .v4 { --accent: var(--rose);     --accent-soft: rgba(216,124,142,0.14); }
+
+  .foot {
+    margin-top: 40px; padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px; color: var(--ash); letter-spacing: 0.04em;
+  }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Post-download <em>proposals</em></h1>
+  <p class="lede">Four directions for the page users land on after clicking <span style="font-family: 'JetBrains Mono', monospace; color: var(--bone);">Download</span>. Same brand. Different tones. Pick what to combine.</p>
+
+  <div class="grid">
+    <a class="card v1" href="v1.html">
+      <span class="tag">V1 · Instructional</span>
+      <h3>First 60 seconds</h3>
+      <div class="vibe">calm · structured · helpful</div>
+      <p>Classic step-by-step walkthrough — open the DMG, drag to Applications, first launch, first task. Mini app-window mockups beside each step. Apple-style.</p>
+      <div class="arrow">View v1</div>
+    </a>
+
+    <a class="card v2" href="v2.html">
+      <span class="tag">V2 · Editorial</span>
+      <h3>A letter from the team</h3>
+      <div class="vibe">warm · intimate · honest</div>
+      <p>Long-form welcome note. Founder voice, serif headline, recommended first prompt as a pull quote, hand-signed sign-off. Slows the user down on purpose.</p>
+      <div class="arrow">View v2</div>
+    </a>
+
+    <a class="card v3" href="v3.html">
+      <span class="tag">V3 · Action-led</span>
+      <h3>Pick your first task</h3>
+      <div class="vibe">tailored · useful · plural</div>
+      <p>Four persona cards (Writer · Researcher · Builder · Operator). Each ships with a copy-pasteable first prompt. Install steps tucked underneath, secondary.</p>
+      <div class="arrow">View v3</div>
+    </a>
+
+    <a class="card v4" href="v4.html">
+      <span class="tag">V4 · Cinematic</span>
+      <h3>Launch sequence</h3>
+      <div class="vibe">dramatic · animated · mission-control</div>
+      <p>Phase rail, live telemetry feed, animated progress, T-minus countdown. Pre-loaded "first task" briefing. Makes the install feel like an event.</p>
+      <div class="arrow">View v4</div>
+    </a>
+  </div>
+
+  <div class="foot">/post-download-proposals · DARIUS · 2026</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Darius — Watch it install</title>
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #14110D;
+    --bg-2: #1B1813;
+    --panel: #1E1A14;
+    --line: rgba(236, 231, 221, 0.07);
+    --line-2: rgba(236, 231, 221, 0.11);
+    --bone: #ECE7DD;
+    --bone-dim: #C7C0B3;
+    --ash: #837C70;
+    --ember: #D49563;
+    --sapphire: #7F92FF;
+    --jade: #6CB39A;
+    --nav-bg: rgba(20, 17, 13, 0.7);
+    --ghost-bg: rgba(236, 231, 221, 0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); }
+  body {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--bone);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+    overflow-x: hidden;
+    font-feature-settings: "ss01", "cv11";
+    min-height: 100vh;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0;
+    pointer-events: none; z-index: 200;
+    opacity: 0.022; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/></svg>");
+  }
+
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 28px; max-width: 1100px; margin: 0 auto;
+  }
+  .brand { display: flex; align-items: center; gap: 6px; text-decoration: none; color: var(--bone); }
+  .brand svg { width: 36px; height: 36px; }
+  .brand-name { font-weight: 600; font-size: 21px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .nav-status {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 7px 12px; border-radius: 999px;
+    background: var(--ghost-bg); border: 1px solid var(--line-2);
+    font-size: 12px; color: var(--bone-dim);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .nav-status .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--jade); box-shadow: 0 0 12px rgba(108,179,154,0.6);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.45; } }
+
+  .stage {
+    position: relative;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 88px 28px 48px;
+    text-align: center;
+  }
+  .stage::before {
+    content: ""; position: absolute;
+    inset: 60px 0 60px 0;
+    background:
+      radial-gradient(ellipse 50% 60% at 50% 50%, rgba(212, 149, 99, 0.18) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 50% at 50% 50%, rgba(127, 146, 255, 0.12) 0%, transparent 65%);
+    filter: blur(80px); pointer-events: none; z-index: 0;
+  }
+  .stage > * { position: relative; z-index: 1; }
+
+  h1 {
+    font-weight: 600;
+    font-size: clamp(34px, 4.6vw, 54px);
+    line-height: 1.04; letter-spacing: -0.035em;
+    margin-bottom: 12px;
+  }
+  h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, #9FB1FF 0%, #5C8AFF 60%, #3B5FBF 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .sub {
+    font-size: 16px; color: var(--bone-dim);
+    max-width: 440px; margin: 0 auto;
+  }
+
+  /* the loop stage */
+  .loop {
+    position: relative;
+    margin: 60px auto 24px;
+    width: 100%;
+    max-width: 720px;
+    aspect-ratio: 1 / 1;
+  }
+
+  .scene {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    animation: showHide 16s linear infinite;
+  }
+  .scene-1 { animation-delay: 0s; }
+  .scene-2 { animation-delay: 4s; }
+  .scene-3 { animation-delay: 8s; }
+  .scene-4 { animation-delay: 12s; }
+
+  @keyframes showHide {
+    0%   { opacity: 0; transform: scale(0.96); }
+    3%   { opacity: 1; transform: scale(1); }
+    22%  { opacity: 1; transform: scale(1); }
+    25%  { opacity: 0; transform: scale(1.02); }
+    100% { opacity: 0; }
+  }
+
+  /* shared elements */
+  .app-icon {
+    width: 38%;
+    aspect-ratio: 1;
+    border-radius: 24%;
+    background: linear-gradient(160deg, #2B241B 0%, #1A1612 70%);
+    border: 1px solid rgba(255,255,255,0.06);
+    display: inline-flex; align-items: center; justify-content: center;
+    box-shadow:
+      0 40px 70px -20px rgba(0,0,0,0.7),
+      0 14px 40px -10px rgba(212,149,99,0.3),
+      inset 0 1px 0 rgba(255,255,255,0.08);
+    position: relative;
+  }
+  .app-icon::after {
+    content: ""; position: absolute; inset: -1px;
+    border-radius: 26%;
+    background: linear-gradient(160deg, rgba(212,149,99,0.4), rgba(127,146,255,0.3) 60%, transparent 80%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    padding: 1px; pointer-events: none;
+  }
+  .app-icon svg { width: 64%; height: 64%; color: var(--sapphire); }
+
+  /* scene 1 — download (cloud + arrow) */
+  .scene-1 .cloud {
+    width: 44%; height: auto;
+    color: var(--sapphire);
+    filter: drop-shadow(0 30px 50px rgba(127, 146, 255, 0.3));
+  }
+  .scene-1 .cloud .down-arrow {
+    transform: translateY(0);
+    animation: dlBounce 1.8s ease-in-out infinite;
+  }
+  @keyframes dlBounce {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(6px); opacity: 0.7; }
+  }
+
+  /* scene 2 — drag to folder */
+  .scene-2 {
+    gap: clamp(40px, 8vw, 90px);
+  }
+  .scene-2 .app-icon {
+    animation: dragMove 3.5s ease-in-out infinite;
+  }
+  @keyframes dragMove {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(40%); }
+  }
+  .scene-2 .folder-svg {
+    width: 36%; height: auto;
+    filter: drop-shadow(0 30px 50px rgba(78,120,200,0.35));
+  }
+
+  /* scene 3 — launch glow */
+  .scene-3 .app-icon {
+    width: 42%;
+    transform: translateZ(0);
+    animation: zoom 2.5s ease-out infinite;
+  }
+  @keyframes zoom {
+    0% { transform: scale(0.86); }
+    100% { transform: scale(1.04); }
+  }
+  .scene-3 .pulse-ring {
+    position: absolute;
+    width: 52%; aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 149, 99, 0.5);
+    animation: pulseRing 2.4s ease-out infinite;
+  }
+  @keyframes pulseRing {
+    0% { transform: scale(0.8); opacity: 0.7; }
+    100% { transform: scale(1.6); opacity: 0; }
+  }
+
+  /* scene 4 — first prompt */
+  .scene-4 .prompt-box {
+    width: 70%;
+    padding: 28px 28px;
+    border-radius: 18px;
+    background: rgba(127, 146, 255, 0.06);
+    border: 1px solid rgba(127, 146, 255, 0.25);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(13px, 1.5vw, 17px);
+    color: var(--bone);
+    line-height: 1.6;
+    text-align: left;
+    backdrop-filter: blur(20px);
+  }
+  .scene-4 .prompt-box::after {
+    content: "▍";
+    color: var(--ember);
+    margin-left: 4px;
+    animation: blink 1s steps(2) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* step indicator (4 pills) */
+  .pills {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    padding: 10px 16px;
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    background: var(--ghost-bg);
+  }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--ash);
+    letter-spacing: 0.04em;
+    transition: color 220ms ease;
+  }
+  .pill .marker {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--ash); opacity: 0.4;
+    transition: all 220ms ease;
+  }
+  .pill-sep { color: var(--line-2); opacity: 0.6; }
+
+  .pill.p1 { animation: pillActive 16s linear infinite; animation-delay: 0s; }
+  .pill.p2 { animation: pillActive 16s linear infinite; animation-delay: 4s; }
+  .pill.p3 { animation: pillActive 16s linear infinite; animation-delay: 8s; }
+  .pill.p4 { animation: pillActive 16s linear infinite; animation-delay: 12s; }
+  @keyframes pillActive {
+    0%, 25%   { color: var(--bone); }
+    25.01%, 100% { color: var(--ash); }
+  }
+  .pill.p1 .marker, .pill.p2 .marker, .pill.p3 .marker, .pill.p4 .marker {
+    animation: markerActive 16s linear infinite;
+  }
+  .pill.p1 .marker { animation-delay: 0s; }
+  .pill.p2 .marker { animation-delay: 4s; }
+  .pill.p3 .marker { animation-delay: 8s; }
+  .pill.p4 .marker { animation-delay: 12s; }
+  @keyframes markerActive {
+    0%, 25%   { background: var(--ember); opacity: 1; box-shadow: 0 0 10px rgba(212,149,99,0.7); }
+    25.01%, 100% { background: var(--ash); opacity: 0.4; box-shadow: none; }
+  }
+
+  .req {
+    margin-top: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--ash);
+    letter-spacing: 0.04em;
+  }
+
+  footer {
+    margin-top: 60px;
+    padding: 28px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    color: var(--ash);
+    font-size: 11.5px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 540px) {
+    .pills { gap: 8px; padding: 8px 12px; flex-wrap: wrap; justify-content: center; }
+    .pill { font-size: 10.5px; }
+  }
+</style>
+</head>
+<body>
+
+<svg style="display:none" aria-hidden="true">
+  <symbol id="darius-mark" viewBox="0 0 200 200">
+    <g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round">
+      <path stroke-width="5.27" d="M 46.49 29.06 L 153.51 90.85 C 160.56 94.91 160.56 105.09 153.51 109.15 L 46.49 170.94 C 39.45 175.01 30.64 169.92 30.64 161.78 L 30.64 38.22 C 30.64 30.08 39.45 25.00 46.49 29.06 Z"/>
+      <path stroke-width="4.30" d="M 100 140 L 30.64 100 L 100 60 Z"/>
+      <path stroke-width="3.13" d="M 65.31 120 L 65.31 80 L 100 100 Z"/>
+    </g>
+  </symbol>
+</svg>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="../../index.html">
+      <svg><use href="#darius-mark"/></svg>
+      <span class="brand-name">DARIUS</span>
+    </a>
+    <span class="nav-status"><span class="dot"></span>Downloading</span>
+  </div>
+</nav>
+
+<main class="stage">
+  <h1>Almost <em>there.</em></h1>
+  <p class="sub">Watch what happens next.</p>
+
+  <div class="loop" role="img" aria-label="Animated install sequence: download, drag to Applications, launch, first task.">
+
+    <div class="scene scene-1">
+      <svg class="cloud" viewBox="0 0 80 80" fill="none">
+        <path d="M22 30 a14 14 0 0 1 28 -8 a12 12 0 0 1 4 23 H 16 a10 10 0 0 1 -2 -18 a16 16 0 0 1 8 3Z"
+              fill="rgba(127,146,255,0.10)" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <g class="down-arrow">
+          <path d="M40 38 V 66 M 30 56 L 40 66 L 50 56"
+                stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="scene scene-2">
+      <div class="app-icon">
+        <svg viewBox="0 0 200 200"><use href="#darius-mark"/></svg>
+      </div>
+      <svg class="folder-svg" viewBox="0 0 100 80" fill="none">
+        <defs>
+          <linearGradient id="fLg1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#9FBAE8"/>
+            <stop offset="100%" stop-color="#4E78C8"/>
+          </linearGradient>
+          <linearGradient id="fLg2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#B0C7EE"/>
+            <stop offset="100%" stop-color="#5E88D8"/>
+          </linearGradient>
+        </defs>
+        <path d="M8 18 Q 8 12 14 12 L 38 12 L 48 22 L 90 22 Q 96 22 96 28 L 96 70 Q 96 76 90 76 L 14 76 Q 8 76 8 70 Z"
+              fill="url(#fLg1)" stroke="rgba(0,0,0,0.25)" stroke-width="0.5"/>
+        <path d="M8 30 Q 8 24 14 24 L 90 24 Q 96 24 96 30 L 96 70 Q 96 76 90 76 L 14 76 Q 8 76 8 70 Z"
+              fill="url(#fLg2)" stroke="rgba(0,0,0,0.18)" stroke-width="0.5"/>
+        <text x="52" y="60" text-anchor="middle" font-family="-apple-system, system-ui" font-size="22" font-weight="700" fill="rgba(255,255,255,0.55)">A</text>
+      </svg>
+    </div>
+
+    <div class="scene scene-3">
+      <div class="pulse-ring"></div>
+      <div class="app-icon">
+        <svg viewBox="0 0 200 200"><use href="#darius-mark"/></svg>
+      </div>
+    </div>
+
+    <div class="scene scene-4">
+      <div class="prompt-box">Ask Darius anything</div>
+    </div>
+
+  </div>
+
+  <div class="pills" aria-hidden="true">
+    <span class="pill p1"><span class="marker"></span>Download</span>
+    <span class="pill-sep">·</span>
+    <span class="pill p2"><span class="marker"></span>Drag</span>
+    <span class="pill-sep">·</span>
+    <span class="pill p3"><span class="marker"></span>Launch</span>
+    <span class="pill-sep">·</span>
+    <span class="pill p4"><span class="marker"></span>Begin</span>
+  </div>
+
+  <p class="req">macOS 15.5+ · Apple Silicon · Free during beta</p>
+</main>
+
+<footer>© 2026 DARIUS · v0.19.0-BETA.6 · APPLE SILICON</footer>
+
+</body>
+</html>
