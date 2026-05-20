@@ -183,18 +183,10 @@
     gap: 8px;
     color: var(--ash);
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 18px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     margin-bottom: 22px;
-  }
-  .eyebrow::before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    border-radius: 999px;
-    background: var(--sapphire);
-    box-shadow: 0 0 18px rgba(127, 146, 255, 0.9);
   }
   h1 {
     font-size: clamp(40px, 6.2vw, 72px);
@@ -263,11 +255,17 @@
     text-transform: uppercase;
   }
   .release-pill {
-    border: 1px solid rgba(127, 146, 255, 0.28);
-    background: rgba(127, 146, 255, 0.08);
-    color: #AEBBFF;
+    border: 1px solid rgba(127, 146, 255, 0.6);
+    background: rgba(127, 146, 255, 0.18);
+    color: #C8D1FF;
     border-radius: 999px;
     padding: 4px 9px;
+    font-weight: 600;
+  }
+  [data-theme="light"] .release-pill {
+    border-color: rgba(59, 95, 191, 0.55);
+    background: rgba(92, 138, 255, 0.16);
+    color: #2A3F8A;
   }
   .release h2 {
     max-width: 760px;
