@@ -322,6 +322,14 @@
     object-fit: contain;
   }
   .ai-labs-logo.is-sm { height: 32px; }
+  [data-theme="dark"] .ai-labs-logo[src*="openai.svg"],
+  [data-theme="dark"] .ai-labs-logo[src*="grok.svg"],
+  [data-theme="dark"] .ai-labs-logo[src*="moonshot.svg"] {
+    filter: brightness(0) invert(1);
+  }
+  [data-theme="dark"] .ai-labs-logo[src*="zai.svg"] {
+    filter: invert(1);
+  }
   @media (max-width: 640px) {
     .ai-labs { padding: 40px 20px 56px; }
     .ai-labs-row { gap: 26px; }
