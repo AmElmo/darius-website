@@ -340,6 +340,80 @@
     .ai-labs-logo.is-sm { height: 26px; }
   }
 
+  /* capabilities — alternating text + visual rows */
+  .capabilities {
+    padding: 24px 28px 64px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .cap-row {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) minmax(0, 2.2fr);
+    align-items: center;
+    gap: 64px;
+    padding: 36px 8px;
+  }
+  .cap-row.reverse { grid-template-columns: minmax(0, 2.2fr) minmax(220px, 1fr); }
+  .cap-row.reverse .cap-text { order: 2; }
+  .cap-row.reverse .cap-visual { order: 1; }
+  .cap-text h3 {
+    font-weight: 600;
+    font-size: clamp(20px, 2.2vw, 26px);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    color: var(--bone);
+    margin-bottom: 12px;
+  }
+  .cap-text p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--bone-dim);
+    max-width: 38ch;
+  }
+  .cap-text .cap-link {
+    display: inline-block;
+    margin-top: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ember);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 160ms ease-out, opacity 160ms ease-out;
+  }
+  .cap-text .cap-link:hover {
+    border-bottom-color: var(--ember);
+  }
+  .cap-visual {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--line-2);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.04),
+      0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .cap-visual img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  @media (max-width: 820px) {
+    .capabilities { gap: 12px; padding: 16px 20px 48px; }
+    .cap-row,
+    .cap-row.reverse {
+      grid-template-columns: 1fr;
+      gap: 22px;
+      padding: 16px 0;
+    }
+    .cap-row.reverse .cap-text { order: 1; }
+    .cap-row.reverse .cap-visual { order: 2; }
+    .cap-text p { max-width: none; }
+  }
+
   /* scenarios — tabbed showcase */
   .scenarios {
     padding: 8px 28px 88px;
@@ -2683,6 +2757,50 @@
     <img class="ai-labs-logo is-sm" src="assets/ai-labs/moonshot.svg" alt="Moonshot" loading="lazy" width="120" height="32">
     <img class="ai-labs-logo is-sm" src="assets/ai-labs/zai.svg" alt="Z.ai (GLM)" loading="lazy" width="120" height="32">
   </div>
+</section>
+
+<section class="capabilities" aria-label="What Darius does">
+
+  <div class="cap-row">
+    <div class="cap-text">
+      <h3>Plugged into every app and file on your Mac.</h3>
+      <p>Darius reaches into Finder, Notes, Mail, Slack, your browser — the tools you already live in. Agents pick up context where it lives, no copy-paste, no glue code.</p>
+    </div>
+    <div class="cap-visual">
+      <img src="assets/capabilities/files.png" alt="Darius file browser showing folders and documents indexed from the Mac" loading="lazy">
+    </div>
+  </div>
+
+  <div class="cap-row reverse">
+    <div class="cap-text">
+      <h3>Any model. Any provider. One workspace.</h3>
+      <p>Route each task to Claude, GPT, Gemini, Grok, Llama, DeepSeek — or a model running locally on your Mac. Mix and match, swap mid-thread, pick the right brain for the job.</p>
+    </div>
+    <div class="cap-visual">
+      <img src="assets/capabilities/models.png" alt="Model picker in Darius showing Codex and Claude models side by side" loading="lazy">
+    </div>
+  </div>
+
+  <div class="cap-row">
+    <div class="cap-text">
+      <h3>One quiet space for every project you run.</h3>
+      <p>Spin up an isolated workspace per client, codebase, or initiative. Agents stay scoped, context stays clean, switching is a keystroke away.</p>
+    </div>
+    <div class="cap-visual">
+      <img src="assets/capabilities/projects.png" alt="Darius sidebar with projects and tasks organized per initiative" loading="lazy">
+    </div>
+  </div>
+
+  <div class="cap-row reverse">
+    <div class="cap-text">
+      <h3>Agents that show their work.</h3>
+      <p>Every step is visible — the thinking, the tools called, the files read. Nothing happens in a black box, so you can trust what comes back and see exactly how it got there.</p>
+    </div>
+    <div class="cap-visual">
+      <img src="assets/capabilities/agent-work.png" alt="A Darius agent showing its reasoning and tool calls while researching a task" loading="lazy">
+    </div>
+  </div>
+
 </section>
 
 <section class="scenarios">
