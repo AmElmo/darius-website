@@ -3116,7 +3116,7 @@
   <div class="hero-canvas">
     <div class="hero-screen">
       <video class="hero-video" aria-label="Darius app workspace preview" width="1892" height="1080" poster="assets/darius-hero-screen-poster.jpg" preload="metadata" playsinline loop>
-        <source data-src="assets/darius-hero-screen.mp4" type="video/mp4">
+        <source src="assets/darius-hero-screen.mp4" type="video/mp4">
       </video>
       <button type="button" class="hero-play" aria-label="Play preview" data-umami-event="hero-video-play">
         <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -4184,50 +4184,41 @@
     const playBtn = document.querySelector('.hero-play');
     if (!video || !playBtn) return;
 
-    let loaded = false;
-    const loadVideo = () => {
-      if (loaded) return;
-      const source = video.querySelector('source[data-src]');
-      if (source) {
-        source.src = source.dataset.src;
-        source.removeAttribute('data-src');
-        video.load();
-      }
-      loaded = true;
-    };
-
+    let hideTimer = null;
     const showButton = () => {
+      clearTimeout(hideTimer);
       playBtn.hidden = false;
       playBtn.style.opacity = '1';
     };
     const hideButton = () => {
+      clearTimeout(hideTimer);
       playBtn.style.opacity = '0';
-      setTimeout(() => { playBtn.hidden = true; }, 240);
+      hideTimer = setTimeout(() => { playBtn.hidden = true; }, 240);
     };
 
-    playBtn.addEventListener('click', () => {
-      loadVideo();
+    const playVideo = () => {
       video.muted = false;
       const play = video.play();
       if (play && typeof play.then === 'function') {
-        play.then(hideButton).catch(() => {
+        play.catch(() => {
           video.muted = true;
-          video.play().then(hideButton).catch(() => {});
+          video.play().catch(showButton);
         });
-      } else {
-        hideButton();
       }
-    });
+    };
+
+    playBtn.addEventListener('click', playVideo);
 
     video.addEventListener('click', () => {
       if (video.paused) {
-        video.play().then(hideButton).catch(() => {});
+        playVideo();
       } else {
         video.pause();
         showButton();
       }
     });
 
+    video.addEventListener('playing', hideButton);
     video.addEventListener('pause', showButton);
     video.addEventListener('ended', showButton);
   })();
