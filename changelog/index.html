@@ -522,6 +522,54 @@
     ],
   };
 
+  // Local-only changelog entries shown ahead of the remote feed.
+  // Remove when these ship through amelmo.github.io/darius-updates/changelog.json.
+  const CHANGELOG_LOCAL = {
+    releases: [
+      {
+        version: '0.20.0-beta.1',
+        date: '2026-06-06',
+        channel: 'beta',
+        title: 'Inline edits and agent comments.',
+        summary: 'Darius now edits CSV, PDF, PPTX, and DOCX files in place — preserving formatting and structure — and a new comments surface lets you batch tasks to any agent across models without leaving the document.',
+        image: {
+          url: '../assets/changelog-file-edit.png',
+          alt: 'Darius file edit view with a comments side panel showing batched agent tasks.',
+          label: 'Inline edit with comments panel',
+        },
+        sections: [
+          {
+            title: 'Highlights',
+            items: [
+              'Inline edits across CSV, PDF, PPTX, and DOCX that preserve the original formatting, fonts, and table structure.',
+              'New Comments panel: leave inline notes on any document region and dispatch them as a batch to an agent.',
+              'Comment batches run in parallel across any supported model — Claude, GPT, Gemini, or a local LLM — so you can keep working while edits land.',
+            ],
+          },
+          {
+            title: 'Improvements',
+            items: [
+              'Faster document preview for long PDFs (200+ pages) thanks to incremental page rendering.',
+              'Comment threads now sync with the workspace timeline so you can replay an editing session step by step.',
+              'Drag-and-drop file replacement keeps existing comments anchored to surviving paragraphs.',
+              'Reduced memory footprint on long DOCX sessions by roughly 28%.',
+            ],
+          },
+          {
+            title: 'Fixes',
+            items: [
+              'Fixed a crash when opening PPTX files containing embedded SVG masks.',
+              'Fixed CSV cell edits occasionally reverting on undo when a column filter was active.',
+              'Fixed comment timestamps rendering in UTC instead of the local timezone.',
+              'Fixed signed builds hanging on first launch behind certain corporate VPNs.',
+            ],
+          },
+        ],
+        _baseUrl: '',
+      },
+    ],
+  };
+
   const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({
     '&': '&amp;',
     '<': '&lt;',
@@ -598,7 +646,7 @@
         </div>
         <h2>${escapeHtml(release.title)}</h2>
         ${release.summary ? `<p class="release-intro">${escapeHtml(release.summary)}</p>` : ''}
-        ${renderImage(release.image, baseUrl)}
+        ${renderImage(release.image, release._baseUrl ?? baseUrl)}
         <div class="release-sections">
           ${renderSections(release.sections)}
         </div>
@@ -651,15 +699,23 @@
     };
   };
 
+  const mergeWithLocal = (feed) => ({
+    ...feed,
+    releases: [
+      ...CHANGELOG_LOCAL.releases,
+      ...(Array.isArray(feed.releases) ? feed.releases : []),
+    ],
+  });
+
   fetch(CHANGELOG_FEED_URL, { cache: 'no-store' })
     .then((response) => response.ok ? response.json() : Promise.reject(response.status))
     .then((feed) => {
-      if (!renderChangelog(feed, CHANGELOG_FEED_BASE)) {
-        renderChangelog(CHANGELOG_FALLBACK, '');
+      if (!renderChangelog(mergeWithLocal(feed), CHANGELOG_FEED_BASE)) {
+        renderChangelog(mergeWithLocal(CHANGELOG_FALLBACK), '');
       }
     })
     .catch(() => {
-      renderChangelog(CHANGELOG_FALLBACK, '');
+      renderChangelog(mergeWithLocal(CHANGELOG_FALLBACK), '');
     });
 
   (() => {
